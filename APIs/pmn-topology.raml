@@ -23,21 +23,3 @@ documentation:
       200:
         body:
           example: !include ../examples/topologyapi-v1.0-base-get-200.json
-          
-/updates:
-  displayName: Updates
-  post:
-    description: Lists the topology elements that have changed since the last update. The changes are relating to network devices and the links. 
-    body:
-    responses:
-      200:
-        body:
-          example: !include ../examples/topologyapi-v1.0-updates-post-200.json
-  delete:
-    description: Removes the existing registration for updates
-    body:
-    responses:
-      200:
-        body:
-          example: include ../examples/topologyapi-v1.0-updates-delete-200.json
-
