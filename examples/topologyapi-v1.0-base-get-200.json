@@ -14,13 +14,13 @@
         "image-file": "N7700-s2-dk9.7.2.0.gbin",
         "build-time": "6/11/2015 10:00:00",
         "uptime": "x Days y hrs z mins a secs",
-        "last-reset-reason": "reboot"
+        "last-reset-reason": "reboot",
         "interfaces":
         [
           {
             "name": "eth 1/1",
             "status": "up|down",	
-            "down-reason": "SFP not inserted"|"Administratively down",
+            "down-reason": "SFP not inserted|Administratively down",
             "built-in-mac-address":" 5cfc.666d.fa90",
             "mac-address": "8c60.4f04.2141 (for L3, GW MAC) 5cfc.666d.fa90 (for L2, BIM) Modifiable manually",	
             "ip-address": "10.1.1.1",
@@ -43,7 +43,7 @@
         "image-file": "N7700-s2-dk9.7.2.0.gbin",
         "build-time": "6/11/2015 10:00:00",
         "uptime": "x Days y hrs z mins a secs",
-        "last-reset-reason": ""
+        "last-reset-reason": "",
         "interfaces":
         [
           {
