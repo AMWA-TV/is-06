@@ -2,7 +2,7 @@
   "network-devices":
   [
       {
-        "id": 100,
+        "id": 100, // Internally generated ID used for referencing . Eg - Link
         "name":"switch1",
         "serial-number": "FXS1844Q1UH",
         "product-id": "N77-C7706",
@@ -18,8 +18,9 @@
         "interfaces":
         [
           {
-            "name": "eth 1/1",
-            "status": "up|down",	
+            "if-name": "eth 1/1",
+            "admin-status": "up|down",
+            "oper-status": "up|down",
             "down-reason": "SFP not inserted|Administratively down",
             "built-in-mac-address":" 5cfc.666d.fa90",
             "mac-address": "8c60.4f04.2141 (for L3, GW MAC) 5cfc.666d.fa90 (for L2, BIM) Modifiable manually",	
@@ -31,7 +32,7 @@
         ] 
       },
       {
-        "id": 101,
+        "id": 101, // Internally generated ID used for referencing . Eg - Link
         "name":"switch2",
         "serial-number": "FXS1844Q1UG",
         "product-id": "N77-C7706",
@@ -48,7 +49,8 @@
         [
           {
             "name": "eth 1/1",
-            "status": "up|down",
+            "admin-status": "up|down",
+            "oper-status": "up|down",
             "down-reason": "SFP not inserted|Administratively down",
             "built-in-mac-address":" 5cfc.666d.fb90",
             "mac-address": "8c60.4f04.2241 (for L3, GW MAC) 5cfc.666d.fa90 (for L2, BIM) Modifiable manually",	
@@ -75,27 +77,32 @@
   "endpoints":
   [
       {
-        "id":1000,
-        "ip-address": "192.168.1.1",
-        "mac-address": "9cc60.4f04.2241"
+        "id":1000, // Internally generated ID used for referencing . Eg - Links
+        "description":"user defined string",
+        "chassis-id": "9cc60.4f04.2200",
+        "port-id": "9cc60.4f04.2241",
       }
   ],  
 
-  "links": 
+  "network-links":
   [
       {
-        "from-device": 100,
-        "to-device": 101,
-        "from-interface": "eth 1/1",
-        "to-interface": "eth 1/1",
+        "network-device-id": 100,
+        "peer-network-device-id": 101,
+        "network-interface": "eth 1/1",
+        "peer-network-interface": "eth 1/1",
         "status": "up|down",
         "speed": "100M|1G|10G|25G|40G|50G|100G"
-      },
+      }
+ ],
+
+ "endpoint-links":
+ [
       {
-        "from-device": 101,
-        "to-device": 1000,
-        "from-interface": "eth 1/2",
-        "to-interface":"", 
+        "network-device-id": 101,
+        "endpoint-id": 1000,
+        "network-interface": "eth 1/2",
+        "endpoint-interface":"9cc60.4f04.2241",
         "status": "up|down",
         "speed": "100M|1G|10G|25G|40G|50G|100G",
       }
