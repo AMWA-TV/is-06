@@ -2,7 +2,7 @@
   "network-devices":
   [
       {
-        "id": 100, // Internally generated ID used for referencing . Eg - Link
+        "id": 100,
         "name":"switch1",
         "serial-number": "FXS1844Q1UH",
         "product-id": "N77-C7706",
@@ -32,7 +32,7 @@
         ] 
       },
       {
-        "id": 101, // Internally generated ID used for referencing . Eg - Link
+        "id": 101,
         "name":"switch2",
         "serial-number": "FXS1844Q1UG",
         "product-id": "N77-C7706",
@@ -80,7 +80,7 @@
         "id":1000, // Internally generated ID used for referencing . Eg - Links
         "description":"user defined string",
         "chassis-id": "9cc60.4f04.2200",
-        "port-id": "9cc60.4f04.2241",
+        "port-id": "9cc60.4f04.2241"
       }
   ],  
 
@@ -104,7 +104,7 @@
         "network-interface": "eth 1/2",
         "endpoint-interface":"9cc60.4f04.2241",
         "status": "up|down",
-        "speed": "100M|1G|10G|25G|40G|50G|100G",
+        "speed": "100M|1G|10G|25G|40G|50G|100G"
       }
   ]
 }
