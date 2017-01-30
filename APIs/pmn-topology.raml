@@ -7,6 +7,15 @@ title: Topology
 baseUri: http://example.api.com/pmn-sdn/{version}/topology
 version: v1.0
 mediaType: application/json
+schemas:
+  - NetworkDevice: !include schemas/networkdevice.json
+    NetworkDevices: !include schemas/networkdevices.json
+    Endpoint: !include schemas/endpoint.json
+    Endpoints: !include schemas/endpoints.json
+    NetworkLink: !include schemas/networklink.json
+    NetworkLinks: !include schemas/networklinks.json
+    EndpointLink: !include schemas/endpointlink.json
+    EndpointLinks: !include schemas/endpointlinks.json
 documentation:
   - title: Overview
     content: |
@@ -15,7 +24,7 @@ documentation:
 /:
   displayName: Base
   get:
-    description: List the network devices, nodes and links that make up the Physical Topology
+    description: List the resources that can be accessed from the base url
     queryParameters:
       filter-by:
       sort:
@@ -23,3 +32,170 @@ documentation:
       200:
         body:
           example: !include ../examples/topologyapi-v1.0-base-get-200.json
+
+/network-devices:
+  displayName: Network Devices
+  get:
+    description: List all the network devices
+    queryParameters:
+      filter-by:
+      sort:
+    responses:
+      200:
+        body:
+          schema: !include schemas/networkdevices.json
+          example: !include ../examples/topologyapi-v1.0-networkdevices-get-200.json
+  /{id}:
+    uriParameters:
+      id:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    get:
+      description: Get a single Network Device
+      body:
+        schema: EmptySchema
+      responses:
+        200:
+          body:
+            example: !include ../examples/topologyapi-v1.0-networkdeviceid-get-200.json
+            schema: !include schemas/networkdevice.json
+        404:
+          description: Returned when the requested Node ID does not exist
+          body:
+
+/endpoints:
+  displayName: Endpoints
+  get:
+    description: List all the endpoint interfaces
+    queryParameters:
+      filter-by:
+      sort:
+    responses:
+      200:
+        body:
+          example: !include ../examples/topologyapi-v1.0-endpoints-get-200.json
+          schema: !include schemas/endpoints.json
+
+  post:
+    description: Register a new endpoint interface
+    responses:
+      201:
+        body:
+          example: !include ../examples/topologyapi-v1.0-endpoints-post-201.json
+
+  /{id}:
+    uriParameters:
+      id:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+
+    get:
+      description: Get a single Network Device
+      body:
+        schema: EmptySchema
+      responses:
+        200:
+          body:
+            example: !include ../examples/topologyapi-v1.0-endpointid-get-200.json
+            schema: !include schemas/endpoint.json
+        404:
+          description: Returned when the requested Node ID does not exist
+          body:
+    put:
+      description: Update an existing endpoint
+      body:
+        schema: EmptySchema
+      responses:
+        202:
+          body:
+            example: !include ../examples/topologyapi-v1.0-endpoints-put-202.json
+        403:
+          description: Returned when a PUT request is made against a non-persistent endpoint which is managed by the Topology API and cannot be updated
+        404:
+          description: Returned when the requested Node ID does not exist
+
+    patch:
+      description: Upsert an existing endpoint interface
+      responses:
+        202:
+          body:
+            example: !include ../examples/topologyapi-v1.0-endpoints-patch-202.json
+        403:
+          description: Returned when a PATCH request is made against a non-persistent endpoint which is managed by the Topology API and cannot be upserted
+        404:
+          description: Returned when the requested Endpoint ID does not exist
+
+    delete:
+      description: delet an existing endpoint interface
+      responses:
+        204:
+          body:
+            example: !include ../examples/topologyapi-v1.0-endpoints-delete-200.json
+        403:
+          description: Returned when a DELETE request is made against a non-persistent endpoint which is managed by the Topology API and cannot be deleted
+        404:
+          description: Returned when the requested Endpoint ID does not exist
+
+/network-links:
+  displayName: Network Links
+  get:
+    description: List all the links between network devices
+    queryParameters:
+      filter-by:
+      sort:
+    responses:
+      200:
+        body:
+          example: !include ../examples/topologyapi-v1.0-networklinks-get-200.json
+          schema: !include schemas/networklinks.json
+
+/endpoint-links:
+  displayName: Endpoint Links
+  get:
+    description: List all the links between network devices
+    queryParameters:
+      filter-by:
+      sort:
+    responses:
+      200:
+        body:
+          example: !include ../examples/topologyapi-v1.0-endpointlinks-get-200.json
+          schema: !include schemas/endpointlinks.json
+
+
+/all:
+  displayName: All
+  get:
+    description: List all the network devices, nodes and links that make up the Physical Topology
+    responses:
+      200:
+        body:
+          example: !include ../examples/topologyapi-v1.0-all-get-200.json
+          schema: !include schemas/all.json
+
+/subscriptions:
+  displayName: Subscriptions
+  post:
+    description: Create a websocket subscription to an API resource
+    body:
+      example: !include ../examples/topologyapi-v1.0-subscriptions-post-request.json
+    responses:
+      201:
+        body:
+          example: !include ../examples/topologyapi-v1.0-subscriptions-post-201.json
+      400:
+        description: Returned when the POST request is incorrectly formatted or missing mandatory attributes
+  get:
+    description: List active connections to websockets providing real-time updates on resource changes
+    body:
+    responses:
+      200:
+        body:
+          example: !include ../examples/topologyapi-v1.0-subscriptions-get-200.json
+
+  /{id}:
+    uriParameters:
+      id:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+

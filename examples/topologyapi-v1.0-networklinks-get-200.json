@@ -1,0 +1,11 @@
+ "network-links":
+ [
+      {
+        "network-device-id": 100,
+        "peer-network-device-id": 101,
+        "network-interface": "eth 1/1",
+        "peer-network-interface": "eth 1/1",
+        "status": "up|down",
+        "speed": "100M|1G|10G|25G|40G|50G|100G"
+      }
+ ]
