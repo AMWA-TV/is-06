@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "network-device-id": {
+      "type": "integer"
+    },
+    "peer-network-device-id": {
+      "type": "integer"
+    },
+    "network-interface": {
+      "type": "string"
+    },
+    "peer-network-interface": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "speed": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "network-device-id",
+    "peer-network-device-id",
+    "network-interface",
+    "peer-network-interface",
+    "status",
+    "speed"
+  ]
+}

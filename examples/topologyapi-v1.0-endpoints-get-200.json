@@ -1,0 +1,9 @@
+  "endpoints":
+  [
+      {
+        "id":1000, // Internally generated ID used for referencing . Eg - Links
+        "description":"user defined string",
+        "chassis-id": "9cc60.4f04.2200",
+        "port-id": "9cc60.4f04.2241",
+      }
+  ]

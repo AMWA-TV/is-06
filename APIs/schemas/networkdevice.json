@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "serial-number": {
+      "type": "string"
+    },
+    "product-id": {
+      "type": "string"
+    },
+    "product-description": {
+      "type": "string"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "mac-address": {
+      "type": "string"
+    },
+    "mgmt-ip": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "image-file": {
+      "type": "string"
+    },
+    "build-time": {
+      "type": "string"
+    },
+    "uptime": {
+      "type": "string"
+    },
+    "last-reset-reason": {
+      "type": "string"
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "if-name": {
+            "type": "string"
+          },
+          "admin-status": {
+            "type": "string"
+          },
+          "oper-status": {
+            "type": "string"
+          },
+          "down-reason": {
+            "type": "string"
+          },
+          "built-in-mac-address": {
+            "type": "string"
+          },
+          "mac-address": {
+            "type": "string"
+          },
+          "ip-address": {
+            "type": "string"
+          },
+          "operating-speed": {
+            "type": "string"
+          },
+          "MTU": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "if-name",
+          "admin-status",
+          "oper-status",
+          "down-reason",
+          "built-in-mac-address",
+          "mac-address",
+          "ip-address",
+          "operating-speed",
+          "MTU",
+          "mode"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "serial-number",
+    "product-id",
+    "product-description",
+    "vendor",
+    "mac-address",
+    "mgmt-ip",
+    "version",
+    "image-file",
+    "build-time",
+    "uptime",
+    "last-reset-reason",
+    "interfaces"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "network-device-id": {
+      "type": "integer"
+    },
+    "endpoint-id": {
+      "type": "integer"
+    },
+    "network-interface": {
+      "type": "string"
+    },
+    "endpoint-interface": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "speed": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "network-device-id",
+    "endpoint-id",
+    "network-interface",
+    "endpoint-interface",
+    "status",
+    "speed"
+  ]
+}
