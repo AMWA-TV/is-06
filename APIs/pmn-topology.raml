@@ -77,11 +77,20 @@ documentation:
           schema: !include schemas/endpoints.json
 
   post:
-    description: Register a new endpoint interface
+    description: Register a new endpoint interface. The POST is invoked to inform the network controller about the presence of an endpoint interface connected to the network. There are three types of endpoints 1. LLDP capable endpoints which advertise the chassis ID and port ID that is the same that is same as the one mentioned in this API 2. Not LLDP capable but sends some data traffic that will have the MAC address of the interface which will be the same as the portID that is mentioned in this API and the chassisID will be empty 3. RX only endpoint which is not capable of sending any data to the network switches but only receives
+       LLDP sent from the switch , understands where it is connected to and relays the switch interface
+       information to the RDS which is what is captured in the chassis ID and port ID
+    body:
+      example: !include ../examples/topologyapi-v1.0-endpoints-post-request.json
+      schema: !include schemas/topologyapi-v1.0-endpoints-post-request.json
     responses:
       201:
         body:
           example: !include ../examples/topologyapi-v1.0-endpoints-post-201.json
+      400:
+        description: Returned when the POST request is incorrectly formatted or missing mandatory attributes
+        body:
+          schema: ErrorSchema
 
   /{id}:
     uriParameters:
@@ -104,7 +113,8 @@ documentation:
     put:
       description: Update an existing endpoint
       body:
-        schema: EmptySchema
+        example: !include ../examples/topologyapi-v1.0-endpoints-post-request.json
+        schema: !include schemas/topologyapi-v1.0-endpoints-post-request.json
       responses:
         202:
           body:
@@ -116,6 +126,9 @@ documentation:
 
     patch:
       description: Upsert an existing endpoint interface
+      body:
+        example: !include ../examples/topologyapi-v1.0-endpoints-post-request.json
+        schema: !include schemas/topologyapi-v1.0-endpoints-post-request.json
       responses:
         202:
           body:
