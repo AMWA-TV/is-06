@@ -21,7 +21,8 @@
       "type": "string"
     },
     "mac-address": {
-      "type": "string"
+      "type": "string",
+      "pattern":"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$" 
     },
     "mgmt-ip": {
       "type": "string"
@@ -68,7 +69,7 @@
             "type": "string"
           },
           "operating-speed": {
-            "type": "string"
+            "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
           },
           "MTU": {
             "type": "string"

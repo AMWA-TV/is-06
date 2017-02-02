@@ -18,7 +18,7 @@
       "type": "string"
     },
     "speed": {
-      "type": "string"
+      "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
     }
   },
   "required": [

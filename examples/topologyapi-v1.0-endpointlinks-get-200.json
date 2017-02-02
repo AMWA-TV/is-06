@@ -1,11 +1,10 @@
- "endpoint-links":
  [
       {
         "network-device-id": 101,
         "endpoint-id": 1000,
         "network-interface": "eth 1/2",
-        "endpoint-interface":"9cc60.4f04.2241",
+        "port-id":"9c:60:4f:04:22:41",
         "status": "up|down",
-        "speed": "100M|1G|10G|25G|40G|50G|100G"
+        "speed": "1G"
       }
   ]

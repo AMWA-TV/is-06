@@ -25,9 +25,6 @@ documentation:
   displayName: Base
   get:
     description: List the resources that can be accessed from the base url
-    queryParameters:
-      filter-by:
-      sort:
     responses:
       200:
         body:
@@ -37,9 +34,6 @@ documentation:
   displayName: Network Devices
   get:
     description: List all the network devices
-    queryParameters:
-      filter-by:
-      sort:
     responses:
       200:
         body:
@@ -67,9 +61,6 @@ documentation:
   displayName: Endpoints
   get:
     description: List all the endpoint interfaces
-    queryParameters:
-      filter-by:
-      sort:
     responses:
       200:
         body:
@@ -90,7 +81,7 @@ documentation:
       400:
         description: Returned when the POST request is incorrectly formatted or missing mandatory attributes
         body:
-          schema: ErrorSchema
+          schema: !include schemas/error.json
 
   /{id}:
     uriParameters:
@@ -116,7 +107,7 @@ documentation:
         example: !include ../examples/topologyapi-v1.0-endpoints-post-request.json
         schema: !include schemas/topologyapi-v1.0-endpoints-post-request.json
       responses:
-        202:
+        200:
           body:
             example: !include ../examples/topologyapi-v1.0-endpoints-put-202.json
         403:
@@ -130,7 +121,7 @@ documentation:
         example: !include ../examples/topologyapi-v1.0-endpoints-post-request.json
         schema: !include schemas/topologyapi-v1.0-endpoints-post-request.json
       responses:
-        202:
+        200:
           body:
             example: !include ../examples/topologyapi-v1.0-endpoints-patch-202.json
         403:
@@ -153,9 +144,6 @@ documentation:
   displayName: Network Links
   get:
     description: List all the links between network devices
-    queryParameters:
-      filter-by:
-      sort:
     responses:
       200:
         body:
@@ -166,25 +154,12 @@ documentation:
   displayName: Endpoint Links
   get:
     description: List all the links between network devices
-    queryParameters:
-      filter-by:
-      sort:
     responses:
       200:
         body:
           example: !include ../examples/topologyapi-v1.0-endpointlinks-get-200.json
           schema: !include schemas/endpointlinks.json
 
-
-/all:
-  displayName: All
-  get:
-    description: List all the network devices, nodes and links that make up the Physical Topology
-    responses:
-      200:
-        body:
-          example: !include ../examples/topologyapi-v1.0-all-get-200.json
-          schema: !include schemas/all.json
 
 /subscriptions:
   displayName: Subscriptions
