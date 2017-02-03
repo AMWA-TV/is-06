@@ -22,7 +22,7 @@
       "built-in-mac-address":" 5cfc.666d.fa90",
       "mac-address": "8c:60:4f:04:21:41",
       "ip-address": "10.1.1.1",
-      "operating-speed":"1G"
+      "operating-speed":"1G",
       "MTU": "1500",
       "mode": "routed|trunk|access"
     }

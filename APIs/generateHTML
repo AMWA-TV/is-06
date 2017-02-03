@@ -30,6 +30,8 @@ do
 done
 echo ""
 echo "Linting..."
-jsonlint -v ../examples/*.json
-echo ""
-jsonlint -v schemas/*.json
+# If jsonlint does not support multiple files, use the find command , else comment the below line and uncomment the subsequent lines
+find .. -name \*.json -print -exec jsonlint -q {} \;
+#jsonlint -v ../examples/*.json
+#echo ""
+#jsonlint -v schemas/*.json
