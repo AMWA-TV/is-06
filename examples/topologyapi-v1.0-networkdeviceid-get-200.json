@@ -16,15 +16,15 @@
   [
     {
       "if-name": "eth 1/1",
-      "admin-status": "up|down",
-      "oper-status": "up|down",
-      "down-reason": "SFP not inserted|Administratively down",
-      "built-in-mac-address":" 5cfc.666d.fa90",
+      "admin-status": "up",
+      "oper-status": "up",
+      "down-reason": "N/A",
+      "built-in-mac-address":" 5c:fc:66:6d:fa:90",
       "mac-address": "8c:60:4f:04:21:41",
       "ip-address": "10.1.1.1",
       "operating-speed":"1G",
       "MTU": "1500",
-      "mode": "routed|trunk|access"
+      "mode": "trunk"
     }
   ]
 }

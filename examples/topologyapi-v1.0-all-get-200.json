@@ -19,15 +19,15 @@
         [
           {
             "if-name": "eth 1/1",
-            "admin-status": "up|down",
-            "oper-status": "up|down",
-            "down-reason": "SFP not inserted|Administratively down",
+            "admin-status": "up",
+            "oper-status": "up",
+            "down-reason": "NA",
             "built-in-mac-address":" 5cfc.666d.fa90",
             "mac-address": "8c60.4f04.2141 (for L3, GW MAC) 5cfc.666d.fa90 (for L2, BIM) Modifiable manually",	
             "ip-address": "10.1.1.1",
             "operating-speed":"1G",
             "MTU": "1500",
-            "mode": "routed|trunk|access"
+            "mode": "trunk"
           }
         ] 
       },
@@ -49,26 +49,26 @@
         [
           {
             "name": "eth 1/1",
-            "admin-status": "up|down",
-            "oper-status": "up|down",
-            "down-reason": "SFP not inserted|Administratively down",
+            "admin-status": "up",
+            "oper-status": "up",
+            "down-reason": "NA",
             "built-in-mac-address":" 5cfc.666d.fb90",
             "mac-address": "8c60.4f04.2241 (for L3, GW MAC) 5cfc.666d.fa90 (for L2, BIM) Modifiable manually",	
             "ip-address": "10.1.1.2",
             "operating-speed":"1G",
             "MTU": "1500",
-            "mode": "routed|trunk|access"
+            "mode": "trunk"
           },
           {
             "name": "eth 1/2",
-            "status": "up|down",	
-            "down-reason": "SFP not inserted|Administratively down",
+            "status": "up",
+            "down-reason": "NA",
             "built-in-mac-address":" 5cfc.666d.fb91",
             "mac-address": "8c60.4f04.2242 (for L3, GW MAC) 5cfc.666d.fa90 (for L2, BIM) Modifiable manually",	
             "ip-address": "10.1.1.3",
             "operating-speed":"1G",
             "MTU": "1500",
-            "mode": "routed|trunk|access"
+            "mode": "trunk"
           }
         ] 
       }

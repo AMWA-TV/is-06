@@ -51,19 +51,21 @@
             "type": "string"
           },
           "admin-status": {
-            "type": "string"
+            "enum": [ "up","down" ]
           },
           "oper-status": {
-            "type": "string"
+            "enum": [ "up","down" ]
           },
           "down-reason": {
             "type": "string"
           },
           "built-in-mac-address": {
             "type": "string"
+            "pattern":"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
           },
           "mac-address": {
             "type": "string"
+            "pattern":"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
           },
           "ip-address": {
             "type": "string"
@@ -75,7 +77,7 @@
             "type": "string"
           },
           "mode": {
-            "type": "string"
+            "enum": [ "routed","trunk","access" ]
           }
         },
         "required": [

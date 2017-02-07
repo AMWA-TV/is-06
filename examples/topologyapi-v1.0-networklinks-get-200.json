@@ -4,7 +4,7 @@
         "peer-network-device-id": 101,
         "network-interface": "eth 1/1",
         "peer-network-interface": "eth 1/1",
-        "status": "up|down",
+        "status": "up",
         "speed": "1G"
       }
  ]
