@@ -1,0 +1,11 @@
+{
+"type": "endpointlink",
+"data": {
+        "network-device-id": 101,
+        "endpoint-id": 1000,
+        "network-interface": "eth 1/2",
+        "endpoint-port-id":"9c:60:4f:04:22:41",
+        "status": "up",
+        "speed": "1G"
+      }
+}
