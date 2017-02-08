@@ -60,11 +60,11 @@
             "type": "string"
           },
           "built-in-mac-address": {
-            "type": "string"
+            "type": "string",
             "pattern":"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
           },
           "mac-address": {
-            "type": "string"
+            "type": "string",
             "pattern":"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
           },
           "ip-address": {
