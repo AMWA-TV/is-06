@@ -1,5 +1,5 @@
 {
-"type": "endpoint",
+"type": "endpoints",
 "data": {
         "id":1000,
         "description":"user defined string",

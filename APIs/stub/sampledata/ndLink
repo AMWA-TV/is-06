@@ -1,5 +1,5 @@
 {
-"type": "networklink",
+"type": "network-links",
 "data": {
         "network-device-id": 100,
         "peer-network-device-id": 101,

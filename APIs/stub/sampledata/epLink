@@ -1,5 +1,5 @@
 {
-"type": "endpointlink",
+"type": "endpoint-links",
 "data": {
         "network-device-id": 101,
         "endpoint-id": 1000,

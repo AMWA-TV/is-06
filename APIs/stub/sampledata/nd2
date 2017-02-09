@@ -1,5 +1,5 @@
 {
-"type":"networkdevice",
+"type":"network-devices",
 "data": {
   "id": 101,
   "name":"switch2",
