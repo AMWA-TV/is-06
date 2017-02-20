@@ -13,3 +13,6 @@ The stub has been tested on the following platforms
 * macOS Sierra (10.12.3)
 * CentOS Linux release 7.1.1503
 * Windows 7
+
+## Accessing the APIs
+The APIs can be accessed using the URL - http://\<ip:port\>/pmn-sdn/v1/topology/ 
