@@ -55,7 +55,18 @@ documentation:
         404:
           description: Returned when the requested Node ID does not exist
           body:
-
+    patch:
+      description: Update an existing endpoint interface
+      body:
+        example: !include ../examples/topologyapi-v1.0-networkdevice-patch-request.json
+        schema: !include schemas/topologyapi-v1.0-networkdevice-patch-request.json
+      responses:
+        200:
+          description: Returned when the PATCH request is handled successfully
+        403:
+          description: Returned when a PATCH request is made against a non-persistent endpoint which is managed by the Topology API and cannot be upserted
+        404:
+          description: Returned when the requested Endpoint ID does not exist
 /endpoints:
   displayName: Endpoints
   get:
@@ -88,7 +99,7 @@ documentation:
         type: integer
 
     get:
-      description: Get a single Network Device
+      description: Get a single Endpoint
       body:
         schema: EmptySchema
       responses:
