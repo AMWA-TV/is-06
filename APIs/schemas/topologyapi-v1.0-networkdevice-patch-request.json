@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "interface": {
+      "type": "object",
+      "properties": {
+        "if-name": {
+          "type": "string"
+        },
+        "admin-status": {
+          "enum": [ "up","down" ]
+        }
+      },
+      "required": [
+        "if-name",
+        "admin-status"
+      ]
+    }
+  },
+  "required": [
+    "interface"
+  ]
+}
