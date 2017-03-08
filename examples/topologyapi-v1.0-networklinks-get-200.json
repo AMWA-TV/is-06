@@ -1,7 +1,7 @@
  [
       {
-        "network-device-id": 100,
-        "peer-network-device-id": 101,
+        "network-device-id": "8c:60:4f:04:24:41",
+        "peer-network-device-id": "8c:60:4f:04:24:42",
         "network-interface": "eth 1/1",
         "peer-network-interface": "eth 1/1",
         "status": "up",

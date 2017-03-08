@@ -42,7 +42,9 @@ documentation:
   /{id}:
     uriParameters:
       id:
-        type: integer
+        type: string
+        description: The unique identifier for the Device. Mac-address is used
+        pattern:^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$
     get:
       description: Get a single Network Device
       body:
@@ -96,7 +98,9 @@ documentation:
   /{id}:
     uriParameters:
       id:
-        type: integer
+        type: string
+        description: The unique identifier for the Device. Mac-address is used
+        pattern:^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$
 
     get:
       description: Get a single Endpoint
@@ -193,5 +197,7 @@ documentation:
   /{id}:
     uriParameters:
       id:
-        type: integer
+        type: string
+        description: The unique identifier for the Device. Mac-address is used
+        pattern:^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$
 

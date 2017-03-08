@@ -1,7 +1,7 @@
 {
 "type":"network-devices",
 "data": {
-  "id": 101,
+  "id": "8c:60:4f:04:24:41",
   "name":"switch2",
   "serial-number": "FXS1844Q1XY",
   "product-id": "N77-C7703",
