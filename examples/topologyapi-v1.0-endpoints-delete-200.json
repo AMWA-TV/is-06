@@ -1,6 +1,6 @@
 {
-  "id":1000,
+  "id":"9c:c6:4f:04:22:00",
   "description":"user defined string",
-  "chassis-id": "9cc60.4f04.2200",
-  "port-id": "9cc60.4f04.2241"
+  "chassis-id": "9c:c6:4f:04:22:00",
+  "port-id": "9c:c6:4f:04:22:41"
 }

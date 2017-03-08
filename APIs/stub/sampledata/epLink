@@ -1,8 +1,8 @@
 {
 "type": "endpoint-links",
 "data": {
-        "network-device-id": 101,
-        "endpoint-id": 1000,
+        "network-device-id": "8c:60:4f:04:24:41",
+        "endpoint-id": "9c:60:4f:04:22:00",
         "network-interface": "eth 1/2",
         "endpoint-port-id":"9c:60:4f:04:22:41",
         "status": "up",

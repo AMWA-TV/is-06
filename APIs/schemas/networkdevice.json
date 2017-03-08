@@ -1,9 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "title": "Network Device",
   "properties": {
     "id": {
-      "type": "integer"
+      "type": "string",
+      "description": "The unique identifier for the Device. Mac-address is used",
+      "pattern":"^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$"
     },
     "name": {
       "type": "string"
@@ -22,7 +25,7 @@
     },
     "mac-address": {
       "type": "string",
-      "pattern":"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$" 
+      "pattern":"^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$" 
     },
     "mgmt-ip": {
       "type": "string"
@@ -61,11 +64,11 @@
           },
           "built-in-mac-address": {
             "type": "string",
-            "pattern":"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
+            "pattern":"^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$"
           },
           "mac-address": {
             "type": "string",
-            "pattern":"^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"
+            "pattern":"^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$"
           },
           "ip-address": {
             "type": "string"

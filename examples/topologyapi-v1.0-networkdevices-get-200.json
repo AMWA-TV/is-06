@@ -1,6 +1,6 @@
   [
       {
-        "id": 100, 
+        "id": "8c:60:4f:04:24:41", 
         "name":"switch1",
         "serial-number": "FXS1844Q1UH",
         "product-id": "N77-C7706",
@@ -30,7 +30,7 @@
         ]
       },
       {
-        "id": 101, 
+        "id": "8c:60:4f:04:24:41", 
         "name":"switch2",
         "serial-number": "FXS1844Q1UG",
         "product-id": "N77-C7706",

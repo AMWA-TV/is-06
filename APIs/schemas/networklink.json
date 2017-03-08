@@ -3,10 +3,14 @@
   "type": "object",
   "properties": {
     "network-device-id": {
-      "type": "integer"
+      "type": "string",
+      "description": "The unique identifier for the Device. Mac-address is used",
+      "pattern":"^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$"
     },
     "peer-network-device-id": {
-      "type": "integer"
+      "type": "string",
+      "description": "The unique identifier for the Device. Mac-address is used",
+      "pattern":"^([0-9A-Fa-f]{2}[:]){5}([0-9A-Fa-f]{2})$"
     },
     "network-interface": {
       "type": "string"

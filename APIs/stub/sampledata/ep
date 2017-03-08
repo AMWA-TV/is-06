@@ -1,7 +1,7 @@
 {
 "type": "endpoints",
 "data": {
-        "id":1000,
+        "id":"9c:60:4f:04:22:00",
         "description":"user defined string",
         "chassis-id": "9c:60:4f:04:22:00",
         "port-id": "9c:60:4f:04:22:41"
