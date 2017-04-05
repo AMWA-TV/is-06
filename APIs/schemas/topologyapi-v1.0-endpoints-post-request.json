@@ -7,9 +7,6 @@
     },
     "chassis-id": {
       "type": "string"
-    },
-    "port-id": {
-      "type": "string"
     }
   }
 }

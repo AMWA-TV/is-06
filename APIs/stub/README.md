@@ -1,7 +1,6 @@
 # **[Work In Progress]** Stub For AMWA Network Control Specification
 
 The stub provides a sample implementation of the APIs that have been  described in this repository. It uses the files present in the sampledata folder for data simulation.<br>    
-The subscription API is yet to be implemented. 
 
 ## Usage:
 
@@ -15,4 +14,4 @@ The stub has been tested on the following platforms
 * Windows 7
 
 ## Accessing the APIs
-The APIs can be accessed using the URL - http://\<ip:port\>/pmn-sdn/v1/topology/ 
+The APIs can be accessed using the URL - http://\<ip:port\>/x-nmos/netctrl//v1.0/topology/ 

@@ -5,17 +5,11 @@
     "network-device-id": {
       "type": "integer"
     },
-    "endpoint-id": {
-      "type": "integer"
-    },
     "network-interface": {
       "type": "string"
     },
     "endpoint-port-id": {
       "type": "string"
-    },
-    "status": {
-      "enum": [ "up","down" ]
     },
     "speed": {
       "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
@@ -23,10 +17,8 @@
   },
   "required": [
     "network-device-id",
-    "endpoint-id",
     "network-interface",
     "endpoint-port-id",
-    "status",
     "speed"
   ]
 }

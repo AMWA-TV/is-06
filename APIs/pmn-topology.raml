@@ -4,8 +4,8 @@
 # (c) ?
 
 title: Topology
-baseUri: http://example.api.com/pmn-sdn/{version}/topology
-version: v1
+baseUri: http://example.api.com/x-nmos/netctrl/{version}/topology
+version: v1.0
 mediaType: application/json
 schemas:
   - NetworkDevice: !include schemas/networkdevice.json
@@ -42,7 +42,7 @@ documentation:
   /{id}:
     uriParameters:
       id:
-        type: integer
+        type: string
     get:
       description: Get a single Network Device
       body:
@@ -93,10 +93,10 @@ documentation:
         body:
           schema: !include schemas/error.json
 
-  /{id}:
+  /{portid}:
     uriParameters:
-      id:
-        type: integer
+      portid:
+        type: string
 
     get:
       description: Get a single Endpoint
@@ -168,30 +168,3 @@ documentation:
         body:
           example: !include ../examples/topologyapi-v1.0-endpointlinks-get-200.json
           schema: !include schemas/endpointlinks.json
-
-
-/subscriptions:
-  displayName: Subscriptions
-  post:
-    description: Create a websocket subscription to an API resource
-    body:
-      example: !include ../examples/topologyapi-v1.0-subscriptions-post-request.json
-    responses:
-      201:
-        body:
-          example: !include ../examples/topologyapi-v1.0-subscriptions-get-200.json
-      400:
-        description: Returned when the POST request is incorrectly formatted or missing mandatory attributes
-  get:
-    description: List active connections to websockets providing real-time updates on resource changes
-    body:
-    responses:
-      200:
-        body:
-          example: !include ../examples/topologyapi-v1.0-subscriptions-get-200.json
-
-  /{id}:
-    uriParameters:
-      id:
-        type: integer
-

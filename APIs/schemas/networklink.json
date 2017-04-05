@@ -3,19 +3,16 @@
   "type": "object",
   "properties": {
     "network-device-id": {
-      "type": "integer"
+      "type": "string"
     },
     "peer-network-device-id": {
-      "type": "integer"
+      "type": "string"
     },
     "network-interface": {
       "type": "string"
     },
     "peer-network-interface": {
       "type": "string"
-    },
-    "status": {
-      "enum": [ "up","down" ]
     },
     "speed": {
       "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
@@ -26,7 +23,6 @@
     "peer-network-device-id",
     "network-interface",
     "peer-network-interface",
-    "status",
     "speed"
   ]
 }

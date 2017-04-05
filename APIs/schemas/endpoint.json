@@ -2,9 +2,6 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "id": {
-      "type": "integer"
-    },
     "description": {
       "type": "string"
     },
@@ -12,11 +9,11 @@
       "type": "string"
     },
     "port-id": {
-      "type": "string"
+      "type": "string",
+      "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
     }
   },
   "required": [
-    "id",
     "description",
     "chassis-id",
     "port-id"

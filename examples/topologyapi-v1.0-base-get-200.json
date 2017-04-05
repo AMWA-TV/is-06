@@ -2,7 +2,5 @@
   "network-devices/",
   "endpoints/",
   "network-links/",
-  "endpoint-links/",
-  "all/",
-  "subscriptions/"
+  "endpoint-links/"
 ]
