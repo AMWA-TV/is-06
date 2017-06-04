@@ -4,10 +4,10 @@ This repository contains details of this AMWA Specification for Network Control 
 
 The main areas of work are:
 1. Discovery of Network Topology and Discovery of endpoint devices that are connected to the Network Switches
-2. Create/Retrieve/Update/Delete Network Streams (Flow Management) 
+2. Create/Retrieve/Update/Delete Network Streams (NetworkFlow Management) 
 3. Monitoring and Diagnostics
 
-This github is covering 1. above. 
+This branch (phase-2) is covering phase 2, NetworkFlow Managment) as mentioned above. 
 
 ## Getting started
 
@@ -24,4 +24,4 @@ Readers are advised to be familiar with:
 * [NOTICE](NOTICE) -- Disclaimer
 * Use Cases: The list of use cases were used to create the required API
 * API: The API specification with the necessary schemas
-* Examples:  Using the API, there are some examples to guide the implementation.
+* Examples:  Using the API, there are some examples to guide the implementation
