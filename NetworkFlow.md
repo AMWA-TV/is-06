@@ -33,3 +33,8 @@ Notes:
 
 ##### Add a listener 
 ##### POST …/listener (Receiver Address, Receiver port (UDP) (optional), NetworkFlow ID)
+
+##### Rquesting Interface Bandwidth information by providing the Interface id.  Single Interface only. grouped Interface bandwidth (eg LAG) is not covered and is added to backlog.
+##### POST ../availableInterfaceBandwidth (interface id)
+Response: Bandwidth
+
