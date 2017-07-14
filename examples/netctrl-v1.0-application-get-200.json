@@ -1,0 +1,7 @@
+{  
+  "id":"app1",
+  "name": "Sample application",
+  "ip-address": "10.16.10.5",
+  "switch-id": "ots-77",
+  "interface-id": "ens30"
+}

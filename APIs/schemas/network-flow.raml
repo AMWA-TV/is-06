@@ -1,0 +1,141 @@
+#%RAML 1.0 Library
+
+usage: Types for the flow API
+
+types:
+  Application:
+    type: object
+    properties:
+      id:
+        required: false
+        type: string
+        note: an assigned id for the application.
+      name:
+        required: false
+        type: string
+      ip-address:
+        required: true
+        type: string
+        note: ipv4 and/or ipv6
+      switch-id:
+        required: false
+        type: string
+        note: Switch ID
+      interface-id:
+        required: false
+        type: string
+        note: Interface ID
+    example: # example of a single application
+        id: app1
+        name: video-app
+        ip-address: 10.16.10.5
+        switch-id: ots-77
+        interface-id: ens30
+  ApplicationRole:
+    type: string
+    enum: [ Sender, Receiver, Both ]
+  Bandwidth:
+    type: object
+    properties:
+      average: number
+      peak: number
+      # burst-interval: number
+  DSCP:
+    type: integer
+    minimum: 0
+    maximum: 46
+    format: int8
+    multipleOf: 1
+  
+  FlowEndpoint:
+    type: object
+    properties:
+      endpoint-id:
+        required: true
+        type: string
+        note: Endpoint id
+      application-id:
+        required: true
+        type: string
+        note: Application id
+      port:
+        required: false
+        type: integer
+        note: Application port address
+        
+  MulticastReceiver:
+    type: array
+    items: FlowEndpoint
+    minItems: 1
+    uniqueItems: true
+    
+  UnicastFlow:
+    type: object
+    properties:
+      id:
+        required: false
+        type: string
+        note: an assigned id for the host.
+      name:
+        required: false
+        type: string
+      source: FlowEndpoint
+      destination: FlowEndpoint
+      protocol-id:
+        required: true
+        type: string
+        note: Protocol ID
+      bandwidth:
+        required: true
+        type: Bandwidth
+        note: Bandwidth for the flow
+      dscp:
+        required: false
+        type: DSCP
+        note: DSCP based QoS metrics
+  
+  MulticastFlow:
+    type: object
+    properties:
+      id:
+        required: false
+        type: string
+        note: an assigned id for the host.
+      name:
+        required: false
+        type: string
+      source: FlowEndpoint
+      destination: MulticastReceiver
+      group-address:
+        required: true
+        type: string
+        note: Multicast group address
+      port-address:
+        required: true
+        type: string
+        note: Multicast port address
+      protocol-id:
+        required: true
+        type: string
+        note: Protocol ID
+      bandwidth:
+        required: true
+        type: Bandwidth
+        note: Bandwidth for the flow
+      dscp:
+        required: false
+        type: DSCP
+        note: DSCP based QoS metrics
+        
+  Flows:
+    type: object
+    properties:
+      unicast:
+        required: false
+        type: array
+        items: UnicastFlow
+      multicast:
+        required: false
+        type: array
+        items: MulticastFlow
+        

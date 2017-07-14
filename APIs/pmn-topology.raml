@@ -1,10 +1,10 @@
-#%RAML 0.8
+#%RAML 1.0
 
-# PMN SDN Conrtoller API Specification : Topology API
+# AMWA-nmos Network Conrtoller API
 # (c) ?
 
 title: Topology
-baseUri: http://example.api.com/x-nmos/netctrl/{version}/topology
+baseUri: http://example.api.com/x-nmos/netctrl/{version}
 version: v1.0
 mediaType: application/json
 schemas:
@@ -16,6 +16,8 @@ schemas:
     NetworkLinks: !include schemas/networklinks.json
     EndpointLink: !include schemas/endpointlink.json
     EndpointLinks: !include schemas/endpointlinks.json
+uses:
+  flow: schemas/network-flow.raml
 documentation:
   - title: Overview
     content: |
@@ -28,7 +30,7 @@ documentation:
     responses:
       200:
         body:
-          example: !include ../examples/topologyapi-v1.0-base-get-200.json
+          example: !include ../examples/netctrl-v1.0-base-get-200.json
 
 /network-devices:
   displayName: Network Devices
@@ -87,15 +89,17 @@ documentation:
     responses:
       201:
         body:
-          example: !include ../examples/topologyapi-v1.0-endpoints-post-201.json
+          description: Returned when the POST request is successful. Respone contains the id of the endpoint.
+          type: string
+          example: sjc-9c41
       400:
         description: Returned when the POST request is incorrectly formatted or missing mandatory attributes
         body:
           schema: !include schemas/error.json
 
-  /{portid}:
+  /{endpoint-id}:
     uriParameters:
-      portid:
+      endpoint-id:
         type: string
 
     get:
@@ -108,7 +112,7 @@ documentation:
             example: !include ../examples/topologyapi-v1.0-endpointid-get-200.json
             schema: !include schemas/endpoint.json
         404:
-          description: Returned when the requested Node ID does not exist
+          description: Returned when the requested endpoint with id does not exist
           body:
     put:
       description: Update an existing endpoint
@@ -122,7 +126,7 @@ documentation:
         403:
           description: Returned when a PUT request is made against a non-persistent endpoint which is managed by the Topology API and cannot be updated
         404:
-          description: Returned when the requested Node ID does not exist
+          description: Returned when the requested endpoint id does not exist
 
     patch:
       description: Upsert an existing endpoint interface
@@ -148,6 +152,111 @@ documentation:
           description: Returned when a DELETE request is made against a non-persistent endpoint which is managed by the Topology API and cannot be deleted
         404:
           description: Returned when the requested Endpoint ID does not exist
+    ## Phase II addiion
+    /application:
+      displayName: application
+      get:
+        description: Retrieve all applications defined for this endpoint
+        responses:
+          200:
+            body:
+              type: flow.Application[]
+      post:
+        description: Create a new application for this endpoint for the first time 
+        body:
+          type: flow.Application
+          example: !include ../examples/netctrl-v1.0-application-post.json
+        responses:
+          200:
+            description: Returned when the POST request is a success and the application has been created. The response contains the new application id.
+            body:
+              type: string
+              example: app-6t4y3
+          400:
+            description: Returned when the POST request is incorrectly formatted or provided wrong value.
+            body:
+              type: !include schemas/error.json
+          404:
+            description: Returned when the endpoint does not exist.
+      /{application-id}:
+        uriParameters:
+          application-id:
+            type: string
+        get:
+          description: Retrieve a single application for this endpoint with application id
+          responses:
+            200:
+              body:
+                type: flow.Application
+                example: !include ../examples/netctrl-v1.0-application-get-200.json
+        patch:
+          description: Modify the application with application id.
+          body:
+            type: flow.Application
+            example: !include ../examples/netctrl-v1.0-application-post.json
+          responses:
+            200:
+              description: Returned when the PATCH request is a success and the application has been modified. No response body.
+            400:
+              description: Returned when the PATCH request is incorrectly formatted or missing values.
+              body:
+                type: !include schemas/error.json
+            404:
+              description: Returned when the application does not exist for this endpoint.
+        delete:
+          description: Delete the application.
+          responses:
+            200:
+              description: Returned when the application is successfully deleted. No response body.
+            404:
+              description: Returned when the application does not exist.
+        /register:
+          displayName: Application-Role
+          get:
+            description: Retrieves the role of this application, as a sender, receiver, or both
+            responses:
+              200:
+                body: flow.ApplicationRole
+                example: Both
+          post:
+            description: Register this application for the first time
+            body:
+              type: flow.ApplicationRole
+              example: Receiver
+            responses:
+              200:
+                description: Returned when the POST request is a success and the application role has been registered. No response body.
+              400:
+                description: Returned when the POST request is incorrectly formatted or provided wrong value.
+                body:
+                  type: !include schemas/error.json
+              404:
+                description: Returned when the application does not exist in this endpoint.
+              403:
+                description: Returned when the application already has a role assigned.
+          patch:
+            description: Modify the role of this application
+            body:
+              type: flow.ApplicationRole
+              example: Sender
+            responses:
+              200:
+                description: Returned when the PATCH request is a success and the application role has been modified. No response body.
+              400:
+                description: Returned when the PATCH request is incorrectly formatted or missing values.
+                body:
+                  type: !include schemas/error.json
+              404:
+                description: Returned when the application does not exist for this endpoint.
+              403:
+                description: Returned when the application does not have a previous role assigned. 
+          delete:
+            description: Delete the role for this application.
+            responses:
+              200:
+                description: Returned when the application role is successfully deleted. No response body.
+              404:
+                description: Returned when the application does not exist.
 
 /network-links:
   displayName: Network Links
@@ -168,3 +277,185 @@ documentation:
         body:
           example: !include ../examples/topologyapi-v1.0-endpointlinks-get-200.json
           schema: !include schemas/endpointlinks.json
+
+
+## Phase II addiion
+/network-flow:
+  displayName: Network-flow
+  get:
+    description: Retrieve all network flows.
+    responses:
+      200:
+        body: flow.Flows
+        example: !include ../examples/netctrl-v1.0-network-flow-get-200.json
+  /unicast-network-flow:
+    displayName: Unicast-Network-flow
+    get:
+      description: Retrieve all unicast network flows.
+      responses:
+        200:
+          body: flow.UnicastFlow[]
+          example: !include ../examples/netctrl-v1.0-unicast-network-flow-get-200.json
+    post:
+      description: Create a new unicast network flow. 
+      body:
+        type: flow.UnicastFlow
+        example: !include ../examples/netctrl-v1.0-unicast-network-flow-post.json
+      responses:
+        201:
+          description: Returned when the unicast network flow creation is successful. The response contains the id of the new flow created.
+          body:
+            type: string
+            example: flow-id-f56098
+        400:
+          description: Returned when the POST request is incorrectly formatted or missing values.
+          body:
+            type: !include schemas/error.json
+        404:
+          description: Returned when the source or the destination of the network flow does not exist.
+        403:
+          description: Returned when the source or destination of the flow can not be used as such, i.e., their roles are not defined as sender (both) and receiver (both), respectively. 
+    
+    /{id}:
+      uriParameters:
+        id:
+          type: string
+      get:
+        description: Retrieve a single unicast network flow.
+        responses:
+          200:
+            body: flow.UnicastFlow
+            example: !include ../examples/netctrl-v1.0-unicast-network-flow-get-200.json
+      patch:
+        description: Update an existing unicast network flow. 
+        body:
+          type: flow.UnicastFlow
+          example: !include ../examples/netctrl-v1.0-unicast-network-flow-post.json
+        responses:
+          201:
+            description: Returned when the unicast network flow update is successful. No response body.
+          400:
+            description: Returned when the PATCH request is incorrectly formatted or missing values.
+            body:
+              type: !include schemas/error.json
+          404:
+            description: Returned when the network flow or the source or the destination does not exist.
+          403:
+            description: Returned when the network flow can not be updated, maybe for permission or security reasons, or the source and the destination can not be used as such, i.e., their roles are not defined as sender (both) and receiver (both), respectively.
+      delete:
+        description: Delete the network flow.
+        responses:
+          200:
+            description: Returned when the network flow is successfully deleted. No response body.
+          404:
+            description: Returned when the network flow does not exist.
+
+  /multicast-network-flow:
+    displayName: Multicast-Network-flow
+    get:
+      description: Retrieve all the multicast network flow.
+      responses:
+        200:
+          body:
+            body: flow.MulticastFlow[]
+            example: !include ../examples/netctrl-v1.0-multicast-network-flow-get-200.json
+    post:
+      description: Create a new multicast network flow. 
+      body:
+        type: flow.MulticastFlow
+        example: !include ../examples/netctrl-v1.0-multicast-network-flow-post.json
+      responses:
+        201:
+          description: Returned when the multicast network flow creation is successful. The response contains the id of the new flow created.
+          body:
+            type: string
+            example: multi-flow-e253904
+        400:
+          description: Returned when the POST request is incorrectly formatted or missing values.
+          body:
+            type: !include schemas/error.json
+        404:
+          description: Returned when the source or the destinations of the network flow do not exist.
+        403:
+          description: Returned when the source or the destinations of the flow can not be used as such, i.e., their roles are not defined as sender (both) and receiver (both), respectively. 
+    
+    /{id}:
+      uriParameters:
+        id:
+          type: string
+      get:
+        description: Retrieve a single multicast network flow.
+        responses:
+          200:
+            body: flow.MulticastFlow
+            example: !include ../examples/netctrl-v1.0-multicast-network-flow-get-200.json
+      patch:
+        description: Update this existing multicast network flow. 
+        body:
+          type: flow.MulticastFlow
+          example: !include ../examples/netctrl-v1.0-multicast-network-flow-post.json
+        responses:
+          201:
+            description: Returned when the multicast network flow update is successful. No response body.
+          400:
+            description: Returned when the PATCH request is incorrectly formatted or missing values.
+            body:
+              type: !include schemas/error.json
+          404:
+            description: Returned when the network flow or the source or the destinations do not exist.
+          403:
+            description: Returned when the network flow can not be updated, maybe for permission or security reasons, or the source and the destination can not be used as such, i.e., their roles are not defined as sender (both) and receiver (both), respectively.
+      delete:
+        description: Delete this multicast network flow.
+        responses:
+          200:
+            description: Returned when the network flow is successfully deleted. No response body.
+          404:
+            description: Returned when the network flow does not exist.
+      /listener:
+        get:
+          description: Retrieve all listeners (receiver) of this multicast flow.
+          responses:
+            200:
+              body: flow.FlowEndpoint[]
+              example: !include ../examples/netctrl-v1.0-multicast-network-flow-listener-get-200.json
+        post:
+          description: Add a new listener to this multicast flow. 
+          body:
+            type: flow.FlowEndpoint
+            example: !include ../examples/netctrl-v1.0-multicast-network-flow-listener-post.json
+          responses:
+            201:
+              description: Returned when the new listener is add to this multicast flow. No response body.
+            400:
+              description: Returned when the POST request is incorrectly formatted or missing values.
+              body:
+                type: !include schemas/error.json
+            404:
+              description: Returned when the listener does not exist.
+            403:
+              description: Returned when the listener is not asigned the role receiver (both).
+        delete:
+          description: Delete an existing listener of this multicast flow.
+          queryParameters:
+            endpoint-id:
+              type: string
+              description: Id of the endpoint as defined in FlowEndpoint.
+              required: true
+              example: mxd-disp-9
+            application-id:
+              type: string
+              description: Id of the application as defined in FlowEndpoint.
+              required: true
+              example: vid-player
+            port:
+              type: integer
+              description: Port address of the listener as defined in FlowEndpoint.
+              required: true
+              example: 2375
+          responses:
+            200:
+              description: Returned when this listener of this multicast flow is successfully deleted. No response body.
+            400:
+              description: Returned when the listener does not exist or the DELETE request is not provided with sufficient parameters.
+

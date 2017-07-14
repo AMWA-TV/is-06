@@ -1,0 +1,12 @@
+[
+  {
+    "endpoint-id": "mxd-disp-5",
+    "application-id": "vid-player",
+    "port": 5890
+  },
+  {
+    "endpoint-id": "mxd-disp-9",
+    "application-id": "vid-player",
+    "port": 5890
+  }
+]

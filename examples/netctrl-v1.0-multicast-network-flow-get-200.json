@@ -1,0 +1,27 @@
+{  
+  "id":"mflow1",
+  "name": "Multicast flow one",
+  "source": {
+    "endpoint-id": "vid-cam-33",
+    "application-id": "vid-streamer",
+    "port": 5690
+  },
+  "destination": [{
+    "endpoint-id": "mxd-disp-5",
+    "application-id": "vid-player",
+    "port": 5890
+  },
+  {
+    "endpoint-id": "mxd-disp-9",
+    "application-id": "vid-player",
+    "port": 5890
+  }],
+  "protocol-id": "4",
+  "group-address": "test-vid-grp",
+  "port-address": "multi-port",
+  "bandwidth": {
+    "average": 40,
+    "peak": 90
+  },
+  "dscp": 22
+}

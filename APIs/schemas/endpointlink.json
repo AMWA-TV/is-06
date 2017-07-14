@@ -8,7 +8,7 @@
     "network-interface": {
       "type": "string"
     },
-    "endpoint-port-id": {
+    "endpoint-id": {
       "type": "string"
     },
     "speed": {
@@ -18,7 +18,7 @@
   "required": [
     "network-device-id",
     "network-interface",
-    "endpoint-port-id",
+    "endpoint-id",
     "speed"
   ]
 }

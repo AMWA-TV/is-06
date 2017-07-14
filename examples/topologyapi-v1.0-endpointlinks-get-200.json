@@ -2,7 +2,7 @@
       {
         "network-device-id": "uid2",
         "network-interface": "eth 1/2",
-        "endpoint-port-id":"9c-60-4f-04-22-41",
+        "endpoint-id":"9c41",
         "speed": "1G"
       }
   ]
