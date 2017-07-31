@@ -1,12 +1,5 @@
 [
-  {
-    "endpoint-id": "mxd-disp-5",
-    "application-id": "vid-player",
-    "port": 5890
-  },
-  {
-    "endpoint-id": "mxd-disp-9",
-    "application-id": "vid-player",
-    "port": 5890
-  }
+  "38158fff-e71f-4e13-bdbb-bd823ee6d6ea",
+  "8587b524-622d-4bbc-af39-1370611c958f",
+  "c7e6a5d9-e928-4b5a-8a36-f69877517522"
 ]

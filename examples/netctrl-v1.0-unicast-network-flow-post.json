@@ -1,15 +1,12 @@
-{  
-  "name": "Flow one",
-  "source": {
-    "endpoint-id": "vid-cam-33",
-    "application-id": "vid-streamer",
-    "port": 5690
-  },
-  "destination": {
-    "endpoint-id": "mxd-disp-5",
-    "application-id": "vid-player",
-    "port": 5890
-  },
+{
+  "id": "1650fbcc-d8a0-4bd2-8e61-c7abb38d78d2",
+  "version": "1271724062:154626264",
+  "label": "Video unicast network-flow",
+  "description": "Sample video unicast network-flow",
+  "tags": [
+  ],
+  "source_application_id": "6c3d756b-1993-4dd3-bde6-db2e2b53302d",
+  "destination_application_id": "227bd295-66d0-4e15-9a19-9331e01ed9e3",
   "protocol-id": "4",
   "bandwidth": {
     "average": 40,

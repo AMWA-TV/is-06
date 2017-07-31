@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "description": "Returning registered multicast netowrk-flows.",
+  "title": "Registered multicast netowrk-flows.",
+  "items": {
+    "$ref": "multicast-network-flow.json"
+  },
+  "minItems": 0,
+  "uniqueItems": true
+}

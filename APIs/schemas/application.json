@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Describes an application in the network which is capable of either sending or receiveing network flows.",
+  "title": "Network application",
+  "oneOf": [
+    {
+      "$ref": "application_core.json",
+      "role": {
+        "description": "Application role strictly as sender.",
+        "type": "string",
+        "enum": [
+          "sender"
+        ]
+      }
+    },
+    {
+      "$ref": "application_core.json",
+      "role": {
+        "description": "Application role strictly as receiver.",
+        "type": "string",
+        "enum": [
+          "receiver"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "ad4c0cc5-68ca-4959-9ba6-e02848e80636",
+  "version": "1271724062:154626412",
+  "label": "Audio multicast network-flow",
+  "description": "Sample audio multicast network-flow",
+  "tags": [
+  ],
+  "source_application_id": "bba6b8b1-2a50-414c-a101-04b56b457474",
+  "destination_application_ids": [
+    "932e9c68-ee81-42d5-acb8-f2fe16445742",
+    "31e6aec1-b3fc-4a7c-9bb2-5d573c221890",
+    "91c1d617-55ac-4406-8e5a-2b36a621cbfe"
+  ],
+  "protocol-id": "4",
+  "bandwidth": {
+    "average": 2,
+    "peak": 5
+  },
+  "dscp": 22
+}
