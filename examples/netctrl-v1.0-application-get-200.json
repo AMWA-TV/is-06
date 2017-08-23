@@ -11,10 +11,7 @@
         ],
         "endpoint_id": "77fd7fad-4160-2802-8d42-4f2819f16031",
         "ip_address": "192.168.16.24",
-        "port_address": 6004,
-        "network-device-id": "3e62e021-3f45-4977-a14a-f1cb5b2f4252",
-        "network-interface": "ens30",
-        "role": "sender"
+        "port_address": 6004
     },
     {
         "id": "84311095-da0b-5a6a-b992-1f5623bdc069",
@@ -28,9 +25,6 @@
         ],
         "endpoint_id": "cbac802c-47cc-433b-a573-0808ddbbe161",
         "ip_address": "192.168.16.26",
-        "port_address": 6004,
-        "network-device-id": "22a25f26-73e5-385a-a733-0a6a1ef0e459",
-        "network-interface": "ens30",
-        "role": "receiver"
+        "port_address": 6004
     }
 ]

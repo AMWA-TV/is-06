@@ -3,43 +3,59 @@
   "type": "object",
   "properties": {
     "id": {
+      "description": "Globally unique identifier for the network device.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "version": {
+      "description": "String formatted TAI timestamp (<seconds>:<nanoseconds>) indicating precisely when an attribute of the network device last changed",
+      "type": "string",
+      "pattern": "^[0-9]+:[0-9]+$"
+    },
+    "label": {
+      "description": "Freeform string label for the network device",
       "type": "string"
     },
-    "name": {
+    "description": {
+      "description": "Detailed description of the network device",
       "type": "string"
     },
-    "serial-number": {
+    "tags": {
+      "description": "Key value set of freeform string tags to aid in filtering network device, if necessary. Values should be represented as an array of strings. Can be empty.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "serial_number": {
       "type": "string"
     },
-    "product-id": {
+    "product_id": {
       "type": "string"
     },
-    "product-description": {
+    "product_description": {
       "type": "string"
     },
     "vendor": {
       "type": "string"
     },
-    "mac-address": {
+    "mac_address": {
       "type": "string",
       "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$" 
     },
-    "mgmt-ip": {
+    "mgmt_ip": {
       "type": "string"
     },
-    "version": {
+    "image_file": {
       "type": "string"
     },
-    "image-file": {
-      "type": "string"
-    },
-    "build-time": {
+    "build_time": {
       "type": "string"
     },
     "uptime": {
       "type": "string"
     },
-    "last-reset-reason": {
+    "last_reset_reason": {
       "type": "string"
     },
     "interfaces": {
@@ -47,30 +63,30 @@
       "items": {
         "type": "object",
         "properties": {
-          "if-name": {
+          "if_name": {
             "type": "string"
           },
-          "admin-status": {
+          "admin_status": {
             "enum": [ "up","down" ]
           },
-          "oper-status": {
+          "oper_status": {
             "enum": [ "up","down" ]
           },
-          "down-reason": {
+          "down_reason": {
             "type": "string"
           },
-          "built-in-mac-address": {
+          "built_in_mac_address": {
             "type": "string",
             "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
           },
-          "mac-address": {
+          "mac_address": {
             "type": "string",
             "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
           },
-          "ip-address": {
+          "ip_address": {
             "type": "string"
           },
-          "operating-speed": {
+          "operating_speed": {
             "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
           },
           "MTU": {
@@ -81,14 +97,14 @@
           }
         },
         "required": [
-          "if-name",
-          "admin-status",
-          "oper-status",
-          "down-reason",
-          "built-in-mac-address",
-          "mac-address",
-          "ip-address",
-          "operating-speed",
+          "if_name",
+          "admin_status",
+          "oper_status",
+          "down_reason",
+          "built_in_mac_address",
+          "mac_address",
+          "ip_address",
+          "operating_speed",
           "MTU",
           "mode"
         ]
@@ -97,18 +113,18 @@
   },
   "required": [
     "id",
-    "name",
-    "serial-number",
-    "product-id",
-    "product-description",
-    "vendor",
-    "mac-address",
-    "mgmt-ip",
     "version",
-    "image-file",
-    "build-time",
+    "name",
+    "serial_number",
+    "product_id",
+    "product_description",
+    "vendor",
+    "mac_address",
+    "mgmt_ip",
+    "image_file",
+    "build_time",
     "uptime",
-    "last-reset-reason",
+    "last_reset_reason",
     "interfaces"
   ]
 }

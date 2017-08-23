@@ -43,7 +43,7 @@ documentation:
       200:
         body:
           type: !include schemas/networkdevices.json
-          example: !include ../examples/topologyapi-v1.0-networkdevices-get-200.json
+          example: !include ../examples/netctrl-v1.0-networkdevices-get-200.json
   /{id}:
     uriParameters:
       id:
@@ -56,15 +56,15 @@ documentation:
         200:
           body:
             type: !include schemas/networkdevice.json
-            example: !include ../examples/topologyapi-v1.0-networkdeviceid-get-200.json
+            example: !include ../examples/netctrl-v1.0-networkdeviceid-get-200.json
         404:
           description: Returned when the requested Node ID does not exist
           body:
     patch:
       description: Update an existing endpoint interface
       body:
-        type: !include schemas/topologyapi-v1.0-networkdevice-patch-request.json
-        example: !include ../examples/topologyapi-v1.0-networkdevice-patch-request.json
+        type: !include schemas/netctrl-v1.0-networkdevice-patch-request.json
+        example: !include ../examples/netctrl-v1.0-networkdevice-patch-request.json
       responses:
         200:
           description: Returned when the PATCH request is handled successfully
@@ -82,7 +82,7 @@ documentation:
       200:
         body:
           type: !include schemas/endpoints.json
-          example: !include ../examples/topologyapi-v1.0-endpoints-get-200.json
+          example: !include ../examples/netctrl-v1.0-endpoints-get-200.json
 
   post:
     description: >
@@ -98,14 +98,14 @@ documentation:
         only receives LLDP sent from the switch , understands where it is connected to and relays
         the switch interface information to the RDS which is what is captured in the chassis ID and port ID
     body:
-      type: !include schemas/topologyapi-v1.0-endpoints-post-request.json
-      example: !include ../examples/topologyapi-v1.0-endpoints-post-request.json
+      type: !include schemas/netctrl-v1.0-endpoints-post-request.json
+      example: !include ../examples/netctrl-v1.0-endpoints-post-request.json
     responses:
       201:
         body:
           description: Returned when the POST request is successful.
-          type: !include schemas/topologyapi-v1.0-endpoints-post-request.json
-          example: !include ../examples/topologyapi-v1.0-endpoints-post-201.json
+          type: !include schemas/netctrl-v1.0-endpoints-post-request.json
+          example: !include ../examples/netctrl-v1.0-endpoints-post-201.json
       400:
         description: Returned when the POST request is incorrectly formatted or missing mandatory attributes
         body:
@@ -117,66 +117,56 @@ documentation:
         type: string
         pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
     get:
-      description: Get a single Endpoint
+      description: Get a single Endpoint.
       body:
         type: EmptySchema
       responses:
         200:
           body:
             type: !include schemas/endpoint.json
-            example: !include ../examples/topologyapi-v1.0-endpointid-get-200.json
+            example: !include ../examples/netctrl-v1.0-endpointid-get-200.json
         404:
           description: Returned when the requested endpoint with id does not exist.
           body:
             type: EmptySchema
-    put:
-      description: Update an existing endpoint
+    patch:
+      description: Update an existing endpoint.
       body:
-        example: !include ../examples/topologyapi-v1.0-endpoints-post-request.json
-        schema: !include schemas/topologyapi-v1.0-endpoints-post-request.json
+        example: !include ../examples/netctrl-v1.0-endpoints-post-request.json
+        schema: !include schemas/netctrl-v1.0-endpoints-post-request.json
       responses:
         200:
+          description: Returned when a PATCH request is successful in modifying the endpoint details.
           body:
-            example: !include ../examples/topologyapi-v1.0-endpoints-put-202.json
+            example: !include ../examples/netctrl-v1.0-endpoint-patch-200.json
         403:
           description: >
-            Returned when a PUT request is made against a non-persistent endpoint which is
-            managed by the Topology API and cannot be updated
-        404:
-          description: Returned when the requested endpoint id does not exist
-
-    patch:
-      description: Upsert an existing endpoint interface
-      body:
-        example: !include ../examples/topologyapi-v1.0-endpoints-post-request.json
-        schema: !include schemas/topologyapi-v1.0-endpoints-post-request.json
-      responses:
-        200:
-          body:
-            example: !include ../examples/topologyapi-v1.0-endpoints-patch-202.json
-        403:
-          description: Returned when a PATCH request is made against a non-persistent endpoint which is managed by the Topology API and cannot be upserted
+            Returned when a PATCH request is made against a non-persistent endpoint 
+            which is managed by the Topology API and cannot be upserted
         404:
           description: Returned when the requested Endpoint ID does not exist
-
     delete:
-      description: delete an existing endpoint interface
+      description: Delete an existing endpoint interface.
       responses:
         204:
+          description: Returned when the Endpoint is successfully deleted. Empty response content
           body:
-            example: !include ../examples/topologyapi-v1.0-endpoints-delete-200.json
+            type: EmptySchema
         403:
-          description: Returned when a DELETE request is made against a non-persistent endpoint which is managed by the Topology API and cannot be deleted
+          description: >
+            Returned when a DELETE request is made against a non-persistent endpoint
+            which is managed by the Topology API and cannot be deleted
         404:
           description: Returned when the requested Endpoint ID does not exist
 
-/application:
+/applications:
   displayName: Create and manage aplication definitions.
   get:
     description: Retrieve all applications defined in the system. Limit result size with paging traits.
     responses:
       200:
         body:
+          type: !include schemas/netctrl-v1.0-application-get-response.json
           example: !include ../examples/netctrl-v1.0-application-get-200.json
   post:
     description: Create or update an application. 
@@ -245,7 +235,7 @@ documentation:
     delete:
       description: Delete the application.
       responses:
-        200:
+        204:
           description: Returned when the application is successfully deleted. No response body.
         404:
           description: Returned when the application with the specified id does not exist.
@@ -258,7 +248,7 @@ documentation:
       200:
         body:
           type: !include schemas/networklinks.json
-          example: !include ../examples/topologyapi-v1.0-networklinks-get-200.json
+          example: !include ../examples/netctrl-v1.0-networklinks-get-200.json
 
 /endpoint-links:
   displayName: Endpoint Links
@@ -268,11 +258,11 @@ documentation:
       200:
         body:
           type: !include schemas/endpointlinks.json
-          example: !include ../examples/topologyapi-v1.0-endpointlinks-get-200.json
+          example: !include ../examples/netctrl-v1.0-endpointlinks-get-200.json
 
 
-/network-flow:
-  displayName: Network-flow
+/network-flows:
+  displayName: Network flows
   get:
     description: >
       Retrieve all network flows, unicast and multicast.
@@ -282,8 +272,8 @@ documentation:
         body: 
           type: !include schemas/netctrl-v1.0-network-flow-get-response.json
           example: !include ../examples/netctrl-v1.0-network-flow-get-200.json
-  /unicast-network-flow:
-    displayName: Unicast-Network-flow
+  /unicast:
+    displayName: Unicast Network flows
     get:
       description: >
         Retrieve all unicast network flows.
@@ -291,39 +281,38 @@ documentation:
       responses:
         200:
           body:
-            type: !include schemas/netctrl-v1.0-unicast-network-flow-get-response.json
-            example: !include ../examples/netctrl-v1.0-unicast-network-flow-get-200.json
+            type: !include schemas/netctrl-v1.0-network-flow-unicast-get-response.json
+            example: !include ../examples/netctrl-v1.0-network-flow-unicast-get-200.json
     post:
       description: Create or update a unicast network-flow. 
       body:
-        type: !include schemas/netctrl-v1.0-unicast-network-flow-post-request.json
-        example: !include ../examples/netctrl-v1.0-unicast-network-flow-post.json
+        type: !include schemas/netctrl-v1.0-network-flow-unicast-post-request.json
+        example: !include ../examples/netctrl-v1.0-network-flow-unicast-post.json
       responses:
         200:
           description: >
             Returned when this is an update request to an existing unicast network-flow
             and the update is successful.
           body:
-            type: !include schemas/netctrl-v1.0-unicast-network-flow-post-response.json
-            example: !include ../examples/netctrl-v1.0-unicast-network-flow-post-200.json
+            type: !include schemas/netctrl-v1.0-network-flow-unicast-post-response.json
+            example: !include ../examples/netctrl-v1.0-network-flow-unicast-post-200.json
           headers:
             Location:
-              example: /netctrl/v1.0/network-flow/unicast-network-flow/3cf82ec2-25c1-47b5-b2b2-56ff47f83c95
+              example: /netctrl/v1.0/network-flows/unicast/3cf82ec2-25c1-47b5-b2b2-56ff47f83c95
         201:
           description: >
             Returned when this is a create request of a new unicast network-flow 
             and the creation is successful.
           body:
-            type: !include schemas/netctrl-v1.0-unicast-network-flow-post-response.json
-            example: !include ../examples/netctrl-v1.0-unicast-network-flow-post-201.json
+            type: !include schemas/netctrl-v1.0-network-flow-unicast-post-response.json
+            example: !include ../examples/netctrl-v1.0-network-flow-unicast-post-201.json
           headers:
             Location:
-              example: /netctrl/v1.0/network-flow/unicast-network-flow/e02fc143-701a-4922-a553-d3bd2585674a
+              example: /netctrl/v1.0/network-flows/unicast/e02fc143-701a-4922-a553-d3bd2585674a
         400:
           description: >
             Returned when the POST request is incorrectly formatted or has missing values.
-            Also returned when the dependent resources (source_application_id or destination_application_id)
-            do not exist or they can not be used as such, i.e., their roles are not defined as sender and receiver.
+            Also returned when the dependent resources (sender_id or receiver_id) do not exist.
           body:
             type: !include schemas/error.json
     /{id}:
@@ -337,29 +326,28 @@ documentation:
         responses:
           200:
             body: 
-              type: !include schemas/netctrl-v1.0-unicast-network-flow-id-get-response.json
-              example: !include ../examples/netctrl-v1.0-unicast-network-flow-id-get-200.json
+              type: !include schemas/netctrl-v1.0-network-flow-unicast-id-get-response.json
+              example: !include ../examples/netctrl-v1.0-network-flow-unicast-id-get-200.json
           404:
             description: Returned when the network-flow with guid does not exist.
       patch:
         description: Update an existing unicast network-flow with the specified guid. 
         body:
-          type: !include schemas/netctrl-v1.0-unicast-network-flow-post-request.json
-          example: !include ../examples/netctrl-v1.0-unicast-network-flow-post.json
+          type: !include schemas/netctrl-v1.0-network-flow-unicast-post-request.json
+          example: !include ../examples/netctrl-v1.0-network-flow-unicast-post.json
         responses:
           200:
             description: Returned when the unicast network flow update is successful.
             body:
-              type: !include schemas/netctrl-v1.0-unicast-network-flow-post-response.json
-              example: !include ../examples/netctrl-v1.0-unicast-network-flow-post-200.json
+              type: !include schemas/netctrl-v1.0-network-flow-unicast-post-response.json
+              example: !include ../examples/netctrl-v1.0-network-flow-unicast-post-200.json
             headers:
               Location:
-                example: /netctrl/v1.0/network-flow/unicast-network-flow/3cf82ec2-25c1-47b5-b2b2-56ff47f83c95
+                example: /netctrl/v1.0/network-flows/unicast/3cf82ec2-25c1-47b5-b2b2-56ff47f83c95
           400:
             description: >
               Returned when the PATCH request is incorrectly formatted or missing values.
-              Also returned when the the source or the destination does not exist or they can not be
-              used as such, i.e., their roles are not defined as sender and receiver, respectively.
+              Also returned when the the sender or the receiver does not exist.
             body:
               type: !include schemas/error.json
           404:
@@ -372,48 +360,47 @@ documentation:
           404:
             description: Returned when the network-flow with guid does not exist.
 
-  /multicast-network-flow:
-    displayName: Multicast-Network-flow
+  /multicast:
+    displayName: Multicast Network flow
     get:
       description: >
-        Retrieve all the multicast network flow.
+        Retrieve all the multicast network flows.
         A paging restriction can be added to limit the number of returned results.
       responses:
         200:
           body:
-            body: !include schemas/netctrl-v1.0-multicast-network-flow-get-response.json
-            example: !include ../examples/netctrl-v1.0-multicast-network-flow-get-200.json
+            body: !include schemas/netctrl-v1.0-network-flow-multicast-get-response.json
+            example: !include ../examples/netctrl-v1.0-network-flow-multicast-get-200.json
     post:
       description: Create or update a multicast network flow. 
       body:
-        type: !include schemas/netctrl-v1.0-multicast-network-flow-post-request.json
-        example: !include ../examples/netctrl-v1.0-multicast-network-flow-post.json
+        type: !include schemas/netctrl-v1.0-network-flow-multicast-post-request.json
+        example: !include ../examples/netctrl-v1.0-network-flow-multicast-post.json
       responses:
         200:
           description: >
             Returned when this is an update request to an existing multicast network-flow
             and the update is successful.
           body:
-            type: !include schemas/netctrl-v1.0-multicast-network-flow-post-response.json
-            example: !include ../examples/netctrl-v1.0-multicast-network-flow-post-200.json
+            type: !include schemas/netctrl-v1.0-network-flow-multicast-post-response.json
+            example: !include ../examples/netctrl-v1.0-network-flow-multicast-post-200.json
           headers:
             Location:
-              example: /netctrl/v1.0/network-flow/multicast-network-flow/ad4c0cc5-68ca-4959-9ba6-e02848e80636
+              example: /netctrl/v1.0/network-flows/multicast/ad4c0cc5-68ca-4959-9ba6-e02848e80636
         201:
           description: >
             Returned when the request is to create a new unicast network-flow
             and the creation is successful.
           body:
-            type: !include schemas/netctrl-v1.0-multicast-network-flow-post-response.json
-            example: !include ../examples/netctrl-v1.0-multicast-network-flow-post-201.json
+            type: !include schemas/netctrl-v1.0-network-flow-multicast-post-response.json
+            example: !include ../examples/netctrl-v1.0-network-flow-multicast-post-201.json
           headers:
             Location:
-              example: /netctrl/v1.0/network-flow/multicast-network-flow/26650ca1-e460-40b2-8bb2-cbc2f822e8de
+              example: /netctrl/v1.0/network-flows/multicast/26650ca1-e460-40b2-8bb2-cbc2f822e8de
         400:
           description: >
             Returned when the POST request is incorrectly formatted or has missing values.
-            Also returned when the dependent resources (source_application_id or destination_application_ids)
-            do not exist or they can not be used as such, i.e., their roles are not defined as sender and receiver.
+            Also returned when the dependent resources (senders or receivers) do not exist.
           body:
             type: !include schemas/error.json
     /{id}:
@@ -427,27 +414,26 @@ documentation:
         responses:
           200:
             body: 
-              type: !include schemas/netctrl-v1.0-multicast-network-flow-id-get-response.json
-              example: !include ../examples/netctrl-v1.0-multicast-network-flow-id-get-200.json
+              type: !include schemas/netctrl-v1.0-network-flow-multicast-id-get-response.json
+              example: !include ../examples/netctrl-v1.0-network-flow-multicast-id-get-200.json
       patch:
         description: Update an existing multicast network-flow with the specified guid.
         body:
-          type: !include schemas/netctrl-v1.0-multicast-network-flow-post-request.json
-          example: !include ../examples/netctrl-v1.0-multicast-network-flow-post.json
+          type: !include schemas/netctrl-v1.0-network-flow-multicast-post-request.json
+          example: !include ../examples/netctrl-v1.0-network-flow-multicast-post.json
         responses:
           200:
             description: Returned when the multicast network-flow update is successful.
             body:
-              type: !include schemas/netctrl-v1.0-multicast-network-flow-post-response.json
-              example: !include ../examples/netctrl-v1.0-multicast-network-flow-post-200.json
+              type: !include schemas/netctrl-v1.0-network-flow-multicast-post-response.json
+              example: !include ../examples/netctrl-v1.0-network-flow-multicast-post-200.json
             headers:
               Location:
-                example: /netctrl/v1.0/network-flow/multicast-network-flow/ad4c0cc5-68ca-4959-9ba6-e02848e80636
+                example: /netctrl/v1.0/network-flows/multicast/ad4c0cc5-68ca-4959-9ba6-e02848e80636
           400:
             description: >
               Returned when the PATCH request is incorrectly formatted or missing values.
-              Also returned when the the source or the destinations do not exist or they can not be
-              used as such, i.e., their roles are not defined as sender and receiver, respectively.
+              Also returned when the the senders or the receivers do not exist.
             body:
               type: !include schemas/error.json
           404:
@@ -467,8 +453,8 @@ documentation:
           responses:
             200:
               body: 
-                type: !include schemas/netctrl-v1.0-multicast-network-flow-listener-get-response.json
-                example: !include ../examples/netctrl-v1.0-multicast-network-flow-listener-get-200.json
+                type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-get-response.json
+                example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-get-200.json
             404:
               description: Returned when the network-flow with id does not exist.
               body:
@@ -476,16 +462,16 @@ documentation:
         post:
           description: Add a new listener to this multicast flow. 
           body:
-            type: !include schemas/netctrl-v1.0-multicast-network-flow-listener-post-request.json
-            example: !include ../examples/netctrl-v1.0-multicast-network-flow-listener-post.json
+            type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-post-request.json
+            example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-post.json
           responses:
             201:
               description: >
                 Returned when the new listeners are added to this multicast network-flow.
                 Returns the list of all registered listeners, including the new ones. 
               body: 
-                type: !include schemas/netctrl-v1.0-multicast-network-flow-listener-get-response.json
-                example: !include ../examples/netctrl-v1.0-multicast-network-flow-listener-post-201.json
+                type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-get-response.json
+                example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-post-201.json
             400:
               description: >
                 Returned when the POST request is incorrectly formatted or missing values.
@@ -495,16 +481,16 @@ documentation:
         delete:
           description: Delete existing listener(s) of this multicast flow.
           body:
-            type: !include schemas/netctrl-v1.0-multicast-network-flow-listener-delete-request.json
-            example: !include ../examples/netctrl-v1.0-multicast-network-flow-listener-delete.json
+            type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-delete-request.json
+            example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-delete.json
           responses:
             201:
               description: >
                 Returned when the listeners are removed from this multicast network-flow.
                 Returns the remaining destination application ids, empty list it none is left.
               body: 
-                type: !include schemas/netctrl-v1.0-multicast-network-flow-listener-get-response.json
-                example: !include ../examples/netctrl-v1.0-multicast-network-flow-listener-post-201.json
+                type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-get-response.json
+                example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-post-201.json
             400:
               description: >
                 Returned when the POST request is incorrectly formatted or missing values.

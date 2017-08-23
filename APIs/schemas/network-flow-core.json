@@ -6,10 +6,8 @@
   "required": [
     "id",
     "version",
-    "label",
     "description",
     "tags",
-    "source_application_id",
     "protocol_id"
   ],
   "properties": {
@@ -38,11 +36,6 @@
         "type": "string"
       }
     },
-    "source_application_id": {
-      "description": "Application ID which this network-flow originates from.",
-      "type": "string",
-      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-    },
     "protocol_id": {
       "description": "Protocol ID for this network-flow.",
       "type": "string"
@@ -64,11 +57,32 @@
       }
     },
     "dscp": {
-      "type": "integer",
-      "description": "DSCP based QoS metrics number, default is 0, default forwarding.",
-      "minimum": 0,
-      "maximum": 46,
-      "default": 0
+      "type": "string",
+      "description": "DSCP based QoS metrics number, default is CS0, best effort.",
+      "enum": [
+        "CS0",
+        "CS1",
+        "CS2",
+        "CS3",
+        "CS4",
+        "CS5",
+        "CS6",
+        "CS7",
+        "AF11",
+        "AF12",
+        "AF13",
+        "AF21",
+        "AF22",
+        "AF23",
+        "AF31",
+        "AF32",
+        "AF33",
+        "AF41",
+        "AF42",
+        "AF43",
+        "EF"
+      ],
+      "default": "CS0"
     }
   }
 }

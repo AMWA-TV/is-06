@@ -1,0 +1,8 @@
+ [
+      {
+        "network_device_id": "uid2",
+        "network_interface": "eth 1/2",
+        "endpoint_id":"9c41",
+        "speed": "1G"
+      }
+  ]

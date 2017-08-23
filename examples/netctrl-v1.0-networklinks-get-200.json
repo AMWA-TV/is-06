@@ -1,0 +1,9 @@
+ [
+      {
+        "network_device_id": "uid1",
+        "peer_network_device_id": "uid2",
+        "network_interface": "eth 1/1",
+        "peer_network_interface": "eth 1/1",
+        "speed": "1G"
+      }
+ ]

@@ -10,10 +10,16 @@
     {
       "type": "object",
       "required": [
-        "destination_application_id"
+        "sender_id",
+        "receiver_id"
       ],
       "properties": {
-        "destination_application_id": {
+        "sender_id": {
+          "description": "Application ID which this network-flow originates from.",
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "receiver_id": {
           "description": "Destination application ID for this unicast network-flow.",
           "type": "string",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"

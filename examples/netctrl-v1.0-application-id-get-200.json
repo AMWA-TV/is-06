@@ -10,8 +10,5 @@
     ],
     "endpoint_id": "cbac802c-47cc-433b-a573-0808ddbbe161",
     "ip_address": "192.168.16.26",
-    "port_address": 6004,
-    "network-device-id": "22a25f26-73e5-385a-a733-0a6a1ef0e459",
-    "network-interface": "ens30",
-    "role": "receiver"
+    "port_address": 6004
 }

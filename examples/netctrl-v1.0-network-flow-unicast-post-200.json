@@ -5,12 +5,12 @@
   "description": "Sample video unicast network-flow",
   "tags": [
   ],
-  "source_application_id": "f335f9d6-46df-49fb-a96f-baaa00624361",
-  "destination_application_id": "1711bb35-6e81-44b3-a559-36870c74883b",
-  "protocol-id": "4",
+  "sender_id": "f335f9d6-46df-49fb-a96f-baaa00624361",
+  "receiver_id": "1711bb35-6e81-44b3-a559-36870c74883b",
+  "protocol_id": "4",
   "bandwidth": {
     "average": 32,
     "peak": 64
   },
-  "dscp": 22
+  "dscp": "AF11"
 }

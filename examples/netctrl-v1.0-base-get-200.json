@@ -3,6 +3,6 @@
   "endpoints/",
   "network-links/",
   "endpoint-links/",
-  "network-flow/",
-  "application/"
+  "network-flows/",
+  "applications/"
 ]

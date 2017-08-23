@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "description": "Describes a unicast network-flow.",
-  "title": "Unicast network-flow",
+  "description": "Describes a multicast network-flow.",
+  "title": "Multicast network-flow",
   "allOf": [
     {
       "$ref": "network-flow-core.json"
@@ -10,17 +10,41 @@
     {
       "type": "object",
       "required": [
-        "destination_application_ids"
+        "multicast_group"
       ],
       "properties": {
-        "destination_application_ids": {
-          "description": "UUIDs of destination applications, can be empty.",
+        "multicast_group": {
+          "description": "Multicast group id for this flow. Group id is an ip address, e.g., for IPv4, the range is 224.1.1.1 to 239.255.255.255.",
+          "type": "string",
+          "anyOf": [
+            {
+              "format": "ipv4"
+            },
+            {
+              "format": "ipv6"
+            }
+          ]
+        },
+        "multicast_port": {
+          "description": "Multicast group port for this flow.",
+          "type": "string"
+        },
+        "senders": {
+          "description": "GUIDs of applications that are senders, can be empty.",
           "type": "array",
           "items": {
             "type": "string",
             "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           },
           "minItems": 0,
+          "uniqueItems": true
+        },
+        "receivers": {
+          "description": "List of receivers (and their corresponding senders, if applicable).",
+          "type": "array",
+          "items": {
+            "$ref": "multicast-receiver.json"
+          },
           "uniqueItems": true
         }
       }
