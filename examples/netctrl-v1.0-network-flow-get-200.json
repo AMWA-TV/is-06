@@ -42,26 +42,7 @@
       "tags": [
       ],
       "multicast_group": "224.1.1.1",
-      "multicast_port": "7800",
-      "senders": [
-        "a369fb9b-7bf4-4fea-afa9-c38e6297eb72",
-        "5f6fac7e-40e3-4f01-ad1e-19b57e70af42",
-        "3ae35661-156d-4262-9bb4-5597d5d51307"
-      ],
-      "receivers": [
-        {
-          "receiver_id": "80c1bac4-a0b1-4931-b6a1-859e8ff2ee7f",
-          "sender_id": "a369fb9b-7bf4-4fea-afa9-c38e6297eb72"
-        },
-        {
-          "receiver_id": "57db5748-bc0f-48b6-9cda-802d552839d0"
-        },
-        {
-          "receiver_id": "371e8001-4c73-4820-8534-59169511fb47",
-          "sender_id": "3ae35661-156d-4262-9bb4-5597d5d51307"
-        }
-      ],
-      "protocol_id": "4",
+      "multicast_port": 7800,
       "bandwidth": {
         "average": 72,
         "peak": 100
@@ -76,28 +57,7 @@
       "tags": [
       ],
       "multicast_group": "229.1.1.1",
-      "multicast_port": "8000",
-      "senders": [
-        "ff1eaad6-d78d-4b28-8778-a12b333fa602",
-        "caa83dd6-8b52-4482-9d89-6fe75bf22cff",
-        "2fd84997-4938-46da-8c0b-29f60b6190c5"
-      ],
-      "receivers": [
-        {
-          "receiver_id": "dcbc0c51-63cc-4f6b-a12f-8744928d6101",
-          "sender_id": "ff1eaad6-d78d-4b28-8778-a12b333fa602"
-        },
-        {
-          "receiver_id": "768d145d-657d-4945-93b3-77b8b2e60bca"
-        },
-        {
-          "receiver_id": "9623d830-8c76-42a4-b7ed-82a19eaac2a0"
-        },
-        {
-          "receiver_id": "d8174369-b340-456d-8444-d64d81701f63"
-        }
-      ],
-      "protocol_id": "4",
+      "multicast_port": 8000,
       "bandwidth": {
         "average": 32,
         "peak": 64

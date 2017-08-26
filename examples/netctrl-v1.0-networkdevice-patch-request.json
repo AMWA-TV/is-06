@@ -1,7 +1,13 @@
 {
-  "interface":
-  {
-    "if-name": "eth 1/1",
-    "admin-status": "up"
-  }
+  "tags": [
+    {
+      "update_label": "patched interface names and admin status"
+    }
+  ],
+  "interfaces": [
+    {
+      "if_name": "eth 1/1",
+      "admin_status": "up"
+    }
+  ]
 }

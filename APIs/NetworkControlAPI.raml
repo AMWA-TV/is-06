@@ -74,6 +74,7 @@ documentation:
             managed by the Topology API and cannot be upserted
         404:
           description: Returned when the requested Endpoint ID does not exist
+      
 /endpoints:
   displayName: Endpoints
   get:
@@ -83,7 +84,6 @@ documentation:
         body:
           type: !include schemas/endpoints.json
           example: !include ../examples/netctrl-v1.0-endpoints-get-200.json
-
   post:
     description: >
       Register a new endpoint interface. The POST is invoked to inform the network controller
@@ -132,8 +132,8 @@ documentation:
     patch:
       description: Update an existing endpoint.
       body:
+        type: !include schemas/netctrl-v1.0-endpoints-post-request.json
         example: !include ../examples/netctrl-v1.0-endpoints-post-request.json
-        schema: !include schemas/netctrl-v1.0-endpoints-post-request.json
       responses:
         200:
           description: Returned when a PATCH request is successful in modifying the endpoint details.
@@ -371,38 +371,6 @@ documentation:
           body:
             body: !include schemas/netctrl-v1.0-network-flow-multicast-get-response.json
             example: !include ../examples/netctrl-v1.0-network-flow-multicast-get-200.json
-    post:
-      description: Create or update a multicast network flow. 
-      body:
-        type: !include schemas/netctrl-v1.0-network-flow-multicast-post-request.json
-        example: !include ../examples/netctrl-v1.0-network-flow-multicast-post.json
-      responses:
-        200:
-          description: >
-            Returned when this is an update request to an existing multicast network-flow
-            and the update is successful.
-          body:
-            type: !include schemas/netctrl-v1.0-network-flow-multicast-post-response.json
-            example: !include ../examples/netctrl-v1.0-network-flow-multicast-post-200.json
-          headers:
-            Location:
-              example: /netctrl/v1.0/network-flows/multicast/ad4c0cc5-68ca-4959-9ba6-e02848e80636
-        201:
-          description: >
-            Returned when the request is to create a new unicast network-flow
-            and the creation is successful.
-          body:
-            type: !include schemas/netctrl-v1.0-network-flow-multicast-post-response.json
-            example: !include ../examples/netctrl-v1.0-network-flow-multicast-post-201.json
-          headers:
-            Location:
-              example: /netctrl/v1.0/network-flows/multicast/26650ca1-e460-40b2-8bb2-cbc2f822e8de
-        400:
-          description: >
-            Returned when the POST request is incorrectly formatted or has missing values.
-            Also returned when the dependent resources (senders or receivers) do not exist.
-          body:
-            type: !include schemas/error.json
     /{id}:
       uriParameters:
         id:
@@ -416,28 +384,50 @@ documentation:
             body: 
               type: !include schemas/netctrl-v1.0-network-flow-multicast-id-get-response.json
               example: !include ../examples/netctrl-v1.0-network-flow-multicast-id-get-200.json
-      patch:
-        description: Update an existing multicast network-flow with the specified guid.
+      put:
+        description: >
+          Create a multicast network flow with the specific id. No subsequent PUT request
+          should be made for this multicast flow. To update the flow, use PATCH request.
+          Subsequent PUT requests must return error. This is because a multicast flow
+          can not be updated to change group id or port. For similar reasons, no POST
+          request exist for /multicast api. 
         body:
-          type: !include schemas/netctrl-v1.0-network-flow-multicast-post-request.json
-          example: !include ../examples/netctrl-v1.0-network-flow-multicast-post.json
+          type: !include schemas/netctrl-v1.0-network-flow-multicast-put-request.json
+          example: !include ../examples/netctrl-v1.0-network-flow-multicast-put.json
         responses:
           200:
-            description: Returned when the multicast network-flow update is successful.
+            description: Returned when the multicast flow is created successfully.
             body:
-              type: !include schemas/netctrl-v1.0-network-flow-multicast-post-response.json
-              example: !include ../examples/netctrl-v1.0-network-flow-multicast-post-200.json
+              type: !include schemas/netctrl-v1.0-network-flow-multicast-put-response.json
+              example: !include ../examples/netctrl-v1.0-network-flow-multicast-put-200.json
             headers:
               Location:
                 example: /netctrl/v1.0/network-flows/multicast/ad4c0cc5-68ca-4959-9ba6-e02848e80636
           400:
             description: >
+              Returned when the POST request is incorrectly formatted or has missing values.
+              Also returned when the dependent resources (multicast group or port) do not exist
+              are invalid.
+            body:
+              type: !include schemas/error.json
+      patch:
+        description: Update an existing multicast network-flow with the specified guid.
+        body:
+          type: !include schemas/netctrl-v1.0-network-flow-multicast-patch-request.json
+          example: !include ../examples/netctrl-v1.0-network-flow-multicast-patch.json
+        responses:
+          200:
+            description: Returned when the multicast network-flow update is successful.
+            body:
+              type: !include schemas/netctrl-v1.0-network-flow-multicast-put-response.json
+              example: !include ../examples/netctrl-v1.0-network-flow-multicast-put-200.json
+          400:
+            description: >
               Returned when the PATCH request is incorrectly formatted or missing values.
-              Also returned when the the senders or the receivers do not exist.
             body:
               type: !include schemas/error.json
           404:
-            description: Returned when the network-flow with guid does not exist.
+            description: Returned when the multicast flow with guid does not exist.
             body:
               type: !include schemas/error.json
       delete:
@@ -447,54 +437,116 @@ documentation:
             description: Returned when the network-flow is successfully deleted. No response body.
           404:
             description: Returned when the network-flow does not exist.
-      /listener:
+      /senders:
         get:
-          description: Retrieve all listener(s) or receivers of this multicast network-flow.
+          description: Retrieve all senders of this multicast network-flow.
           responses:
             200:
               body: 
-                type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-get-response.json
-                example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-get-200.json
+                type: !include schemas/netctrl-v1.0-network-flow-multicast-sender-get-response.json
+                example: !include ../examples/netctrl-v1.0-network-flow-multicast-sender-get-200.json
+            404:
+              description: Returned when the multicast network-flow with id does not exist.
+              body:
+                type: !include schemas/error.json
+        post:
+          description: Add one new sender application to this multicast flow. 
+          body:
+            type: string
+            pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          responses:
+            200:
+              description: >
+                Returned when the new sender application is added to this multicast network-flow.
+                Returns the list of all registered senders, including the new one.
+              body: 
+                type: !include schemas/netctrl-v1.0-network-flow-multicast-sender-get-response.json
+                example: !include ../examples/netctrl-v1.0-network-flow-multicast-sender-get-200.json
+            400:
+              description: >
+                Returned when the POST request is incorrectly formatted or missing values.
+              body:
+                type: !include schemas/error.json
+            404:
+              description: >
+                Returned when the multicast network-flow with id does not exist or the application
+                can not be used as a sender.
+              body:
+                type: !include schemas/error.json
+        /{senderId}:
+          uriParameters:
+          senderId:
+            type: string
+            pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            description: >
+              The globally unique identifier for a sender application of this multicast network-flow.
+          delete:
+            description: Remove one existing sender of this multicast flow.
+            responses:
+              200:
+                description: >
+                  Returned when the sender is successfully removed from this multicast flow.
+                  No response body.
+              404:
+                description: >
+                  Returned when no sender with sender id exists for this flow. 
+                body:
+                  type: !include schemas/error.json
+      /receivers:
+        get:
+          description: Retrieve all receivers of this multicast network-flow.
+          responses:
+            200:
+              body: 
+                type: !include schemas/netctrl-v1.0-network-flow-multicast-receiver-get-response.json
+                example: !include ../examples/netctrl-v1.0-network-flow-multicast-receiver-get-200.json
             404:
               description: Returned when the network-flow with id does not exist.
               body:
                 type: !include schemas/error.json
         post:
-          description: Add a new listener to this multicast flow. 
+          description: Add a new receiver to this multicast flow. 
           body:
-            type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-post-request.json
-            example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-post.json
+            type: !include schemas/netctrl-v1.0-network-flow-multicast-receiver-post-request.json
+            example: !include ../examples/netctrl-v1.0-network-flow-multicast-receiver-post.json
           responses:
-            201:
+            200:
               description: >
-                Returned when the new listeners are added to this multicast network-flow.
-                Returns the list of all registered listeners, including the new ones. 
+                Returned when the new receiver is successfully added for this multicast flow.
+                Returns the list of all receivers, including the new one. 
               body: 
-                type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-get-response.json
-                example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-post-201.json
+                type: !include schemas/netctrl-v1.0-network-flow-multicast-receiver-get-response.json
+                example: !include ../examples/netctrl-v1.0-network-flow-multicast-receiver-get-200.json
             400:
               description: >
                 Returned when the POST request is incorrectly formatted or missing values.
-                Also when the listener ids dont exist or are not defined as destination applications. 
               body:
                 type: !include schemas/error.json
-        delete:
-          description: Delete existing listener(s) of this multicast flow.
-          body:
-            type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-delete-request.json
-            example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-delete.json
-          responses:
-            201:
+            404:
               description: >
-                Returned when the listeners are removed from this multicast network-flow.
-                Returns the remaining destination application ids, empty list it none is left.
-              body: 
-                type: !include schemas/netctrl-v1.0-network-flow-multicast-listener-get-response.json
-                example: !include ../examples/netctrl-v1.0-network-flow-multicast-listener-post-201.json
-            400:
-              description: >
-                Returned when the POST request is incorrectly formatted or missing values.
-                Also when the lisetner ids dont exist or are not destination applications. 
+                Returned when the multicast network-flow with id does not exist or the application
+                can not be used as a receiver or the sender the receiver requires is not a sender
+                of this flow. 
               body:
                 type: !include schemas/error.json
+        /{receiverId}:
+          uriParameters:
+          receiverId:
+            type: string
+            pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            description: >
+              The globally unique identifier for a receiver application of this multicast network-flow.
+          delete:
+            description: >
+              Remove an existing receiver of this multicast flow with specified receiver id.
+            responses:
+              200:
+                description: >
+                  Returned when the receiver is successfully removed from this multicast flow.
+                  No response body.
+              404:
+                description: >
+                  Returned when no receiver with receiver id exists for this flow. 
+                body:
+                  type: !include schemas/error.json
 

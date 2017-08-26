@@ -68,6 +68,16 @@
       "maximum": 65535,
       "pattern": "^auto$",
       "default": "auto"
+    },
+    "role": {
+      "description": "The role of the application -- sender, receiver, or both.",
+      "type": "string",
+      "enum": [
+        "sender",
+        "receiver",
+        "both"
+      ],
+      "default": "both"
     }
   }
 }

@@ -1,19 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "properties": {
-    "endpoint-id": {
-      "type": "string"
-    },
-    "description": {
-      "type": "string"
-    },
-    "chassis-id": {
-      "type": "string"
-    },
-    "port-id": {
-      "type": "string"
-    }
-  }
+  "description": "Create an endpoint.",
+  "title": "Create an endpoint.",
+  "$ref": "endpoint.json"
 }
 

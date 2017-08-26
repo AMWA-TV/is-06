@@ -10,10 +10,15 @@
     {
       "type": "object",
       "required": [
+        "protocol_id",
         "sender_id",
         "receiver_id"
       ],
       "properties": {
+        "protocol_id": {
+          "description": "Protocol ID for this network-flow.",
+          "type": "string"
+        },
         "sender_id": {
           "description": "Application ID which this network-flow originates from.",
           "type": "string",
