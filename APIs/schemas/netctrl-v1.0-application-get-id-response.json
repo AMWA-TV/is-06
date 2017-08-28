@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Returning a registered application from the netcontrol API.",
+  "title": "Registered application.",
+  "$ref": "application.json"
+}

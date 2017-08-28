@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "description": "Update a multicast netowrk-flow to add a new receiver application.",
+  "title": "Additional receiver application details for a multicast netowrk-flow.",
+  "$ref": "multicast-receiver.json"
+}

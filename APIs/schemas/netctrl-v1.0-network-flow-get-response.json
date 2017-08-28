@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Returning registered netowrk-flows from the netcontrol API. A list of unicast and/or multicast flows.",
+  "title": "Registered netowrk-flows.",
+  "required": [
+    "unicast",
+    "multicast"
+  ],
+  "properties": {
+    "unicast": {
+      "type": "array",
+      "description": "Array of unicast network-flow in the system.",
+      "items": {
+        "$ref": "unicast-network-flow.json"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "multicast": {
+      "type": "array",
+      "description": "Array of multicast network-flow in the system.",
+      "items": {
+        "$ref": "multicast-network-flow.json"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    }
+  }
+}

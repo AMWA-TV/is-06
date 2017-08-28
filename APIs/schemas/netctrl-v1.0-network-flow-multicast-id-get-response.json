@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Returning one registered multicast netowrk-flow with specified id.",
+  "title": "Registered multicast netowrk-flow.",
+  "$ref": "multicast-network-flow.json"
+}

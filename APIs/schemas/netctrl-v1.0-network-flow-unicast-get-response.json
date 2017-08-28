@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "description": "Returning registered unicast netowrk-flows.",
+  "title": "Registered unicast netowrk-flows.",
+  "items": {
+    "$ref": "unicast-network-flow.json"
+  },
+  "minItems": 0,
+  "uniqueItems": true
+}

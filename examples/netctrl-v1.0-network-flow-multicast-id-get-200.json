@@ -1,0 +1,15 @@
+{
+  "id": "c386ff15-3b3f-4813-ac86-1c7b8cf753b6",
+  "version": "1271724062:154626385",
+  "label": "Audio multicast network-flow",
+  "description": "Sample audio multicast network-flow",
+  "tags": [
+  ],
+  "multicast_group": "226.1.1.1",
+  "multicast_port": 8000,
+  "bandwidth": {
+    "average": 2,
+    "peak": 5
+  },
+  "dscp": "CS0"
+}

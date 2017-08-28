@@ -2,5 +2,7 @@
   "network-devices/",
   "endpoints/",
   "network-links/",
-  "endpoint-links/"
+  "endpoint-links/",
+  "network-flows/",
+  "applications/"
 ]

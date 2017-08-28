@@ -1,0 +1,68 @@
+{
+  "unicast": [
+    {
+      "id": "6e5402ad-1d21-4065-8a97-62f43485c185",
+      "version": "1271724062:154626453",
+      "label": "Video unicast network-flow",
+      "description": "Sample video unicast network-flow",
+      "tags": [
+      ],
+      "sender_id": "b8681a30-d39f-4063-9102-b1d2cdbd7709",
+      "receiver_id": "e5377260-7ec6-4883-911a-e1d6a355bfc6",
+      "protocol_id": "4",
+      "bandwidth": {
+        "average": 40,
+        "peak": 90
+      },
+      "dscp": "AF12"
+    },
+    {
+      "id": "713c5c1b-315c-46f3-97fb-6b0d4db1a566",
+      "version": "1271724062:154626521",
+      "label": "Lower resuolution video unicast network-flow",
+      "description": "Sample lower resuolution video unicast network-flow",
+      "tags": [
+      ],
+      "sender_id": "732d7f2c-5569-4548-b54b-0d9c3553d61f",
+      "receiver_id": "fb3de5ac-9273-4904-87cf-855d2d29f218",
+      "protocol_id": "4",
+      "bandwidth": {
+        "average": 20,
+        "peak": 40
+      },
+      "dscp": "AF11"
+    }
+  ],
+  "multicast": [
+    {
+      "id": "094b9b5b-d34c-44e6-9ccc-8a431a1b5857",
+      "version": "1271724062:154624293",
+      "label": "Video/Audio multicast network-flow",
+      "description": "Sample Video/Audio multicast network-flow",
+      "tags": [
+      ],
+      "multicast_group": "224.1.1.1",
+      "multicast_port": 7800,
+      "bandwidth": {
+        "average": 72,
+        "peak": 100
+      },
+      "dscp": "AF12"
+    },
+    {
+      "id": "e66b232a-d51e-48f0-a40a-8f10a074cc6a",
+      "version": "1271724062:154624293",
+      "label": "Low resolution Video/Audio multicast network-flow",
+      "description": "Sample low resolution Video/Audio multicast network-flow",
+      "tags": [
+      ],
+      "multicast_group": "229.1.1.1",
+      "multicast_port": 8000,
+      "bandwidth": {
+        "average": 32,
+        "peak": 64
+      },
+      "dscp": "AF11"
+    }
+  ]
+}
