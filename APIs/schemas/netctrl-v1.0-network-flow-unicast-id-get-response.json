@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "description": "Returning one registered unicast network-flow with specified id.",
-  "title": "Registered unicast network-flow.",
+  "description": "Returning one registered unicast netowrk-flow with specified id.",
+  "title": "Registered unicast netowrk-flow.",
   "$ref": "unicast-network-flow.json"
 }
