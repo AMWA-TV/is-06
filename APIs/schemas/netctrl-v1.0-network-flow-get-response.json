@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "description": "Returning registered netowrk-flows from the netcontrol API. A list of unicast and/or multicast flows.",
-  "title": "Registered netowrk-flows.",
+  "description": "Returning registered network-flows from the netcontrol API. A list of unicast and/or multicast flows.",
+  "title": "Registered network-flows.",
   "required": [
     "unicast",
     "multicast"

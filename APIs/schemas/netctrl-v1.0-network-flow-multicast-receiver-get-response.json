@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "description": "Returning registered sender application ids for the specific multicast netowrk-flow.",
-  "title": "Sender application ids for a multicast netowrk-flow.",
+  "description": "Returning registered sender application ids for the specific multicast network-flow.",
+  "title": "Sender application ids for a multicast network-flow.",
   "properties": {
     "multicast_flow_id": {
       "description": "Multicast flow id for which these receivers are registered.",
