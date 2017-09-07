@@ -5,9 +5,9 @@
   "description": "Sample video unicast network-flow",
   "tags": [
   ],
-  "sender_id": "561d6fba-7796-4e18-ba9e-12597f91b12b",
-  "receiver_id": "ac8dd7c1-d0d0-43fe-a45c-26f810dd711f",
-  "protocol_id": "4",
+  "sender_app_id": "561d6fba-7796-4e18-ba9e-12597f91b12b",
+  "receiver_app_id": "ac8dd7c1-d0d0-43fe-a45c-26f810dd711f",
+  "protocol_id": 4,
   "bandwidth": {
     "average": 32,
     "peak": 64
