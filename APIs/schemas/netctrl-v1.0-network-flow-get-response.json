@@ -1,30 +1,55 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
+  "type": "array",
   "description": "Returning registered network-flows from the netcontrol API. A list of unicast and/or multicast flows.",
   "title": "Registered network-flows.",
-  "required": [
-    "unicast",
-    "multicast"
-  ],
-  "properties": {
-    "unicast": {
-      "type": "array",
-      "description": "Array of unicast network-flow in the system.",
-      "items": {
-        "$ref": "unicast-network-flow.json"
+  "items": {
+    "oneOf": [
+      {
+        "$ref": "unicast-network-flow.json",
+        "properties": {
+          "type": {
+            "description": "Type indicating the network flow to be unicast",
+            "type": "string",
+            "enum": [
+              "unicast"
+            ]
+          }
+        }
       },
-      "minItems": 0,
-      "uniqueItems": true
-    },
-    "multicast": {
-      "type": "array",
-      "description": "Array of multicast network-flow in the system.",
-      "items": {
-        "$ref": "multicast-network-flow.json"
-      },
-      "minItems": 0,
-      "uniqueItems": true
-    }
-  }
+      {
+        "$ref": "multicast-network-flow.json",
+        "properties": {
+          "type": {
+            "description": "Type indicating the network flow to be multicast",
+            "type": "string",
+            "enum": [
+              "multicast"
+            ]
+          },
+          "receivers": {
+            "description": "List of receiver application ids.",
+            "type": "array",
+            "items": {
+              "$ref": "multicast-receiver.json"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "senders": {
+            "description": "List of sender application ids.",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          }
+        }
+      }
+    ]
+  },
+  "minItems": 0,
+  "uniqueItems": true
 }

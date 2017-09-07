@@ -283,44 +283,13 @@ documentation:
           body:
             type: !include schemas/netctrl-v1.0-network-flow-unicast-get-response.json
             example: !include ../examples/netctrl-v1.0-network-flow-unicast-get-200.json
-    post:
-      description: Create or update a unicast network-flow. 
-      body:
-        type: !include schemas/netctrl-v1.0-network-flow-unicast-post-request.json
-        example: !include ../examples/netctrl-v1.0-network-flow-unicast-post.json
-      responses:
-        200:
-          description: >
-            Returned when this is an update request to an existing unicast network-flow
-            and the update is successful.
-          body:
-            type: !include schemas/netctrl-v1.0-network-flow-unicast-post-response.json
-            example: !include ../examples/netctrl-v1.0-network-flow-unicast-post-200.json
-          headers:
-            Location:
-              example: /netctrl/v1.0/network-flows/unicast/3cf82ec2-25c1-47b5-b2b2-56ff47f83c95
-        201:
-          description: >
-            Returned when this is a create request of a new unicast network-flow 
-            and the creation is successful.
-          body:
-            type: !include schemas/netctrl-v1.0-network-flow-unicast-post-response.json
-            example: !include ../examples/netctrl-v1.0-network-flow-unicast-post-201.json
-          headers:
-            Location:
-              example: /netctrl/v1.0/network-flows/unicast/e02fc143-701a-4922-a553-d3bd2585674a
-        400:
-          description: >
-            Returned when the POST request is incorrectly formatted or has missing values.
-            Also returned when the dependent resources (sender_id or receiver_id) do not exist.
-          body:
-            type: !include schemas/error.json
     /{id}:
       uriParameters:
         id:
           type: string
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           description: The globally unique identifier for the network-flow.
+          example: cfd02532-1c83-45a5-ae38-1cb7614346db
       get:
         description: Retrieve a single unicast network-flow with the specified guid.
         responses:
@@ -330,17 +299,40 @@ documentation:
               example: !include ../examples/netctrl-v1.0-network-flow-unicast-id-get-200.json
           404:
             description: Returned when the network-flow with guid does not exist.
+      put:
+        description: >
+          Create a unicast network flow with the specific guid. No subsequent PUT request
+          should be made for this unicast flow. Subsequent PUT requests must return error.
+          To update the flow, use PATCH request.
+        body:
+          type: !include schemas/netctrl-v1.0-network-flow-unicast-put-request.json
+          example: !include ../examples/netctrl-v1.0-network-flow-unicast-put.json
+        responses:
+          201:
+            description: Returned when the unicast network flow created successfully.
+            body:
+              type: !include schemas/netctrl-v1.0-network-flow-unicast-put-response.json
+              example: !include ../examples/netctrl-v1.0-network-flow-unicast-put-201.json
+            headers:
+              Location:
+                example: /netctrl/v1.0/network-flows/unicast/e02fc143-701a-4922-a553-d3bd2585674a
+          400:
+            description: >
+              Returned when the PUT request is incorrectly formatted or has missing values.
+              Also returned when the dependent resources (sender_app_id or receiver_app_id) do not exist.
+            body:
+              type: !include schemas/error.json
       patch:
         description: Update an existing unicast network-flow with the specified guid. 
         body:
-          type: !include schemas/netctrl-v1.0-network-flow-unicast-post-request.json
-          example: !include ../examples/netctrl-v1.0-network-flow-unicast-post.json
+          type: !include schemas/netctrl-v1.0-network-flow-unicast-patch-request.json
+          example: !include ../examples/netctrl-v1.0-network-flow-unicast-patch.json
         responses:
           200:
             description: Returned when the unicast network flow update is successful.
             body:
-              type: !include schemas/netctrl-v1.0-network-flow-unicast-post-response.json
-              example: !include ../examples/netctrl-v1.0-network-flow-unicast-post-200.json
+              type: !include schemas/netctrl-v1.0-network-flow-unicast-patch-response.json
+              example: !include ../examples/netctrl-v1.0-network-flow-unicast-patch-200.json
             headers:
               Location:
                 example: /netctrl/v1.0/network-flows/unicast/3cf82ec2-25c1-47b5-b2b2-56ff47f83c95
@@ -355,7 +347,7 @@ documentation:
       delete:
         description: Delete the unicast network-flow with the specified guid.
         responses:
-          200:
+          204:
             description: Returned when the network-flow is successfully deleted. No response body.
           404:
             description: Returned when the network-flow with guid does not exist.
@@ -369,7 +361,7 @@ documentation:
       responses:
         200:
           body:
-            body: !include schemas/netctrl-v1.0-network-flow-multicast-get-response.json
+            type: !include schemas/netctrl-v1.0-network-flow-multicast-get-response.json
             example: !include ../examples/netctrl-v1.0-network-flow-multicast-get-200.json
     /{id}:
       uriParameters:
@@ -377,6 +369,7 @@ documentation:
           type: string
           pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
           description: The globally unique identifier for the multicast network-flow.
+          example: d7b01965-6818-48e4-802c-2d9aab4df1d1
       get:
         description: Retrieve a single multicast network-flow with specified guid.
         responses:
@@ -395,11 +388,11 @@ documentation:
           type: !include schemas/netctrl-v1.0-network-flow-multicast-put-request.json
           example: !include ../examples/netctrl-v1.0-network-flow-multicast-put.json
         responses:
-          200:
+          201:
             description: Returned when the multicast flow is created successfully.
             body:
               type: !include schemas/netctrl-v1.0-network-flow-multicast-put-response.json
-              example: !include ../examples/netctrl-v1.0-network-flow-multicast-put-200.json
+              example: !include ../examples/netctrl-v1.0-network-flow-multicast-put-201.json
             headers:
               Location:
                 example: /netctrl/v1.0/network-flows/multicast/ad4c0cc5-68ca-4959-9ba6-e02848e80636
@@ -433,7 +426,7 @@ documentation:
       delete:
         description: Delete this multicast network-flow.
         responses:
-          200:
+          204:
             description: Returned when the network-flow is successfully deleted. No response body.
           404:
             description: Returned when the network-flow does not exist.
@@ -483,7 +476,7 @@ documentation:
           delete:
             description: Remove one existing sender of this multicast flow.
             responses:
-              200:
+              204:
                 description: >
                   Returned when the sender is successfully removed from this multicast flow.
                   No response body.
@@ -540,7 +533,7 @@ documentation:
             description: >
               Remove an existing receiver of this multicast flow with specified receiver id.
             responses:
-              200:
+              204:
                 description: >
                   Returned when the receiver is successfully removed from this multicast flow.
                   No response body.

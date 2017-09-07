@@ -3,5 +3,26 @@
   "type": "object",
   "description": "Returning one registered multicast network-flow with specified id.",
   "title": "Registered multicast network-flow.",
-  "$ref": "multicast-network-flow.json"
+  "$ref": "multicast-network-flow.json",
+  "properties": {
+    "receivers": {
+      "description": "List of receiver application ids.",
+      "type": "array",
+      "items": {
+        "$ref": "multicast-receiver.json"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "senders": {
+      "description": "List of sender application ids.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    }
+  }
 }

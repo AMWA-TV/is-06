@@ -11,20 +11,20 @@
       "type": "object",
       "required": [
         "protocol_id",
-        "sender_id",
-        "receiver_id"
+        "sender_app_id",
+        "receiver_app_id"
       ],
       "properties": {
         "protocol_id": {
           "description": "Protocol ID for this network-flow.",
-          "type": "string"
+          "type": "integer"
         },
-        "sender_id": {
+        "sender_app_id": {
           "description": "Application ID which this network-flow originates from.",
           "type": "string",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
         },
-        "receiver_id": {
+        "receiver_app_id": {
           "description": "Destination application ID for this unicast network-flow.",
           "type": "string",
           "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
