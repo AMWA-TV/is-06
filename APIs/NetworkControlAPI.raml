@@ -181,7 +181,7 @@ documentation:
           example: !include ../examples/netctrl-v1.0-application-post-200.json
         headers:
           Location:
-            example: /netctrl/v1.0/application/9c51b3ec-1e95-40a5-b025-5dd8a941035f
+            example: /x-nmos/netctrl/v1.0/application/9c51b3ec-1e95-40a5-b025-5dd8a941035f/
       201:
         description: Returned when this is a create request and a new application is created successfully.
         body:
@@ -189,7 +189,7 @@ documentation:
           example: !include ../examples/netctrl-v1.0-application-post-201.json
         headers:
           Location:
-            example: /netctrl/v1.0/application/a48937c5-1e0b-4ef1-9aab-52d332eda820
+            example: /x-nmos/netctrl/v1.0/application/a48937c5-1e0b-4ef1-9aab-52d332eda820/
       400:
         description: >
           Returned when the POST request is incorrectly formatted or provided wrong value.
@@ -223,9 +223,6 @@ documentation:
           body:
             type: !include schemas/netctrl-v1.0-application-post-response.json
             example: !include ../examples/netctrl-v1.0-application-post-200.json
-          headers:
-            Location:
-              example: /netctrl/v1.0/application/9c51b3ec-1e95-40a5-b025-5dd8a941035f
         400:
           description: Returned when the PATCH request is incorrectly formatted or missing values.
           body:
@@ -313,9 +310,6 @@ documentation:
             body:
               type: !include schemas/netctrl-v1.0-network-flow-unicast-put-response.json
               example: !include ../examples/netctrl-v1.0-network-flow-unicast-put-201.json
-            headers:
-              Location:
-                example: /netctrl/v1.0/network-flows/unicast/e02fc143-701a-4922-a553-d3bd2585674a
           400:
             description: >
               Returned when the PUT request is incorrectly formatted or has missing values.
@@ -333,9 +327,6 @@ documentation:
             body:
               type: !include schemas/netctrl-v1.0-network-flow-unicast-patch-response.json
               example: !include ../examples/netctrl-v1.0-network-flow-unicast-patch-200.json
-            headers:
-              Location:
-                example: /netctrl/v1.0/network-flows/unicast/3cf82ec2-25c1-47b5-b2b2-56ff47f83c95
           400:
             description: >
               Returned when the PATCH request is incorrectly formatted or missing values.
@@ -393,9 +384,6 @@ documentation:
             body:
               type: !include schemas/netctrl-v1.0-network-flow-multicast-put-response.json
               example: !include ../examples/netctrl-v1.0-network-flow-multicast-put-201.json
-            headers:
-              Location:
-                example: /netctrl/v1.0/network-flows/multicast/ad4c0cc5-68ca-4959-9ba6-e02848e80636
           400:
             description: >
               Returned when the POST request is incorrectly formatted or has missing values.
