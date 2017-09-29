@@ -6,47 +6,67 @@
   "items": {
     "oneOf": [
       {
-        "$ref": "unicast-network-flow.json",
-        "properties": {
-          "type": {
-            "description": "Type indicating the network flow to be unicast",
-            "type": "string",
-            "enum": [
-              "unicast"
-            ]
+        "allOf": [
+          {
+            "$ref": "unicast-network-flow.json"
+          },
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "description": "Type indicating the network flow to be unicast",
+                "type": "string",
+                "enum": [
+                  "unicast"
+                ]
+              }
+            }
           }
-        }
+        ]
       },
       {
-        "$ref": "multicast-network-flow.json",
-        "properties": {
-          "type": {
-            "description": "Type indicating the network flow to be multicast",
-            "type": "string",
-            "enum": [
-              "multicast"
-            ]
+        "allOf": [
+          {
+            "$ref": "multicast-network-flow.json"
           },
-          "receivers": {
-            "description": "List of receiver application ids.",
-            "type": "array",
-            "items": {
-              "$ref": "multicast-receiver.json"
-            },
-            "minItems": 0,
-            "uniqueItems": true
-          },
-          "senders": {
-            "description": "List of sender application ids.",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-            },
-            "minItems": 0,
-            "uniqueItems": true
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "description": "Type indicating the network flow to be multicast",
+                "type": "string",
+                "enum": [
+                  "multicast"
+                ]
+              },
+              "receivers": {
+                "description": "List of receiver application ids.",
+                "type": "array",
+                "items": {
+                  "$ref": "multicast-receiver.json"
+                },
+                "minItems": 0,
+                "uniqueItems": true
+              },
+              "senders": {
+                "description": "List of sender application ids.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                },
+                "minItems": 0,
+                "uniqueItems": true
+              }
+            }
           }
-        }
+        ]
       }
     ]
   },

@@ -16,6 +16,58 @@ types:
     NetworkLinks: !include schemas/networklinks.json
     EndpointLink: !include schemas/endpointlink.json
     EndpointLinks: !include schemas/endpointlinks.json
+    EmptySchema: !include schemas/empty.json
+    ErrorSchema: !include schemas/error.json
+traits:
+  - paged:
+      description: API resources supporting pagination of results
+      queryParameters:
+        paging.since:
+          description: Return results which have been created/updated since the time specified (non-inclusive) (seconds:nanoseconds)
+          type: string
+          pattern: "^[0-9]+:[0-9]+$"
+        paging.until:
+          description: Return results which were created/updated up until the time specified (inclusive) (seconds:nanoseconds)
+          type: string
+          pattern: "^[0-9]+:[0-9]+$"
+        paging.limit:
+          description: Limit the response results to this specified number. Implementations may specify default and maximum for the limit
+          type: integer
+        paging.order:
+          description: Specify the order of the results, either resource creation time or last modified time. In both cases the response should be provided in descending order
+          type: string
+          enum: ["create", "update"]
+          default: "update"
+      responses:
+        200:
+          headers:
+            Link:
+              description: Provides references to cursors for paging. The 'rel' attribute may be one of 'next', 'prev', 'first' or 'last'
+              type: string
+              example: <http://example.api.com/x-nmos/netctrl/v1.0/applications/?paging.since=1441716353:6839634&paging.limit=20>; rel="next", <http://example.api.com/x-nmos/netctrl/v1.0/applications/?paging.until=1441716120:318744030&paging.limit=20>; rel="prev"
+            X-Paging-Limit:
+              description: Denotes the limit being used for paging. This may not match the requested value.
+              type: integer
+            X-Paging-Since:
+              description: Denotes the value being used for 'paging.since', regardless of whether it is specified in the query. This value may be re-used as the paging.until value of a query to return the previous page of results. Combining this with the X-Paging-Until header value provides the absolute time bounds of the current returned data set.
+              type: string
+              example: 1442196353:7659634
+            X-Paging-Until:
+              description: Denotes the value being used for 'paging.until', regardless of whether it is specified in the query. This value may be re-used as the paging.since value of a query to return the next page of results. Combining this with the X-Paging-Since header value provides the absolute time bounds of the current returned data set.
+              type: string
+              example: 1442196120:93444030
+  - rql:
+      description: This resource MAY support advanced query formats using the Resource Query Language (RQL) syntax
+      queryParameters:
+        query.rql:
+          description: RQL format string indicating the query to be performed, such as 'and(ge(version,urn:x-nmos:version:unicast),in(tags.location,(Salford,London)))'. Strings used as filter values MUST be URL encoded.
+          type: string
+      responses:
+        400:
+          description: The server not able to perform the query as it might be resource intensive.
+        501:
+          description: The query parameters specified are not currently supported by this implementation.
+
 documentation:
   - title: Overview
     content: |
@@ -38,7 +90,18 @@ documentation:
 /network-devices:
   displayName: Network Devices
   get:
+    is: [paged, rql]
     description: List all the network devices
+    body:
+      schema: EmptySchema
+    queryParameters:
+      id:
+      version:
+      name:
+      serial_number:
+      product_id:
+      product_description:
+      vendor:
     responses:
       200:
         body:
@@ -78,7 +141,16 @@ documentation:
 /endpoints:
   displayName: Endpoints
   get:
+    is: [paged, rql]
     description: List all the endpoint interfaces
+    body:
+      schema: EmptySchema
+    queryParameters:
+      id:
+      version:
+      chassis_id:
+      port_id:
+      network_device:
     responses:
       200:
         body:
@@ -162,7 +234,14 @@ documentation:
 /applications:
   displayName: Create and manage aplication definitions.
   get:
+    is: [paged, rql]
     description: Retrieve all applications defined in the system. Limit result size with paging traits.
+    body:
+      schema: EmptySchema
+    queryParameters:
+      id:
+      version:
+      endpoint_id:
     responses:
       200:
         body:
@@ -181,7 +260,7 @@ documentation:
           example: !include ../examples/netctrl-v1.0-application-post-200.json
         headers:
           Location:
-            example: /netctrl/v1.0/application/9c51b3ec-1e95-40a5-b025-5dd8a941035f
+            example: /x-nmos/netctrl/v1.0/application/9c51b3ec-1e95-40a5-b025-5dd8a941035f/
       201:
         description: Returned when this is a create request and a new application is created successfully.
         body:
@@ -189,7 +268,7 @@ documentation:
           example: !include ../examples/netctrl-v1.0-application-post-201.json
         headers:
           Location:
-            example: /netctrl/v1.0/application/a48937c5-1e0b-4ef1-9aab-52d332eda820
+            example: /x-nmos/netctrl/v1.0/application/a48937c5-1e0b-4ef1-9aab-52d332eda820/
       400:
         description: >
           Returned when the POST request is incorrectly formatted or provided wrong value.
@@ -223,9 +302,6 @@ documentation:
           body:
             type: !include schemas/netctrl-v1.0-application-post-response.json
             example: !include ../examples/netctrl-v1.0-application-post-200.json
-          headers:
-            Location:
-              example: /netctrl/v1.0/application/9c51b3ec-1e95-40a5-b025-5dd8a941035f
         400:
           description: Returned when the PATCH request is incorrectly formatted or missing values.
           body:
@@ -243,7 +319,16 @@ documentation:
 /network-links:
   displayName: Network Links
   get:
+    is: [paged, rql]
     description: List all the links between network devices
+    body:
+      schema: EmptySchema
+    queryParameters:
+      network_device_id:
+      peer_network_device_id:
+      network_interface:
+      peer_network_interface:
+      speed:
     responses:
       200:
         body:
@@ -253,7 +338,15 @@ documentation:
 /endpoint-links:
   displayName: Endpoint Links
   get:
+    is: [paged, rql]
     description: List all the links between network devices
+    body:
+      schema: EmptySchema
+    queryParameters:
+      network_device_id:
+      network_interface:
+      endpoint_id:
+      speed:
     responses:
       200:
         body:
@@ -264,9 +357,21 @@ documentation:
 /network-flows:
   displayName: Network flows
   get:
+    is: [paged, rql]
     description: >
       Retrieve all network flows, unicast and multicast.
       A paging restriction can be added to limit the number of returned results.
+    body:
+      schema: EmptySchema
+    queryParameters:
+      id:
+      version:
+      description:
+      tags:
+      dscp:
+      bandwidth.average:
+      bandwidth.peak:
+      type:
     responses:
       200:
         body: 
@@ -275,9 +380,22 @@ documentation:
   /unicast:
     displayName: Unicast Network flows
     get:
+      is: [paged, rql]
       description: >
         Retrieve all unicast network flows.
         A paging restriction can be added to limit the number of returned results.
+      body:
+        schema: EmptySchema
+      queryParameters:
+        id:
+        version:
+        description:
+        tags:
+        dscp:
+        bandwidth.average:
+        bandwidth.peak:
+        sender_app_id:
+        receiver_app_id:
       responses:
         200:
           body:
@@ -313,9 +431,6 @@ documentation:
             body:
               type: !include schemas/netctrl-v1.0-network-flow-unicast-put-response.json
               example: !include ../examples/netctrl-v1.0-network-flow-unicast-put-201.json
-            headers:
-              Location:
-                example: /netctrl/v1.0/network-flows/unicast/e02fc143-701a-4922-a553-d3bd2585674a
           400:
             description: >
               Returned when the PUT request is incorrectly formatted or has missing values.
@@ -333,9 +448,6 @@ documentation:
             body:
               type: !include schemas/netctrl-v1.0-network-flow-unicast-patch-response.json
               example: !include ../examples/netctrl-v1.0-network-flow-unicast-patch-200.json
-            headers:
-              Location:
-                example: /netctrl/v1.0/network-flows/unicast/3cf82ec2-25c1-47b5-b2b2-56ff47f83c95
           400:
             description: >
               Returned when the PATCH request is incorrectly formatted or missing values.
@@ -355,9 +467,23 @@ documentation:
   /multicast:
     displayName: Multicast Network flow
     get:
+      is: [paged, rql]
       description: >
         Retrieve all the multicast network flows.
         A paging restriction can be added to limit the number of returned results.
+      body:
+        schema: EmptySchema
+      queryParameters:
+        id:
+        version:
+        description:
+        tags:
+        dscp:
+        bandwidth.average:
+        bandwidth.peak:
+        multicast_group:
+        multicast_port:
+        igmp_enabled:
       responses:
         200:
           body:
@@ -393,9 +519,6 @@ documentation:
             body:
               type: !include schemas/netctrl-v1.0-network-flow-multicast-put-response.json
               example: !include ../examples/netctrl-v1.0-network-flow-multicast-put-201.json
-            headers:
-              Location:
-                example: /netctrl/v1.0/network-flows/multicast/ad4c0cc5-68ca-4959-9ba6-e02848e80636
           400:
             description: >
               Returned when the POST request is incorrectly formatted or has missing values.
@@ -432,6 +555,7 @@ documentation:
             description: Returned when the network-flow does not exist.
       /senders:
         get:
+          is: [rql]
           description: Retrieve all senders of this multicast network-flow.
           responses:
             200:
@@ -487,6 +611,7 @@ documentation:
                   type: !include schemas/error.json
       /receivers:
         get:
+          is: [rql]
           description: Retrieve all receivers of this multicast network-flow.
           responses:
             200:

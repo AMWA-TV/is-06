@@ -12,6 +12,7 @@
     "peak": 5
   },
   "dscp": "CS0",
+  "igmp_enabled": false,
   "receivers": [
     {
       "receiver_app_id": "a5dc2f31-0f67-4c36-8d66-76683ec40d63",

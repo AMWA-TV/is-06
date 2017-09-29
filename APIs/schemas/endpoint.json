@@ -1,6 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "required": [
+    "id",
+    "version",
+    "chassis_id",
+    "port_id",
+    "network_device"
+  ],
   "properties": {
     "id": {
       "type": "string",
@@ -28,10 +35,26 @@
     },
     "chassis_id": {
       "description": "Chasis id of the endpoint. LLDP is one way the chassid id should be passed to the network. For virtual system it can be null.",
-      "type": "string"
+      "type": ["string", "null"],
+        "anyOf": [
+          {
+            "type": "string",
+            "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$",
+            "description": "When the Chassis ID is a MAC address, use this format"
+          },
+          {
+            "type": "string",
+            "pattern": "^.+$",
+            "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used"
+          },
+          {
+            "type": "null",
+            "description": "When the Chassis ID is unavailable it should be set to null"
+          }
+        ]
     },
     "port_id": {
-      "description": "Port ID of the endpoint. Similar to chassis-id, it can be advertised in LLDP from the endpoint.",
+      "description": "Port ID of the endpoint. Similar to chassis-id, it can be advertised in LLDP/ARP from the endpoint. Must be a MAC address",
       "type": "string",
       "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
     },
@@ -43,7 +66,14 @@
             "mgmt_ip": {
               "type": "string",
               "description": "Unique management IP address for the device. If provided, IP address must uniquely identify the network device.",
-              "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+              "anyOf": [
+                {
+                  "format": "ipv4"
+                },
+                {
+                  "format": "ipv6"
+                }
+              ]
             }
           },
           {
@@ -60,10 +90,5 @@
         }
       }
     }
-  },
-  "required": [
-    "id",
-    "version",
-    "port_id"
-  ]
+  }
 }
