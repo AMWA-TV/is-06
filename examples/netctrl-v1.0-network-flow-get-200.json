@@ -47,6 +47,7 @@
       "peak": 100
     },
     "dscp": "AF12",
+    "igmp_enabled": false,
     "type": "multicast",
     "receivers": [
       {
@@ -81,6 +82,7 @@
       "peak": 64
     },
     "dscp": "AF11",
+    "igmp_enabled": true,
     "type": "multicast",
     "receivers": [
       {

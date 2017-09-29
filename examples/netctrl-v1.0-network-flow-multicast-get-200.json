@@ -13,6 +13,7 @@
       "peak": 50
     },
     "dscp": "AF12",
+    "igmp_enabled": false,
     "receivers": [
       {
         "receiver_app_id": "699dccf2-2942-4f4e-b5fd-b155872fba5d",
@@ -46,6 +47,7 @@
       "peak": 5
     },
     "dscp": "AF11",
+    "igmp_enabled": true,
     "receivers": [
       {
         "receiver_app_id": "b5abd15b-74ed-47d6-ac73-85bd9515ea81",

@@ -66,6 +66,11 @@
         "AF43",
         "EF"
       ]
+    },
+    "igmp_enabled": {
+      "description": "Flag denoting if reveivers can join through igmp. Unless explicitly set to true, receivers will be blocked from joining. Flag has no effect on north bound API, i.e., receivers can be added/removed to/from the flow using the northbound API.",
+      "type": "boolean",
+      "default": false
     }
   }
 }

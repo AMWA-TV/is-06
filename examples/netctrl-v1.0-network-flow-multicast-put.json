@@ -11,5 +11,6 @@
     "average": 2,
     "peak": 5
   },
-  "dscp": "AF11"
+  "dscp": "AF11",
+  "igmp_enabled": true
 }
