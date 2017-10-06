@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Create a network flow.",
+  "title": "Create a new network flow.",
+  "$ref": "network-flow-minimal.json"
+}

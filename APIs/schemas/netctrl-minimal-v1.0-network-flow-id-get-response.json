@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Returning one registered network-flow with specified guid.",
+  "title": "Registered network-flow.",
+  "$ref": "network-flow-minimal-senders-receivers.json"
+}

@@ -1,0 +1,38 @@
+{
+  "id": "c386ff15-3b3f-4813-ac86-1c7b8cf753b6",
+  "label": "Sample Video network flow",
+  "senders": [
+    {
+      "label": "Camera 1",
+      "ip_address": "192.168.16.24",
+      "port_id": "5c-fc-66-6d-fa-90"
+    },
+    {
+      "label": "Camera 2",
+      "ip_address": "192.168.16.26",
+      "port_id": "8c-60-4f-04-24-41"
+    }
+  ],
+  "receivers": [
+    {
+      "label": "North side monitor",
+      "ip_address": "10.10.16.80",
+      "port_id": "7d-42-37-25-75-21"
+    },
+    {
+      "label": "West side monitor",
+      "ip_address": "10.10.28.100",
+      "port_id": "b3-76-43-54-23-87"
+    },
+    {
+      "label": "Campus monitor",
+      "ip_address": "10.10.20.56",
+      "port_id": "5d-34-62-24-56-aa"
+    }
+  ],
+  "bandwidth": 4000000,
+  "dscp": "AF12",
+  "multicast_label": "Sample Multicast",
+  "multicast_address": "226.1.1.1",
+  "multicast_port": 8000
+}

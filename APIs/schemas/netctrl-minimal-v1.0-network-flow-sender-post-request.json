@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Post request schema for adding a new sender to an existing network flow.",
+  "title": "Single sender for a multicast network-flow.",
+  "properties": {
+    "label": {
+      "description": "Freeform string label for the sender",
+      "type": "string"
+    },
+    "ip_address": {
+      "description": "IP address the sender.",
+      "type": "string"
+    },
+    "port_id": {
+      "description": "Port of the sender. Must be a MAC address",
+      "type": "string",
+      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+    }
+  }
+}

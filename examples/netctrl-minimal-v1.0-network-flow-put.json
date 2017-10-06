@@ -1,0 +1,15 @@
+{
+  "id": "1650fbcc-d8a0-4bd2-8e61-c7abb38d78d2",
+  "label": "New video network-flow",
+  "sender_label": "Camera 1",
+  "sender_ip_address": "192.168.15.55",
+  "sender_port_id": "2a-65-15-22-6d-cc",
+  "receiver_label": "Conf room monitor",
+  "receiver_ip_address": "10.10.20.60",
+  "receiver_port_id": "b2-98-33-15-75-21",
+  "bandwidth": 2000000,
+  "dscp": "AF11",
+  "multicast_label": "Sample Multicast",
+  "multicast_address": "227.1.1.1",
+  "multicast_port": 7080
+}
