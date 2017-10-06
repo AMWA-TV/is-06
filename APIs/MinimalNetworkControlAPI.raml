@@ -113,6 +113,8 @@ documentation:
             description: >
               Returned when the sender is successfully deleted.
               No response body.
+            body:
+              type: EmptySchema
           404:
             description: >
               Returned when no sender with specifid ip and port exists for this flow. 
@@ -159,8 +161,10 @@ documentation:
             description: >
               Returned when the receiver is successfully deleted.
               No response body.
+            body:
+              type: EmptySchema
           404:
             description: >
-              Returned when no receiver with specifid ip and port exists for this flow. 
+              Returned when no receiver with specifid ip and port exists for this flow.
             body:
               type: ErrorSchema
