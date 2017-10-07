@@ -100,17 +100,16 @@ documentation:
             Returned when the multicast network-flow with id does not exist.
           body:
             type: ErrorSchema
-    /{senderIp}/port/{portId}:
+    /{senderIp}/port/{portAddress}:
       uriParameters:
         senderIp:
           type: string
           description: >
             The sender IP address.
-        portId:
-          type: string
-          pattern: "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+        portAddress:
+          type: number
           description: >
-            The sender port address. Must be a MAC address.
+            The sender udp port address.
       delete:
         description: >
           Delete sender of this network flow with given ip and port address.
@@ -148,17 +147,16 @@ documentation:
             Returned when the network flow with guid does not exist. 
           body:
             type: ErrorSchema
-    /{receiverIp}/port/{portId}:
+    /{receiverIp}/port/{portAddress}:
       uriParameters:
         receiverIp:
           type: string
           description: >
             The receiver IP address.
-        portId:
-          type: string
-          pattern: "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+        portAddress:
+          type: number
           description: >
-            The receiver port address. Must be a MAC address.
+            The receiver UDP port address.
       delete:
         description: >
           Delete receiver of this network flow with given ip and port address.

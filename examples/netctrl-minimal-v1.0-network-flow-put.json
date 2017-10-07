@@ -10,5 +10,5 @@
   "bandwidth": 2000000,
   "dscp": "AF11",
   "multicast_address": "227.1.1.1",
-  "multicast_port": 7080
+  "multicast_port": 18620
 }
