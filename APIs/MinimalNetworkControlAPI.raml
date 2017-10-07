@@ -44,6 +44,8 @@ documentation:
           example: !include ../examples/netctrl-minimal-v1.0-network-flow-id-get-200.json
       404:
         description: Returned when the network-flow with guid does not exist.
+      body: 
+          type: ErrorSchema
   put:
     description: >
       Create a network flow with the specific guid. No subsequent PUT request
@@ -69,8 +71,12 @@ documentation:
       204:
         description: >
           Returned when the network-flow is successfully deleted. No response body.
+        body:
+          type: EmptySchema
       404:
         description: Returned when the network-flow with guid does not exist.
+        body:
+          type: ErrorSchema
 
   /senders:
     post:

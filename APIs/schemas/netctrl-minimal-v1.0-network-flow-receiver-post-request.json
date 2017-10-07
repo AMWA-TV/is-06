@@ -3,6 +3,10 @@
   "type": "object",
   "description": "Post request schema for adding a new receiver to an existing network flow.",
   "title": "Single receiver for a multicast network-flow.",
+  "required": [
+    "ip_address",
+    "udp_port"
+  ],
   "properties": {
     "label": {
       "description": "Freeform string label for the receiver",
@@ -12,10 +16,9 @@
       "description": "IP address the receiver.",
       "type": "string"
     },
-    "port_id": {
-      "description": "Port of the receiver. Must be a MAC address",
-      "type": "string",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+    "udp_port": {
+      "description": "UDP port of the receiver.",
+      "type": "number"
     }
   }
 }

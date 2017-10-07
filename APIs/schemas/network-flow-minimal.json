@@ -5,12 +5,9 @@
   "title": "Network application",
   "required": [
     "id",
-    "label",
-    "sender_label",
     "sender_ip_address",
-    "sender_port_id",
+    "sender_udp_port",
     "bandwidth",
-    "dscp",
     "multicast_address",
     "multicast_port"
   ],
@@ -20,7 +17,7 @@
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
     },
-    "label": {
+    "flow_label": {
       "description": "Freeform string label for the network-flow",
       "type": "string"
     },
@@ -32,10 +29,9 @@
       "description": "IP address the sender.",
       "type": "string"
     },
-    "sender_port_id": {
-      "description": "Port of the sender. Must be a MAC address",
-      "type": "string",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+    "sender_udp_port": {
+      "description": "UDP port of the sender.",
+      "type": "number"
     },
     "receiver_label": {
       "description": "Freeform string label for the receiver",
@@ -45,10 +41,9 @@
       "description": "IP address the receiver.",
       "type": "string"
     },
-    "receiver_port_id": {
-      "description": "Port of the receiver. Must be a MAC address",
-      "type": "string",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+    "receiver_udp_port": {
+      "description": "UDP port of the receiver.",
+      "type": "number"
     },
     "bandwidth": {
       "type": "number",
@@ -81,10 +76,6 @@
         "EF"
       ],
       "default": "CS0"
-    },
-    "multicast_label": {
-      "description": "Multicast group label for this flow.",
-      "type": "string"
     },
     "multicast_address": {
       "description": "Multicast group address is an ip address, the ipv4 range is 224.1.1.1 to 239.255.255.255.",
