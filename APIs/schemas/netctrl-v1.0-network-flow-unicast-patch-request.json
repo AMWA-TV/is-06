@@ -1,7 +1,0 @@
-{
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "description": "Create or update a unicast network flow.",
-  "title": "Create or update a unicast network flow.",
-  "$ref": "unicast-network-flow.json"
-}

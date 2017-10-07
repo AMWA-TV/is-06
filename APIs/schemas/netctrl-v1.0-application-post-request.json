@@ -1,7 +1,0 @@
-{
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "description": "Create or update an application.",
-  "title": "Create or update an application.",
-  "$ref": "application.json"
-}

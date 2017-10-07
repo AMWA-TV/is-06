@@ -1,9 +1,0 @@
-[
-  {
-    "network_device_id": "23b50745-ae73-484e-b986-2c0c82425d02",
-    "peer_network_device_id": "c25e1a3d-4d81-4469-8406-182b44ce4d39",
-    "network_interface": "eth 1/1",
-    "peer_network_interface": "eth 1/1",
-    "speed": "1G"
-  }
-]
