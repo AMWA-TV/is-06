@@ -1,37 +1,27 @@
 {
   "id": "c386ff15-3b3f-4813-ac86-1c7b8cf753b6",
   "flow_label": "Sample Video network flow",
+  "bandwidth": 4000000,
+  "dscp": "AF12",
+  "multicast_address": "226.1.1.1",
   "senders": [
     {
       "label": "Camera 1",
-      "ip_address": "192.168.16.24",
-      "udp_port": 24400
-    },
-    {
-      "label": "Camera 2",
-      "ip_address": "192.168.16.26",
-      "udp_port": 24800
+      "ip_address": "192.168.16.24"
     }
   ],
   "receivers": [
     {
       "label": "North side monitor",
-      "ip_address": "10.10.16.80",
-      "udp_port": 26600
+      "ip_address": "10.10.16.80"
     },
     {
       "label": "West side monitor",
-      "ip_address": "10.10.28.100",
-      "udp_port": 26600
+      "ip_address": "10.10.28.100"
     },
     {
       "label": "Campus monitor",
-      "ip_address": "10.10.20.56",
-      "udp_port": 26800
+      "ip_address": "10.10.20.56"
     }
-  ],
-  "bandwidth": 4000000,
-  "dscp": "AF12",
-  "multicast_address": "226.1.1.1",
-  "multicast_port": 18020
+  ]
 }

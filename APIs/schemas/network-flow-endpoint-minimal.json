@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Describes a simple network flow endpoint which can be either a sender or a receiver.",
+  "title": "Network flow endpoint",
+  "required": [
+    "ip_address"
+  ],
+  "properties": {
+    "label": {
+      "description": "Freeform string label for the flow endpoint",
+      "type": "string"
+    },
+    "ip_address": {
+      "description": "IP address the flow endpoint.",
+      "type": "string"
+    }
+  }
+}

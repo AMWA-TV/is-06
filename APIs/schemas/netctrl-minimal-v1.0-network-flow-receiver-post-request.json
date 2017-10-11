@@ -3,22 +3,5 @@
   "type": "object",
   "description": "Post request schema for adding a new receiver to an existing network flow.",
   "title": "Single receiver for a multicast network-flow.",
-  "required": [
-    "ip_address",
-    "udp_port"
-  ],
-  "properties": {
-    "label": {
-      "description": "Freeform string label for the receiver",
-      "type": "string"
-    },
-    "ip_address": {
-      "description": "IP address the receiver.",
-      "type": "string"
-    },
-    "udp_port": {
-      "description": "UDP port of the receiver.",
-      "type": "number"
-    }
-  }
+  "$ref": "network-flow-endpoint-minimal.json"
 }

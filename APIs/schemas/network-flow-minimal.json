@@ -1,49 +1,22 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "description": "Describes a simple network flow with a sender and an optional receiver.",
-  "title": "Network application",
+  "description": "Describes a simple network flow core schema.",
+  "title": "Network flow with minimal attributes",
   "required": [
     "id",
-    "sender_ip_address",
-    "sender_udp_port",
     "bandwidth",
-    "multicast_address",
-    "multicast_port"
+    "multicast_address"
   ],
   "properties": {
     "id": {
-      "description": "Globally unique identifier for the application",
+      "description": "Globally unique identifier for the network flow",
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
     },
     "flow_label": {
       "description": "Freeform string label for the network-flow",
       "type": "string"
-    },
-    "sender_label": {
-      "description": "Freeform string label for the sender",
-      "type": "string"
-    },
-    "sender_ip_address": {
-      "description": "IP address the sender.",
-      "type": "string"
-    },
-    "sender_udp_port": {
-      "description": "UDP port of the sender.",
-      "type": "number"
-    },
-    "receiver_label": {
-      "description": "Freeform string label for the receiver",
-      "type": "string"
-    },
-    "receiver_ip_address": {
-      "description": "IP address the receiver.",
-      "type": "string"
-    },
-    "receiver_udp_port": {
-      "description": "UDP port of the receiver.",
-      "type": "number"
     },
     "bandwidth": {
       "type": "number",
@@ -80,10 +53,6 @@
     "multicast_address": {
       "description": "Multicast group address is an ip address, the ipv4 range is 224.1.1.1 to 239.255.255.255.",
       "type": "string"
-    },
-    "multicast_port": {
-      "description": "Multicast group port for this flow.",
-      "type": "integer"
     }
   }
 }

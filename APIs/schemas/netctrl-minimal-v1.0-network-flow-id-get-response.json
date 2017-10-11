@@ -1,7 +1,37 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "description": "Returning one registered network-flow with specified guid.",
-  "title": "Registered network-flow.",
-  "$ref": "network-flow-minimal-senders-receivers.json"
+  "description": "Create a network flow.",
+  "title": "Create a new network flow.",
+  "allOf": [
+    {
+      "$ref": "network-flow-minimal.json"
+    },
+    {
+      "type": "object",
+      "required": [
+        "senders"
+      ],
+      "properties": {
+        "senders": {
+          "type": "array",
+          "description": "List of senders.",
+          "items": {
+            "$ref": "network-flow-endpoint-minimal.json"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "receivers": {
+          "type": "array",
+          "description": "List of receivers.",
+          "items": {
+            "$ref": "network-flow-endpoint-minimal.json"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        }
+      }
+    }
+  ]
 }

@@ -77,54 +77,6 @@ documentation:
         description: Returned when the network-flow with guid does not exist.
         body:
           type: ErrorSchema
-
-  /senders:
-    post:
-      description: Add one new sender to this network flow. 
-      body:
-        type: !include schemas/netctrl-minimal-v1.0-network-flow-sender-post-request.json
-        example: !include ../examples/netctrl-minimal-v1.0-network-flow-sender-post.json
-      responses:
-        200:
-          description: >
-            Returned when the new sender application is added successfully. No response body.
-          body: 
-            type: EmptySchema
-        400:
-          description: >
-            Returned when the POST request is incorrectly formatted or missing values.
-          body:
-            type: ErrorSchema
-        404:
-          description: >
-            Returned when the multicast network-flow with id does not exist.
-          body:
-            type: ErrorSchema
-    /{senderIp}/port/{portAddress}:
-      uriParameters:
-        senderIp:
-          type: string
-          description: >
-            The sender IP address.
-        portAddress:
-          type: number
-          description: >
-            The sender udp port address.
-      delete:
-        description: >
-          Delete sender of this network flow with given ip and port address.
-        responses:
-          204:
-            description: >
-              Returned when the sender is successfully deleted.
-              No response body.
-            body:
-              type: EmptySchema
-          404:
-            description: >
-              Returned when no sender with specifid ip and port exists for this flow. 
-            body:
-              type: ErrorSchema
   /receivers:
     post:
       description: Add receiver to this network flow. 
@@ -147,19 +99,15 @@ documentation:
             Returned when the network flow with guid does not exist. 
           body:
             type: ErrorSchema
-    /{receiverIp}/port/{portAddress}:
+    /{receiverIp}:
       uriParameters:
         receiverIp:
           type: string
           description: >
             The receiver IP address.
-        portAddress:
-          type: number
-          description: >
-            The receiver UDP port address.
       delete:
         description: >
-          Delete receiver of this network flow with given ip and port address.
+          Delete receiver of this network flow with given ip.
         responses:
           204:
             description: >
@@ -169,6 +117,6 @@ documentation:
               type: EmptySchema
           404:
             description: >
-              Returned when no receiver with specifid ip and port exists for this flow.
+              Returned when no receiver with specifid ip exists for this flow.
             body:
               type: ErrorSchema

@@ -1,5 +1,4 @@
 {
-  "label": "Conference room monitor 1",
-  "ip_address": "10.10.22.100",
-  "udp_port": 26640
+  "label": "North side monitor",
+  "ip_address": "10.10.16.80"
 }
