@@ -2,16 +2,16 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "device-id": {
+    "device_id": {
       "type": "string"
     },
-    "network-interface": {
+    "network_interface": {
       "type": "string"
     },
-    "peer-device-id": {
+    "peer_device_id": {
       "type": "string"
     },
-    "peer-network-interface": {
+    "peer_network_interface": {
       "type": "string"
     },
     "speed": {
@@ -19,10 +19,10 @@
     }
   },
   "required": [
-    "device-id",
-    "network-interface",
-    "peer-device-id",
-    "peer-network-interface",
+    "device_id",
+    "network_interface",
+    "peer_device_id",
+    "peer_network_interface",
     "speed"
   ]
 }
