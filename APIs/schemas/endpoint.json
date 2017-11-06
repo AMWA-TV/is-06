@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "ip_addresses",
+    "bandwidth"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "label": {
+      "description": "Freeform string label for the endpoint",
+      "type": "string"
+    },
+    "ip_addresses": {
+      "type": "array",
+      "description": "IP addresses the endpoint can assume to send/receive flows. Each IP must be unique in the network.",
+      "items": {
+        "type": "string",
+        "anyOf": [
+          {
+            "format": "ipv4"
+          },
+          {
+            "format": "ipv6"
+          }
+        ],
+        "minItems": 1,
+        "uniqueItems": true
+      }
+    },
+    "bandwidth": {
+      "type": "number",
+      "description": "Maximum bandwidth in kbps required by all the multicast groups combined."
+    },
+    "network_device": {
+      "type": "object",
+      "description": "Peer network device (switch) details. If not provided, it's assumed to be discovered using other protocols (LLDP).",
+      "properties": {
+        "chassis_id": {
+          "type": "string",
+          "description": "MAC address for the peer network device. If provided, mac-address must uniquely identify the network device.",
+          "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+        },
+        "port_id": {
+          "type": "string",
+          "description": "The ifAlias of the peer network device the end point is connected to. If provided, interface must uniquely identify the switch port."
+        }
+      }
+    }
+  },
+  "role": {
+    "description": "The role of the endpoint as a sender or receiver.",
+    "type": "string",
+    "enum": [
+      "sender",
+      "receiver",
+      "both"
+    ],
+    "default": "both"
+  }
+}
