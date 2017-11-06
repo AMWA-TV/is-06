@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "device-id": {
+      "type": "string"
+    },
+    "network-interface": {
+      "type": "string"
+    },
+    "peer-device-id": {
+      "type": "string"
+    },
+    "peer-network-interface": {
+      "type": "string"
+    },
+    "speed": {
+      "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
+    }
+  },
+  "required": [
+    "device-id",
+    "network-interface",
+    "peer-device-id",
+    "peer-network-interface",
+    "speed"
+  ]
+}
