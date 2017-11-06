@@ -1,0 +1,114 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "serial-number": {
+      "type": "string"
+    },
+    "product-id": {
+      "type": "string"
+    },
+    "product-description": {
+      "type": "string"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "mac-address": {
+      "type": "string",
+      "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$" 
+    },
+    "mgmt-ip": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "image-file": {
+      "type": "string"
+    },
+    "build-time": {
+      "type": "string"
+    },
+    "uptime": {
+      "type": "string"
+    },
+    "last-reset-reason": {
+      "type": "string"
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "if-name": {
+            "type": "string"
+          },
+          "admin-status": {
+            "enum": [ "up","down" ]
+          },
+          "oper-status": {
+            "enum": [ "up","down" ]
+          },
+          "down-reason": {
+            "type": "string"
+          },
+          "built-in-mac-address": {
+            "type": "string",
+            "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+          },
+          "mac-address": {
+            "type": "string",
+            "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+          },
+          "ip-address": {
+            "type": "string"
+          },
+          "operating-speed": {
+            "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
+          },
+          "MTU": {
+            "type": "string"
+          },
+          "mode": {
+            "enum": [ "routed","trunk","access" ]
+          }
+        },
+        "required": [
+          "if-name",
+          "admin-status",
+          "oper-status",
+          "down-reason",
+          "built-in-mac-address",
+          "mac-address",
+          "ip-address",
+          "operating-speed",
+          "MTU",
+          "mode"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "serial-number",
+    "product-id",
+    "product-description",
+    "vendor",
+    "mac-address",
+    "mgmt-ip",
+    "version",
+    "image-file",
+    "build-time",
+    "uptime",
+    "last-reset-reason",
+    "interfaces"
+  ]
+}
