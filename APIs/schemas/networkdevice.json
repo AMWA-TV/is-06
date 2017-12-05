@@ -1,114 +1,71 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "required": [
+    "id",
+    "chassis_id",
+    "mgmt_ip",
+    "interfaces"
+  ],
   "properties": {
     "id": {
-      "type": "string"
-    },
-    "name": {
-      "type": "string"
-    },
-    "serial-number": {
-      "type": "string"
-    },
-    "product-id": {
-      "type": "string"
-    },
-    "product-description": {
-      "type": "string"
-    },
-    "vendor": {
-      "type": "string"
-    },
-    "mac-address": {
       "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "chassis_id": {
+      "type": "string",
+      "description": "MAC address of the network device.",
       "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$" 
     },
-    "mgmt-ip": {
-      "type": "string"
-    },
-    "version": {
-      "type": "string"
-    },
-    "image-file": {
-      "type": "string"
-    },
-    "build-time": {
-      "type": "string"
-    },
-    "uptime": {
-      "type": "string"
-    },
-    "last-reset-reason": {
-      "type": "string"
+    "mgmt_ip": {
+      "type": "string",
+      "description": "The management IP address of the network device.",
+ 			"anyOf": [
+        {
+ 					"format": "ipv4"
+ 				},
+ 				{
+ 					"format": "ipv6"
+ 				}
+ 			]
     },
     "interfaces": {
       "type": "array",
       "items": {
         "type": "object",
+        "required": [
+          "port_id",
+          "admin_status",
+          "oper_status",
+          "speed"
+        ],
         "properties": {
-          "if-name": {
-            "type": "string"
-          },
-          "admin-status": {
+          "port_id": {
+            "description": "The ifAlias of the network device.",
+ 			      "type": "string"
+ 	        },
+          "admin_status": {
+            "description": "The administrative status of the interface.",
             "enum": [ "up","down" ]
           },
-          "oper-status": {
+          "oper_status": {
+            "description": "The operational status of the interface.",
             "enum": [ "up","down" ]
           },
-          "down-reason": {
-            "type": "string"
-          },
-          "built-in-mac-address": {
-            "type": "string",
-            "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
-          },
-          "mac-address": {
-            "type": "string",
-            "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
-          },
-          "ip-address": {
-            "type": "string"
-          },
-          "operating-speed": {
+          "speed": {
+            "description": "The reported active speed of the interface.",
             "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
           },
-          "MTU": {
-            "type": "string"
-          },
-          "mode": {
-            "enum": [ "routed","trunk","access" ]
+          "mtu": {
+            "description": "The MTU of the interface.",
+            "type": "integer"
           }
-        },
-        "required": [
-          "if-name",
-          "admin-status",
-          "oper-status",
-          "down-reason",
-          "built-in-mac-address",
-          "mac-address",
-          "ip-address",
-          "operating-speed",
-          "MTU",
-          "mode"
-        ]
+        }
       }
+    },
+    "label": {
+      "description": "Freeform string label for the network device",
+      "type": "string"
     }
-  },
-  "required": [
-    "id",
-    "name",
-    "serial-number",
-    "product-id",
-    "product-description",
-    "vendor",
-    "mac-address",
-    "mgmt-ip",
-    "version",
-    "image-file",
-    "build-time",
-    "uptime",
-    "last-reset-reason",
-    "interfaces"
-  ]
+  }
 }
