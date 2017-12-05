@@ -1,28 +1,34 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+   "required": [
+    "chassis_id",
+    "port_id",
+    "peer_chassis_id",
+    "peer_port_id",
+    "speed"
+  ],
   "properties": {
-    "device_id": {
-      "type": "string"
-    },
-    "network_interface": {
-      "type": "string"
-    },
-    "peer_device_id": {
-      "type": "string"
-    },
-    "peer_network_interface": {
-      "type": "string"
-    },
+    "chassis_id": {
+ +			"type": "string",
+ +			"description": "MAC address for the network device.",
+ +			"pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+ +	},
+ +	"port_id": {
+ +			"type": "string",
+ +			"description": "The ifAlias of the network device."
+ +	},
+    "peer_chassis_id": {
+ +			"type": "string",
+ +			"description": "MAC address for the peer device.",
+ +			"pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+ +	},
+ +	"peer_port_id": {
+ +			"type": "string",
+ +			"description": "The ifAlias of the peer device."
+ +	},
     "speed": {
       "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
     }
-  },
-  "required": [
-    "device_id",
-    "network_interface",
-    "peer_device_id",
-    "peer_network_interface",
-    "speed"
-  ]
+  }
 }
