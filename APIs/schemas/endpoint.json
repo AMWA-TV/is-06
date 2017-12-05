@@ -4,6 +4,7 @@
 	"required": [
 		"id",
 		"ip_address",
+		"endpoint_chassis_id",
 		"attached_network_device"
 	],
 	"properties": {
@@ -22,18 +23,27 @@
 				}
 			]
 		},
+		"endpoint_chassis_id": {
+			"type": "string",
+			"description": "MAC address of the endpoint.",
+			"pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+		},
 		"attached_network_device": {
 			"type": "object",
-			"description": "Peer network device (switch) details. If not provided, it's assumed to be discovered using other protocols (LLDP).",
+			"description": "Peer network device (switch) details.",
+			"required": [
+				"chassis_id",
+				"port_id"
+			], 
 			"properties": {
 				"chassis_id": {
 					"type": "string",
-					"description": "MAC address for the peer network device. If provided, mac-address must uniquely identify the network device.",
+					"description": "MAC address for the peer network device.",
 					"pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
 				},
 				"port_id": {
 					"type": "string",
-					"description": "The ifAlias of the peer network device the end point is connected to. If provided, interface must uniquely identify the switch port."
+					"description": "The ifAlias of the peer network device the end point is connected to."
 				}
 			}
 		},
