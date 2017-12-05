@@ -14,7 +14,7 @@
 		},
 		"ip_address": {
 			"type": "string",
-			"description": "IP address the endpoint can assume to send/receive flows. IP must be unique in the network.",
+			"description": "IP address on which the endpoint sends/receives flows. IP must be unique in the network.",
 			"anyOf": [{
 					"format": "ipv4"
 				},
