@@ -6,34 +6,6 @@
   "allOf": [
     {
       "$ref": "network-flow-minimal.json"
-    },
-    {
-      "type": "object",
-      "required": [
-        "senders"
-      ],
-      "properties": {
-        "senders": {
-          "type": "array",
-          "description": "List of senders.",
-          "items": {
-            "$ref": "network-flow-endpoint-minimal.json"
-          },
-          "minItems": 1,
-          "maxitems": 1,
-          "uniqueItems": true
-        },
-        "receivers": {
-          "type": "array",
-          "description": "List of receivers.",
-          "items": {
-            "$ref": "network-flow-endpoint-minimal.json"
-          },
-          "minItems": 0,
-          "maxitems": 1,
-          "uniqueItems": true
-        }
-      }
     }
   ]
 }
