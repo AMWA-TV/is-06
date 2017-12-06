@@ -1,0 +1,78 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"required": [
+		"id",
+		"ip_address",
+		"endpoint_chassis_id",
+		"attached_network_device"
+	],
+	"properties": {
+		"id": {
+			"type": "string",
+			"pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+		},
+		"ip_address": {
+			"type": "string",
+			"description": "IP address on which the endpoint sends/receives flows. IP must be unique in the network.",
+			"anyOf": [{
+					"format": "ipv4"
+				},
+				{
+					"format": "ipv6"
+				}
+			]
+		},
+		"endpoint_chassis_id": {
+			"type": "string",
+			"description": "MAC address of the endpoint.",
+			"pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+		},
+		"attached_network_device": {
+			"type": "object",
+			"description": "Peer network device (switch) details.",
+			"required": [
+				"chassis_id",
+				"port_id"
+			], 
+			"properties": {
+				"chassis_id": {
+					"type": "string",
+					"description": "MAC address for the peer network device.",
+					"pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+				},
+				"port_id": {
+					"type": "string",
+					"description": "The ifAlias of the peer network device the end point is connected to."
+				}
+			}
+		},
+		"label": {
+			"description": "Freeform string label for the endpoint",
+			"type": "string"
+		},
+		"bandwidth": {
+			"type": "number",
+			"description": "Maximum bandwidth in kbps that the sender is allowed to send."
+		},
+		"role": {
+			"description": "The role of the endpoint as a sender or receiver.",
+			"type": "string",
+			"enum": [
+				"sender",
+				"receiver",
+				"both"
+			],
+			"default": "both"
+		},
+		"endpoint_profile": {
+			"description": "The transmission packet profile of the endpoint",
+			"type": "string",
+			"enum": [
+				"narrow",
+				"wide"
+			],
+			"default": "narrow"
+		}
+	}
+}

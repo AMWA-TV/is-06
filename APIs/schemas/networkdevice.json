@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "required": [
+    "id",
+    "chassis_id",
+    "mgmt_ip",
+    "interfaces"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "chassis_id": {
+      "type": "string",
+      "description": "MAC address of the network device.",
+      "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$" 
+    },
+    "mgmt_ip": {
+      "type": "string",
+      "description": "The management IP address of the network device.",
+ 			"anyOf": [
+        {
+ 					"format": "ipv4"
+ 				},
+ 				{
+ 					"format": "ipv6"
+ 				}
+ 			]
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "port_id",
+          "admin_status",
+          "oper_status",
+          "speed"
+        ],
+        "properties": {
+          "port_id": {
+            "description": "The ifAlias of the network device.",
+ 			      "type": "string"
+ 	        },
+          "admin_status": {
+            "description": "The administrative status of the interface.",
+            "enum": [ "up","down" ]
+          },
+          "oper_status": {
+            "description": "The operational status of the interface.",
+            "enum": [ "up","down" ]
+          },
+          "speed": {
+            "description": "The reported active speed of the interface.",
+            "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
+          },
+          "mtu": {
+            "description": "The MTU of the interface.",
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "label": {
+      "description": "Freeform string label for the network device",
+      "type": "string"
+    }
+  }
+}
