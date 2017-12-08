@@ -5,7 +5,7 @@
   "title": "Create a new network flow.",
   "allOf": [
     {
-      "$ref": "network-flow-minimal.json"
+      "$ref": "network-flow.json"
     }
   ]
 }

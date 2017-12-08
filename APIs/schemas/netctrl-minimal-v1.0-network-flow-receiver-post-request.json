@@ -1,7 +1,0 @@
-{
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "description": "Post request schema for adding a new receiver to an existing network flow.",
-  "title": "Single receiver for a multicast network-flow.",
-  "$ref": "network-flow-endpoint-minimal.json"
-}

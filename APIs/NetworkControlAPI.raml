@@ -3,19 +3,19 @@
 # AMWA-nmos Network Conrtoller API
 # (c) ?
 
-title: Network-control-minimal
+title: Network-control-API
 baseUri: http://example.api.com/x-nmos/netctrl/{version}
 version: v1.0
 mediaType: application/json
 types:
-  - NetworkFlow: !include schemas/network-flow-minimal.json
+  - NetworkFlow: !include schemas/network-flow.json
     EmptySchema: !include schemas/empty.json
     ErrorSchema: !include schemas/error.json
     
 documentation:
   - title: Overview
     content: |
-      The minimal network control API is exposed by NMOS network controller. It provides minimal APIs to
+      The Phase 2 network control API is exposed by NMOS network controller. It provides Phase 2 APIs to
       create and manage network flows, and senders and receivers for the flows. 
 
 /:
@@ -25,7 +25,7 @@ documentation:
     responses:
       200:
         body:
-          example: !include ../examples/netctrl-minimal-v1.0-base-get-200.json
+          example: !include ../examples/netctrl-v1.0-base-get-200.json
 
 /network-flows/{id}:
   displayName: Network flow
@@ -40,8 +40,8 @@ documentation:
     responses:
       200:
         body: 
-          type: !include schemas/netctrl-minimal-v1.0-network-flow-id-get-response.json
-          example: !include ../examples/netctrl-minimal-v1.0-network-flow-id-get-200.json
+          type: !include schemas/netctrl-v1.0-network-flow-id-get-response.json
+          example: !include ../examples/netctrl-v1.0-network-flow-id-get-200.json
       404:
         description: Returned when the network-flow with guid does not exist.
         body: 
@@ -51,8 +51,8 @@ documentation:
       Create a network flow with the specific guid. No subsequent PUT request
       should be made for this flow. Subsequent PUT requests must return error.
     body:
-      type: !include schemas/netctrl-minimal-v1.0-network-flow-put-request.json
-      example: !include ../examples/netctrl-minimal-v1.0-network-flow-put.json
+      type: !include schemas/netctrl-v1.0-network-flow-put-request.json
+      example: !include ../examples/netctrl-v1.0-network-flow-put.json
     responses:
       201:
         description: >
@@ -81,8 +81,8 @@ documentation:
     post:
       description: Add receiver to this network flow. 
       body:
-        type: !include schemas/netctrl-minimal-v1.0-network-flow-receiver-post-request.json
-        example: !include ../examples/netctrl-minimal-v1.0-network-flow-receiver-post.json
+        type: !include schemas/netctrl-v1.0-network-flow-receiver-post-request.json
+        example: !include ../examples/netctrl-v1.0-network-flow-receiver-post.json
       responses:
         200:
           description: >
