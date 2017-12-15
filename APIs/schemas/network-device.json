@@ -12,22 +12,26 @@
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
     },
+    "label": {
+      "description": "Freeform string label for the network device",
+      "type": "string"
+    },
     "chassis_id": {
       "type": "string",
       "description": "MAC address of the network device.",
-      "pattern":"^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$" 
+      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
     },
     "mgmt_ip": {
       "type": "string",
       "description": "The management IP address of the network device.",
- 			"anyOf": [
+      "anyOf": [
         {
- 					"format": "ipv4"
- 				},
- 				{
- 					"format": "ipv6"
- 				}
- 			]
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        }
+      ]
     },
     "interfaces": {
       "type": "array",
@@ -42,19 +46,33 @@
         "properties": {
           "port_id": {
             "description": "The ifAlias of the network device.",
- 			      "type": "string"
- 	        },
+            "type": "string"
+          },
           "admin_status": {
             "description": "The administrative status of the interface.",
-            "enum": [ "up","down" ]
+            "enum": [
+              "up",
+              "down"
+            ]
           },
           "oper_status": {
             "description": "The operational status of the interface.",
-            "enum": [ "up","down" ]
+            "enum": [
+              "up",
+              "down"
+            ]
           },
           "speed": {
             "description": "The reported active speed of the interface.",
-            "enum": [ "100M","1G","10G","25G","40G","50G","100G" ]
+            "enum": [
+              "100Mbit/s",
+              "1Gbit/s",
+              "10Gbit/s",
+              "25Gbit/s",
+              "40Gbit/s",
+              "50Gbit/s",
+              "100Gbit/s"
+            ]
           },
           "mtu": {
             "description": "The MTU of the interface.",
@@ -62,10 +80,6 @@
           }
         }
       }
-    },
-    "label": {
-      "description": "Freeform string label for the network device",
-      "type": "string"
     }
   }
 }

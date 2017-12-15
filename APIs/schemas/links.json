@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "description": "A list of network links.",
+  "title": "List of network links.",
+  "items": {
+    "$ref": "link.json"
+  },
+  "minItems": 0,
+  "uniqueItems": true
+}

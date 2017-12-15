@@ -21,7 +21,10 @@
     },
     "debug": {
       "description": "Debug information which may assist a programmer working with the API",
-      "type": ["null", "string"]
+      "type": [
+        "null",
+        "string"
+      ]
     }
   }
 }

@@ -1,17 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "description": "Patch request schema for updating an existing endpoint.",
+  "title": "Schema to modify an endpoint with new values.",
   "required": [
-    "id",
-    "ip_address",
-    "endpoint_chassis_id",
-    "attached_network_device"
   ],
   "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-    },
     "ip_address": {
       "type": "string",
       "description": "IP address on which the endpoint sends/receives flows. IP must be unique in the network.",
@@ -23,11 +17,6 @@
           "format": "ipv6"
         }
       ]
-    },
-    "endpoint_chassis_id": {
-      "type": "string",
-      "description": "MAC address of the endpoint.",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
     },
     "attached_network_device": {
       "type": "object",
@@ -48,10 +37,6 @@
         }
       }
     },
-    "label": {
-      "description": "Freeform string label for the endpoint",
-      "type": "string"
-    },
     "max_bandwidth": {
       "type": "number",
       "description": "Maximum bandwidth in kbps that the sender is allowed to send."
@@ -63,17 +48,7 @@
         "sender",
         "receiver",
         "both"
-      ],
-      "default": "both"
-    },
-    "endpoint_profile": {
-      "description": "The transmission packet profile of the endpoint",
-      "type": "string",
-      "enum": [
-        "narrow",
-        "wide"
-      ],
-      "default": "narrow"
+      ]
     }
   }
 }

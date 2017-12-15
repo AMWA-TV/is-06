@@ -1,4 +1,6 @@
 [
-  "network-flows/",
-  "network-flows/receivers/"
+  "network-devices/",
+  "endpoints/",
+  "network-links/",
+  "network-flows/"
 ]
