@@ -241,6 +241,12 @@ documentation:
             Returned when the network flow with guid does not exist. 
           body:
             type: ErrorSchema
+        500:
+          description: >
+            Internal server error. Returned when the request could not be satisfied.
+            This maybe due to the failure to setup the flow routes.
+          body:
+            type: ErrorSchema
     /{receiverId}:
       uriParameters:
         receiverId:
