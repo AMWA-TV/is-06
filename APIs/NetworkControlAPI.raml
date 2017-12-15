@@ -207,6 +207,10 @@ documentation:
           Returned when the PUT request is incorrectly formatted or has missing values.
         body:
           type: ErrorSchema
+      500:
+        description: >
+          Internal server error. Returned when the request could not be satisfied.
+          This maybe due to the failure to setup the flow routes.
   delete:
     description: Delete the network-flow with the specified guid.
     responses:
