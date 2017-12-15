@@ -1,0 +1,27 @@
+{
+  "id": "11b8973e-91c9-462d-8dad-6b37e53b3b9f",
+  "label": "Network spine",
+  "chassis_id": "41-B6-72-79-87-CC",
+  "mgmt_ip": "10.10.10.16",
+  "interfaces": [
+    {
+      "port_id": "Ethernet 1/1",
+      "admin_status": "up",
+      "oper_status": "up",
+      "speed": "1Gbit/s",
+      "mtu": 1500
+    },
+    {
+      "port_id": "Ethernet 1/2",
+      "admin_status": "up",
+      "oper_status": "up",
+      "speed": "100Gbit/s"
+    },
+    {
+      "port_id": "Ethernet 1/3",
+      "admin_status": "up",
+      "oper_status": "up",
+      "speed": "100Gbit/s"
+    }
+  ]
+}

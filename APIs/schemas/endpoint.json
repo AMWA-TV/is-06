@@ -4,7 +4,7 @@
   "required": [
     "id",
     "ip_address",
-    "endpoint_chassis_id",
+    "chassis_id",
     "attached_network_device"
   ],
   "properties": {
@@ -24,7 +24,7 @@
         }
       ]
     },
-    "endpoint_chassis_id": {
+    "chassis_id": {
       "type": "string",
       "description": "MAC address of the endpoint.",
       "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
@@ -53,8 +53,8 @@
       "type": "string"
     },
     "max_bandwidth": {
-      "type": "number",
-      "description": "Maximum bandwidth in kbps that the sender is allowed to send."
+      "type": "string",
+      "description": "Maximum bandwidth that the sender is allowed to send. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
     },
     "role": {
       "description": "The role of the endpoint as a sender or receiver.",
@@ -66,7 +66,7 @@
       ],
       "default": "both"
     },
-    "endpoint_profile": {
+    "profile": {
       "description": "The transmission packet profile of the endpoint",
       "type": "string",
       "enum": [

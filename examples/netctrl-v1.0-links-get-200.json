@@ -1,0 +1,30 @@
+[
+  {
+    "chassis_id": "B5-FC-0E-17-32-FC",
+    "port_id": "Ethernet 1/2",
+    "peer_chassis_id": "12-5D-1F-5F-3B-F1",
+    "peer_port_id": "Ethernet 2/1",
+    "speed": "100Gbit/s"
+  },
+  {
+    "chassis_id": "B5-FC-0E-17-32-FC",
+    "port_id": "Ethernet 1/3",
+    "peer_chassis_id": "D0-C5-39-07-2A-4A",
+    "peer_port_id": "Ethernet 2/1",
+    "speed": "100Gbit/s"
+  },
+  {
+    "chassis_id": "12-5D-1F-5F-3B-F1",
+    "port_id": "Ethernet 2/2",
+    "peer_chassis_id": "32-C6-09-64-1A-46",
+    "peer_port_id": "Ethernet 1/1",
+    "speed": "1Gbit/s"
+  },
+  {
+    "chassis_id": "D0-C5-39-07-2A-4A",
+    "port_id": "Ethernet 2/2",
+    "peer_chassis_id": "58-9E-95-6D-95-48",
+    "peer_port_id": "Ethernet 1/1",
+    "speed": "1Gbit/s"
+  }
+]

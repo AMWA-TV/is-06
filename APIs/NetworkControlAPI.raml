@@ -67,7 +67,7 @@ documentation:
 /endpoints:
   displayName: Endpoints
   get:
-    description: List a collection of endpoints.
+    description: Retrieve a collection of endpoints.
     responses:
       200:
         body:
@@ -88,7 +88,7 @@ documentation:
         200:
           body:
             type: Endpoint
-            example: !include ../examples/netctrl-v1.0-endpointid-get-200.json
+            example: !include ../examples/netctrl-v1.0-endpoint-id-get-200.json
         404:
           description: Returned when the requested Node ID does not exist.
           body:
@@ -106,8 +106,14 @@ documentation:
         example: !include ../examples/netctrl-v1.0-endpoint-put-request.json
       responses:
         201:
+          description: >
+            Returns when the endpoint is registered with network controller successfully.
+            No response body. Header should indicate the location of the created resource.
           body:
-            example: !include ../examples/netctrl-v1.0-endpoint-put-201.json
+            type: EmptySchema
+          headers:
+            Location:
+              example: /x-nmos/netctrl/v1.0/endpoints/d0729fa2-83ba-4e6b-8817-d48a4bf28f74/
         400:
           description: >
             Returned when the POST request is incorrectly formatted or missing mandatory attributes.
@@ -125,8 +131,10 @@ documentation:
         example: !include ../examples/netctrl-v1.0-endpoint-patch-request.json
       responses:
         202:
+          description: >
+            Returns when the endpoint is updated successfully. No response body.
           body:
-            example: !include ../examples/topologyapi-v1.0-endpoints-patch-202.json
+            type: EmptySchema
         400:
           description: >
             Returned when the PATCH request is incorrectly formatted.
@@ -169,130 +177,138 @@ documentation:
           type: Links
           example: !include ../examples/netctrl-v1.0-links-get-200.json
 
-/network-flows/{id}:
+/network-flows:
   displayName: Network flow
-  uriParameters:
-    id:
-      type: string
-      pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-      description: The globally unique identifier for the network-flow.
-      example: cfd02532-1c83-45a5-ae38-1cb7614346db
   get:
-    description: Retrieve a single network-flow with the specified guid.
+    description: Retrieve a collection of network flows.
     responses:
       200:
-        body: 
-          type: NetworkFlow
-          example: !include ../examples/netctrl-v1.0-network-flow-id-get-200.json
-      404:
-        description: Returned when the network-flow with guid does not exist.
-        body: 
-            type: ErrorSchema
-  put:
-    description: >
-      Create a network flow with the specific guid. No subsequent PUT request
-      should be made for this flow. Subsequent PUT requests must return error.
-    body:
-      type: NetworkFlow
-      example: !include ../examples/netctrl-v1.0-network-flow-put.json
-    responses:
-      201:
-        description: >
-          Returned when the network flow is created successfully.
-          No response body.
         body:
-          type: EmptySchema
-      400:
-        description: >
-          Returned when the PUT request is incorrectly formatted or has missing values.
-        body:
-          type: ErrorSchema
-      500:
-        description: >
-          Internal server error. Returned when the request could not be satisfied.
-          This maybe due to the failure to setup the flow routes.
-  delete:
-    description: Delete the network-flow with the specified guid.
-    responses:
-      204:
-        description: >
-          Returned when the network-flow is successfully deleted. No response body.
-        body:
-          type: EmptySchema
-      404:
-        description: Returned when the network-flow with guid does not exist.
-        body:
-          type: ErrorSchema
-  /receivers:
-    post:
-      description: Add receivers to this network flow. 
-      body:
-        type: !include schemas/netctrl-v1.0-network-flow-receiver-post-request.json
-        example: !include ../examples/netctrl-v1.0-network-flow-receiver-post.json
+          type: NetworkFlows
+          example: !include ../examples/netctrl-v1.0-network-flows-get-200.json
+  /{id}:
+    uriParameters:
+      id:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        description: The globally unique identifier for the network-flow.
+        example: cfd02532-1c83-45a5-ae38-1cb7614346db
+    get:
+      description: Retrieve a single network-flow with the specified guid.
       responses:
         200:
-          description: >
-            Returned when the receiver is successfully added. No response body.
           body: 
+            type: NetworkFlow
+            example: !include ../examples/netctrl-v1.0-network-flow-id-get-200.json
+        404:
+          description: Returned when the network-flow with guid does not exist.
+          body: 
+              type: ErrorSchema
+    put:
+      description: >
+        Create a network flow with the specific guid. No subsequent PUT request
+        should be made for this flow. Subsequent PUT requests must return error.
+      body:
+        type: NetworkFlow
+        example: !include ../examples/netctrl-v1.0-network-flow-put.json
+      responses:
+        201:
+          description: >
+            Returned when the network flow is created successfully.
+            No response body.
+          body:
             type: EmptySchema
         400:
           description: >
-            Returned when the POST request is incorrectly formatted or missing values.
-          body:
-            type: ErrorSchema
-        404:
-          description: >
-            Returned when the network flow with guid does not exist. 
+            Returned when the PUT request is incorrectly formatted or has missing values.
           body:
             type: ErrorSchema
         500:
           description: >
             Internal server error. Returned when the request could not be satisfied.
             This maybe due to the failure to setup the flow routes.
-          body:
-            type: ErrorSchema
-    /{receiverId}:
-      uriParameters:
-        receiverId:
-          type: string
-          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-          description: The globally unique identifier for the receiver endpoint.
-          example: 77b52221-c789-45fd-90b3-d9d8211de9d3
-      delete:
-        description: >
-          Delete receiver of this network flow with given id.
-        responses:
-          204:
-            description: >
-              Returned when the receiver is successfully deleted.
-              No response body.
-            body:
-              type: EmptySchema
-          404:
-            description: >
-              Returned when no receiver with specifid id exists for this flow.
-            body:
-              type: ErrorSchema
-  /route-flow:
-    put:
-      description: Enable route_flow flag for this network flow. 
-      body:
-        type: EmptySchema
+    delete:
+      description: Delete the network-flow with the specified guid.
       responses:
-        200:
+        204:
           description: >
-            Returned when the route_flow flag is successfully enabled. It may not
-            necessarily ensure flow setup, implementations may vary.
-            No response body.
-          body: 
+            Returned when the network-flow is successfully deleted. No response body.
+          body:
             type: EmptySchema
         404:
           description: Returned when the network-flow with guid does not exist.
           body:
             type: ErrorSchema
-        500:
+    /receivers:
+      post:
+        description: Add receivers to this network flow. 
+        body:
+          type: !include schemas/netctrl-v1.0-network-flow-receiver-post-request.json
+          example: !include ../examples/netctrl-v1.0-network-flow-receiver-post.json
+        responses:
+          200:
+            description: >
+              Returned when the receiver is successfully added. No response body.
+            body: 
+              type: EmptySchema
+          400:
+            description: >
+              Returned when the POST request is incorrectly formatted or missing values.
+            body:
+              type: ErrorSchema
+          404:
+            description: >
+              Returned when the network flow with guid does not exist. 
+            body:
+              type: ErrorSchema
+          500:
+            description: >
+              Internal server error. Returned when the request could not be satisfied.
+              This maybe due to the failure to setup the flow routes.
+            body:
+              type: ErrorSchema
+      /{receiverId}:
+        uriParameters:
+          receiverId:
+            type: string
+            pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            description: The globally unique identifier for the receiver endpoint.
+            example: 77b52221-c789-45fd-90b3-d9d8211de9d3
+        delete:
           description: >
-            Internal server error. Returned when the request could not be satisfied.
-            This maybe due to the failure to setup the flow routes.
-          body:
-            type: ErrorSchema
+            Delete receiver of this network flow with given id.
+          responses:
+            204:
+              description: >
+                Returned when the receiver is successfully deleted.
+                No response body.
+              body:
+                type: EmptySchema
+            404:
+              description: >
+                Returned when no receiver with specifid id exists for this flow.
+              body:
+                type: ErrorSchema
+    /route-flow:
+      put:
+        description: Enable route_flow flag for this network flow. 
+        body:
+          type: EmptySchema
+        responses:
+          200:
+            description: >
+              Returned when the route_flow flag is successfully enabled. It may not
+              necessarily ensure flow setup, implementations may vary.
+              No response body.
+            body: 
+              type: EmptySchema
+          404:
+            description: Returned when the network-flow with guid does not exist.
+            body:
+              type: ErrorSchema
+          500:
+            description: >
+              Internal server error. Returned when the request could not be satisfied.
+              This maybe due to the failure to setup the flow routes.
+            body:
+              type: ErrorSchema

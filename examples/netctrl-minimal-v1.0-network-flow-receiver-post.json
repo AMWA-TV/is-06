@@ -1,4 +1,9 @@
 {
-  "label": "North side monitor",
-  "ip_address": "10.10.16.80"
+  "receiver_ids": [
+    "ff458774-0fdc-4948-b0ee-2d6043c2c689",
+    "4d3cfb9f-5a1b-4a92-a4f5-6f3812795629",
+    "79b9e6ec-8d14-4c87-b1f1-45e763f4c077",
+    "d60bbf82-6b5d-4a56-ab8e-eeae3e40e534",
+    "e0cfe384-0a3e-4256-9a70-4251c423ad00"
+  ]
 }

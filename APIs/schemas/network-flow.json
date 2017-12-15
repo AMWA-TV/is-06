@@ -17,8 +17,8 @@
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
     },
     "bandwidth": {
-      "type": "number",
-      "description": "Average bandwidth requirement in kbps."
+      "type": "string",
+      "description": "Average bandwidth requirement for the flow. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
     },
     "multicast_address": {
       "description": "Multicast group address is an ip address, the ipv4 range is 224.1.1.1 to 239.255.255.255.",

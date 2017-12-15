@@ -1,27 +1,14 @@
 {
   "id": "c386ff15-3b3f-4813-ac86-1c7b8cf753b6",
   "flow_label": "Sample Video network flow",
-  "bandwidth": 4000000,
-  "dscp": "AF12",
+  "bandwidth": "4Gbit/s",
   "multicast_address": "226.1.1.1",
-  "senders": [
-    {
-      "label": "Camera 1",
-      "ip_address": "192.168.16.24"
-    }
+  "dscp": "AF12",
+  "sender_id": "a9ab3d49-3b8f-49e1-bbe4-b46228a9e167",
+  "receiver_ids": [
+    "231ea016-1553-4488-8c2b-26bee7b9a1aa",
+    "7e54a194-45e7-44e6-8795-b3a21bfff253",
+    "3f80b3fa-74e3-4dcc-a1c0-5dbf5a199e20"
   ],
-  "receivers": [
-    {
-      "label": "North side monitor",
-      "ip_address": "10.10.16.80"
-    },
-    {
-      "label": "West side monitor",
-      "ip_address": "10.10.28.100"
-    },
-    {
-      "label": "Campus monitor",
-      "ip_address": "10.10.20.56"
-    }
-  ]
+  "route_flow": true
 }
