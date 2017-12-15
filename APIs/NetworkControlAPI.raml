@@ -215,9 +215,12 @@ documentation:
         201:
           description: >
             Returned when the network flow is created successfully.
-            No response body.
+            No response body. Location header should indicate the location of the resource.
           body:
             type: EmptySchema
+          headers:
+            Location:
+              example: /x-nmos/netctrl/v1.0/network-flows/6fb3c057-a363-40cc-8f3d-cbaee5e35248/
         400:
           description: >
             Returned when the PUT request is incorrectly formatted or has missing values.
