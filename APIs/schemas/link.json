@@ -2,41 +2,34 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "required": [
-    "chassis_id",
-    "port_id",
-    "peer_chassis_id",
-    "peer_port_id",
+    "network_device_id",
+    "network_port_id",
+    "peer_device_id",
     "speed"
   ],
   "properties": {
-    "chassis_id": {
+    "network_device_id": {
       "type": "string",
-      "description": "MAC address for the network device.",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "description": "Guid for the network device. Must match an instance of Network Device schema."
     },
-    "port_id": {
+    "network_port_id": {
       "type": "string",
-      "description": "The ifAlias of the network device."
+      "description": "The ifAlias of the interface of the network device."
     },
-    "peer_chassis_id": {
+    "peer_device_id": {
       "type": "string",
-      "description": "MAC address for the peer device.",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "description": "Guid for the peer device, which could be either a network device or an endpoint. Must match an instance of Network Device or Endpoint schema."
     },
     "peer_port_id": {
       "type": "string",
-      "description": "The ifAlias of the peer device."
+      "description": "The ifAlias of the interface of the peer device. For Endpoint as peer, this can be empty or the port_id"
     },
     "speed": {
-      "enum": [
-        "100Mbit/s",
-        "1Gbit/s",
-        "10Gbit/s",
-        "25Gbit/s",
-        "40Gbit/s",
-        "50Gbit/s",
-        "100Gbit/s"
-      ]
+      "type": "string",
+      "pattern": "^[1-9][0-9]*[kMG]bit/s$",
+      "description": "Speed of the link. Formatted as number followed by kbit/s, Mbit/s, Gbit/s."
     }
   }
 }
