@@ -5,12 +5,13 @@
     "bandwidth": "4Gbit/s",
     "multicast_address": "226.8.1.1",
     "dscp": "AF12",
-    "sender_id": "e576574b-3b29-4f44-bb0e-784008ee26fb",
-    "receiver_ids": [
+    "sender_endpoint_id": "e576574b-3b29-4f44-bb0e-784008ee26fb",
+    "receiver_endpoint_ids": [
       "92ecbc58-2f65-4f98-a426-6c479e0698cd",
       "600be553-0384-4405-97f9-7f4abb29051d"
     ],
-    "route_flow": true
+    "forward_flow": true,
+    "profile": "SMPTE-2110-21-wide"
   },
   {
     "id": "d2439cef-59bc-456d-8791-fc37b8e82691",
@@ -18,10 +19,11 @@
     "bandwidth": "2Gbit/s",
     "multicast_address": "226.1.1.16",
     "dscp": "AF12",
-    "sender_id": "20aece97-c2b8-4a6c-a451-34ad86aae367",
-    "receiver_ids": [
+    "sender_endpoint_id": "20aece97-c2b8-4a6c-a451-34ad86aae367",
+    "receiver_endpoint_ids": [
     ],
-    "route_flow": false
+    "forward_flow": false,
+    "profile": "SMPTE-2110-21-narrow"
   },
   {
     "id": "c519def6-2e4c-4c7f-91b1-4cdbcbe60e8c",
@@ -29,11 +31,12 @@
     "bandwidth": "400Mbit/s",
     "multicast_address": "226.8.1.2",
     "dscp": "AF12",
-    "sender_id": "e576574b-3b29-4f44-bb0e-784008ee26fb",
-    "receiver_ids": [
+    "sender_endpoint_id": "e576574b-3b29-4f44-bb0e-784008ee26fb",
+    "receiver_endpoint_ids": [
       "92ecbc58-2f65-4f98-a426-6c479e0698cd",
       "600be553-0384-4405-97f9-7f4abb29051d"
     ],
-    "route_flow": true
+    "forward_flow": true,
+    "profile": "constant-rate"
   }
 ]

@@ -7,8 +7,8 @@
     "id",
     "bandwidth",
     "multicast_address",
-    "sender_id",
-    "receiver_ids"
+    "sender_endpoint_id",
+    "receiver_endpoint_ids"
   ],
   "properties": {
     "id": {
@@ -20,16 +20,37 @@
       "type": "string",
       "description": "Average bandwidth requirement for the flow. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
     },
-    "multicast_address": {
-      "description": "Multicast group address is an ip address, the ipv4 range is 224.1.1.1 to 239.255.255.255.",
-      "type": "string"
+    "profile": {
+      "description": "The transmission profile of the flow.",
+      "type": "string",
+      "enum": [
+        "constant-rate",
+        "SMPTE-2110-21-narrow",
+        "SMPTE-2110-21-wide",
+        "unknown"
+      ],
+      "default": "constant-rate"
     },
-    "sender_id": {
+    "multicast_address": {
+      "description": "Multicast group address is an ip address, the ipv4 range is 224.1.1.1 to 239.255.255.255. For future use of this schema for unicast flow, a null value option is added.",
+      "anyOf": [
+        {
+          "description": "When the multicast address exists, use ipv4 format.",
+          "type": "string",
+          "format": "ipv4"
+        },
+        {
+          "type": "null",
+          "description": "For future use only. When the flow is a unicast flow, multicast group address will be null."
+        }
+      ]
+    },
+    "sender_endpoint_id": {
       "description": "Sender Endpoint ID",
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
     },
-    "receiver_ids": {
+    "receiver_endpoint_ids": {
       "type": "array",
       "description": "List of receiver endpoint IDs.",
       "items": {
@@ -39,8 +60,8 @@
       "minItems": 1,
       "uniqueItems": true
     },
-    "route_flow": {
-      "description": "Flag for routing the flow. If false, the network should not route the flow. Only when this flag is changed to true should the flow be routed to all receivers.",
+    "forward_flow": {
+      "description": "Flag for forwarding the flow. If false, the network should not set up the flow. Only when this flag is changed to true should the flow be sent to all receivers.",
       "type": "boolean",
       "default": true
     },

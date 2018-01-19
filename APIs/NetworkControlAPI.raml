@@ -292,15 +292,15 @@ documentation:
                 Returned when no receiver with specifid id exists for this flow.
               body:
                 type: ErrorSchema
-    /route-flow:
+    /forward-flow:
       put:
-        description: Enable route_flow flag for this network flow. 
+        description: Enable forward_flow flag for this network flow. 
         body:
           type: EmptySchema
         responses:
           200:
             description: >
-              Returned when the route_flow flag is successfully enabled. It may not
+              Returned when the forward_flow flag is successfully enabled. It may not
               necessarily ensure flow setup, implementations may vary.
               No response body.
             body: 
