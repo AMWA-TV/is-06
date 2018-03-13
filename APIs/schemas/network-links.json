@@ -4,7 +4,7 @@
   "description": "A list of network links.",
   "title": "List of network links.",
   "items": {
-    "$ref": "link.json"
+    "$ref": "network-link.json"
   },
   "minItems": 0,
   "uniqueItems": true

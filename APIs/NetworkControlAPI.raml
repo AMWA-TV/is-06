@@ -12,13 +12,60 @@ types:
     NetworkDevices: !include schemas/network-devices.json
     Endpoint: !include schemas/endpoint.json
     Endpoints: !include schemas/endpoints.json
-    Link: !include schemas/link.json
-    Links: !include schemas/links.json
+    NetworkLink: !include schemas/network-link.json
+    NetworkLinks: !include schemas/network-links.json
     NetworkFlow: !include schemas/network-flow.json
     NetworkFlows: !include schemas/network-flows.json
-    EmptySchema: !include schemas/empty.json
     ErrorSchema: !include schemas/error.json
-    
+traits:
+  - paged:
+      description: API resource supporting pagination of results
+      queryParameters:
+        paging.since:
+          description: Return only the results which have been created/updated since the time specified (non-inclusive) (seconds:nanoseconds)
+          type: string
+          pattern: "^[0-9]+:[0-9]+$"
+        paging.until:
+          description: Return only the results which were created/updated up until the time specified (inclusive) (seconds:nanoseconds)
+          type: string
+          pattern: "^[0-9]+:[0-9]+$"
+        paging.limit:
+          description: Restrict the response to the specified number of results. Implementations may specify their own default and maximum for the limit
+          type: integer
+        paging.order:
+          description: Specify whether paging should be based upon initial resource creation time, or when it was last modified. In both cases the response should be provided in descending order
+          type: string
+          enum: ["create", "update"]
+          default: "update"
+      responses:
+        200:
+          headers:
+            Link:
+              description: Provides references to cursors for paging. The 'rel' attribute may be one of 'next', 'prev', 'first' or 'last'
+              type: string
+              example: <http://example.api.com/x-nmos/query/v1.0/endpoints/?paging.since=1520976651:4939634&paging.limit=20>; rel="next", <http://example.api.com/x-nmos/query/v1.0/endpoints/?paging.until=1520976651:318744030&paging.limit=20>; rel="prev"
+            X-Paging-Limit:
+              description: Identifies the current limit being used for paging. This may not match the requested value if the requested value was too high for the implementation
+              type: integer
+            X-Paging-Since:
+              description: Identifies the current value of the query parameter 'paging.since' in use, or if not specified identifies what value it would have had to return this data set. This value may be re-used as the paging.until value of a query to return the previous page of results. Combining this with the X-Paging-Until header value provides the absolute time bounds of the current returned data set.
+              type: string
+              example: 1520976651:5439634
+            X-Paging-Until:
+              description: Identifies the current value of the query parameter 'paging.until' in use, or if not specified identifies what value it would have had to return this data set. This value may be re-used as the paging.since value of a query to return the next page of results. Combining this with the X-Paging-Since header value provides the absolute time bounds of the current returned data set.
+              type: string
+              example: 1520976651:318744030
+  - rql:
+      description: This resource MAY support advanced query formats using the Resource Query Language (RQL) syntax
+      queryParameters:
+        query.rql:
+          description: RQL format string indicating the query to be performed, such as 'eq(network-device-id,urn:x-nmos:network_device_id)'. Strings used as filter values MUST be URL encoded.
+          type: string
+      responses:
+        400:
+          description: The server refuses to perform the query as it would be too resource intensive.
+        501:
+          description: The query parameters specified are not currently supported by this implementation.
 documentation:
   - title: Overview
     content: |
@@ -33,7 +80,6 @@ documentation:
       200:
         body:
           example: !include ../examples/netctrl-v1.0-base-get-200.json
-
 /network-devices:
   displayName: Network Devices
   get:
@@ -52,8 +98,6 @@ documentation:
         example: 3f383f86-c977-498f-81bf-04c5cb8a0e0d
     get:
       description: Get a single Network Device
-      body:
-        schema: EmptySchema
       responses:
         200:
           body:
@@ -82,8 +126,6 @@ documentation:
         example: 3607f868-c762-4220-8caf-e5a546395b29
     get:
       description: Get a single Endpoint
-      body:
-        type: EmptySchema
       responses:
         200:
           body:
@@ -101,6 +143,9 @@ documentation:
         by the endpoint through LLDP (if the endpoint is LLDP capabale) or manual entry in the
         caller of this API (e.g., broadcast controller). The network _may_ verify these details
         for security purposes. Verification _may_ happen synchronously, as part of the request.
+        Network controller _must_ create a corresponding network link with this endpoint as the
+        peer device. Peer port id of the new link may or maynot be assigned, i.e, implementation
+        dependent.
       body:
         type: Endpoint
         example: !include ../examples/netctrl-v1.0-endpoint-put-request.json
@@ -109,8 +154,6 @@ documentation:
           description: >
             Returns when the endpoint is registered with network controller successfully.
             No response body. Header should indicate the location of the created resource.
-          body:
-            type: EmptySchema
           headers:
             Location:
               example: /x-nmos/netctrl/v1.0/endpoints/d0729fa2-83ba-4e6b-8817-d48a4bf28f74/
@@ -133,8 +176,6 @@ documentation:
         202:
           description: >
             Returns when the endpoint is updated successfully. No response body.
-          body:
-            type: EmptySchema
         400:
           description: >
             Returned when the PATCH request is incorrectly formatted.
@@ -156,15 +197,12 @@ documentation:
         204:
           description: >
             Returned when the endpoint is successfully deleted. No response body.
-          body:
-            type: EmptySchema
         403:
           description: >
             Returned when a DELETE request is made against a non-persistent endpoint
             which cannot be deleted.
         404:
           description: Returned when the requested Endpoint with guid does not exist
-
 /network-links:
   displayName: Network Links
   get:
@@ -174,9 +212,8 @@ documentation:
     responses:
       200:
         body:
-          type: Links
+          type: NetworkLinks
           example: !include ../examples/netctrl-v1.0-links-get-200.json
-
 /network-flows:
   displayName: Network flow
   get:
@@ -216,8 +253,6 @@ documentation:
           description: >
             Returned when the network flow is created successfully.
             No response body. Location header should indicate the location of the resource.
-          body:
-            type: EmptySchema
           headers:
             Location:
               example: /x-nmos/netctrl/v1.0/network-flows/6fb3c057-a363-40cc-8f3d-cbaee5e35248/
@@ -236,8 +271,6 @@ documentation:
         204:
           description: >
             Returned when the network-flow is successfully deleted. No response body.
-          body:
-            type: EmptySchema
         404:
           description: Returned when the network-flow with guid does not exist.
           body:
@@ -252,8 +285,6 @@ documentation:
           200:
             description: >
               Returned when the receiver is successfully added. No response body.
-            body: 
-              type: EmptySchema
           400:
             description: >
               Returned when the POST request is incorrectly formatted or missing values.
@@ -285,8 +316,6 @@ documentation:
               description: >
                 Returned when the receiver is successfully deleted.
                 No response body.
-              body:
-                type: EmptySchema
             404:
               description: >
                 Returned when no receiver with specifid id exists for this flow.
@@ -295,16 +324,12 @@ documentation:
     /forward-flow:
       put:
         description: Enable forward_flow flag for this network flow. 
-        body:
-          type: EmptySchema
         responses:
           200:
             description: >
               Returned when the forward_flow flag is successfully enabled. It may not
               necessarily ensure flow setup, implementations may vary.
               No response body.
-            body: 
-              type: EmptySchema
           404:
             description: Returned when the network-flow with guid does not exist.
             body:

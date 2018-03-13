@@ -72,7 +72,9 @@
               "25Gbit/s",
               "40Gbit/s",
               "50Gbit/s",
-              "100Gbit/s"
+              "100Gbit/s",
+              "200Gbit/s",
+              "400Gbit/s"
             ]
           },
           "mtu": {

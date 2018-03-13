@@ -18,7 +18,8 @@
     },
     "bandwidth": {
       "type": "string",
-      "description": "Average bandwidth requirement for the flow. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
+      "description": "Average bandwidth requirement for the flow. Format as numbers followed by kbit/s, Mbit/s, Gbit/s.",
+      "pattern": "^[1-9][0-9]*[kMG]bit/s$"
     },
     "profile": {
       "description": "The transmission profile of the flow.",
@@ -32,16 +33,20 @@
       "default": "constant-rate"
     },
     "multicast_address": {
-      "description": "Multicast group address is an ip address, the ipv4 range is 224.1.1.1 to 239.255.255.255. For future use of this schema for unicast flow, a null value option is added.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Multicast group address is an ip address, the ipv4 range is 224.1.1.1 to 239.255.255.255. Provisioned for ipv6 but implementation may depend or may not exist. A null value and null type option is added for future use of this schema for unicast flow",
       "anyOf": [
         {
-          "description": "When the multicast address exists, use ipv4 format.",
-          "type": "string",
           "format": "ipv4"
         },
         {
-          "type": "null",
-          "description": "For future use only. When the flow is a unicast flow, multicast group address will be null."
+          "format": "ipv6"
+        },
+        {
+          "type": "null"
         }
       ]
     },
