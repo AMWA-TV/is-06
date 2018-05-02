@@ -3,8 +3,8 @@
   "type": "object",
   "required": [
     "id",
-    "ip_address",
     "port_id",
+    "ip_address",
     "attached_network_device"
   ],
   "properties": {
@@ -12,6 +12,11 @@
       "description": "Globally unique identifier for the network endpoint",
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "port_id": {
+      "type": "string",
+      "description": "MAC address of the endpoint.",
+      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
     },
     "ip_address": {
       "type": "string",
@@ -24,11 +29,6 @@
           "format": "ipv6"
         }
       ]
-    },
-    "port_id": {
-      "type": "string",
-      "description": "MAC address of the endpoint.",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
     },
     "attached_network_device": {
       "type": "object",
@@ -49,12 +49,9 @@
         }
       }
     },
-    "label": {
-      "description": "Freeform string label for the endpoint",
-      "type": "string"
-    },
     "max_bandwidth": {
       "type": "string",
+      "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit\/s$",
       "description": "Maximum bandwidth that the sender is allowed to send. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
     },
     "role": {
@@ -66,6 +63,10 @@
         "both"
       ],
       "default": "both"
+    },
+    "label": {
+      "description": "Freeform string label for the endpoint",
+      "type": "string"
     }
   }
 }

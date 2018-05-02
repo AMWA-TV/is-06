@@ -1,12 +1,12 @@
 {
   "id": "dc7c36a5-cd6d-44bb-a1ac-6e328c018de0",
-  "label": "Video receiver gateway endpoint.",
-  "ip_address": "10.10.26.24",
   "port_id": "80-49-CF-AB-DA-AC",
+  "ip_address": "10.10.26.24",
   "attached_network_device": {
     "chassis_id": "55-BD-F7-1D-9F-07",
     "port_id": "Ethernet 1/2"
   },
   "max_bandwidth": "40Gbit/s",
-  "role": "receiver"
+  "role": "receiver",
+  "label": "Video receiver gateway endpoint."
 }

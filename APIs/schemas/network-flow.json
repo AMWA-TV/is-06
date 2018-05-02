@@ -5,32 +5,15 @@
   "title": "Network flow with minimal attributes",
   "required": [
     "id",
-    "bandwidth",
     "multicast_address",
     "sender_endpoint_id",
-    "receiver_endpoint_ids"
+    "bandwidth"
   ],
   "properties": {
     "id": {
       "description": "Globally unique identifier for the network flow",
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-    },
-    "bandwidth": {
-      "type": "string",
-      "description": "Average bandwidth requirement for the flow. Format as numbers followed by kbit/s, Mbit/s, Gbit/s.",
-      "pattern": "^[1-9][0-9]*[kMG]bit/s$"
-    },
-    "profile": {
-      "description": "The transmission profile of the flow.",
-      "type": "string",
-      "enum": [
-        "constant-rate",
-        "SMPTE-2110-21-narrow",
-        "SMPTE-2110-21-wide",
-        "unknown"
-      ],
-      "default": "constant-rate"
     },
     "multicast_address": {
       "type": [
@@ -62,17 +45,29 @@
         "type": "string",
         "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
       },
-      "minItems": 1,
+      "minItems": 0,
       "uniqueItems": true
+    },
+    "bandwidth": {
+      "type": "string",
+      "description": "Average bandwidth requirement for the flow. Format as numbers followed by kbit/s, Mbit/s, Gbit/s.",
+      "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit\/s$"
+    },
+    "profile": {
+      "description": "The transmission profile of the flow.",
+      "type": "string",
+      "enum": [
+        "constant-rate",
+        "SMPTE-2110-21-narrow",
+        "SMPTE-2110-21-wide",
+        "unknown"
+      ],
+      "default": "constant-rate"
     },
     "forward_flow": {
       "description": "Flag for forwarding the flow. If false, the network should not set up the flow. Only when this flag is changed to true should the flow be sent to all receivers.",
       "type": "boolean",
       "default": true
-    },
-    "flow_label": {
-      "description": "Freeform string label for the network-flow",
-      "type": "string"
     },
     "dscp": {
       "type": "string",
@@ -101,6 +96,10 @@
         "EF"
       ],
       "default": "CS0"
+    },
+    "label": {
+      "description": "Freeform string label for the network-flow",
+      "type": "string"
     }
   }
 }

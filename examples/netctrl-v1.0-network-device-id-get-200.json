@@ -1,6 +1,5 @@
 {
   "id": "11b8973e-91c9-462d-8dad-6b37e53b3b9f",
-  "label": "Network spine",
   "chassis_id": "41-B6-72-79-87-CC",
   "mgmt_ip": "10.10.10.16",
   "interfaces": [
@@ -23,5 +22,6 @@
       "oper_status": "up",
       "speed": "100Gbit/s"
     }
-  ]
+  ],
+  "label": "Network spine"
 }

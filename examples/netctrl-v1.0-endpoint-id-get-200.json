@@ -1,12 +1,12 @@
 {
   "id": "d9c88a0a-c0c8-4ec8-ade5-fde9106e5040",
-  "label": "Video transmitter gateway endpoint.",
-  "ip_address": "10.10.34.24",
   "port_id": "2A-0D-5C-8A-15-FF",
+  "ip_address": "10.10.34.24",
   "attached_network_device": {
     "chassis_id": "2A-E8-7B-29-92-3B",
     "port_id": "Ethernet 2/2"
   },
   "max_bandwidth": "10Gbit/s",
-  "role": "sender"
+  "role": "sender",
+  "label": "Video transmitter gateway endpoint."
 }

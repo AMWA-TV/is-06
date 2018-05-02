@@ -87,9 +87,9 @@ documentation:
     description: List all network devices.
     queryParameters:
       id:
-      label:
       chassis_id:
       mgmt_ip:
+      label:
     responses:
       200:
         body:
@@ -121,8 +121,8 @@ documentation:
     description: Retrieve a collection of endpoints.
     queryParameters:
       id:
-      ip_address:
       port_id:
+      ip_address:
       attached_network_device:
     responses:
       200:
@@ -244,7 +244,6 @@ documentation:
       profile:
       sender_endpoint_id:
       receiver_endpoint_id:
-      flow_label:
       dscp:
     responses:
       200:

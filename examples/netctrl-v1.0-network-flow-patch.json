@@ -1,6 +1,6 @@
 {
   "bandwidth": "4Gbit/s",
+  "profile": "constant-rate",
   "forward_flow": true,
-  "dscp": "AF11",
-  "profile": "constant-rate"
+  "dscp": "AF11"
 }
