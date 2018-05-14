@@ -1,5 +1,6 @@
 {
   "id": "d9c88a0a-c0c8-4ec8-ade5-fde9106e5040",
+  "chassis_id":"93-6F-79-4E-3A-5C",
   "port_id": "2A-0D-5C-8A-15-FF",
   "ip_address": "10.10.34.24",
   "attached_network_device": {

@@ -121,6 +121,7 @@ documentation:
     description: Retrieve a collection of endpoints.
     queryParameters:
       id:
+      chassis_id:
       port_id:
       ip_address:
       attached_network_device:
@@ -286,6 +287,11 @@ documentation:
         400:
           description: >
             Returned when the PUT request is incorrectly formatted or has missing values.
+          body:
+            type: ErrorSchema
+        409:
+          description: >
+            Conflict (409). Returned when a network-flow exists with the given guid.
           body:
             type: ErrorSchema
         500:

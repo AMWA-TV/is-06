@@ -4,6 +4,7 @@
   "required": [
     "id",
     "port_id",
+    "chassis_id",
     "ip_address",
     "attached_network_device"
   ],
@@ -12,6 +13,25 @@
       "description": "Globally unique identifier for the network endpoint",
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "chassis_id": {
+      "description": "Chassis ID of the interface, as signalled in LLDP from this endpoint. Maybe null where LLDP is unsuitable for use (ie. virtualised environments). Matches to IS-04 nodes/interfaces/chassis-id and should be same.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$",
+          "description": "When the Chassis ID is a MAC address, use this format"
+        },
+        {
+          "type": "string",
+          "pattern": "^.+$",
+          "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used"
+        },
+        {
+          "type": "null",
+          "description": "When the Chassis ID is unavailable it should be set to null"
+        }
+      ]
     },
     "port_id": {
       "type": "string",
