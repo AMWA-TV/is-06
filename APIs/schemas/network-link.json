@@ -2,29 +2,43 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "required": [
-    "network_device_id",
-    "network_port_id",
-    "peer_device_id",
+    "peers",
     "speed"
   ],
   "properties": {
-    "network_device_id": {
-      "type": "string",
-      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-      "description": "Guid for the network device. Must match an instance of Network Device schema. This cant be an endpoint."
-    },
-    "network_port_id": {
-      "type": "string",
-      "description": "The ifAlias of the interface of the network device. This cant be an endpoint interface."
-    },
-    "peer_device_id": {
-      "type": "string",
-      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
-      "description": "Guid for the peer device, which could be either a network device or an endpoint. Must match an instance of Network Device or Endpoint schema."
-    },
-    "peer_port_id": {
-      "type": "string",
-      "description": "The ifAlias of the interface of the peer device. For Endpoint as peer, this can be empty or the port_id"
+    "peers": {
+      "description": "List of peer devices in a link. Peer can be a network device (switch) or an endpoint. There must be exactly two peers in the list.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "device_id",
+          "port_id"
+        ],
+        "properties": {
+          "device_id": {
+            "description": "Guid of a network device or an endoint.",
+            "type": "string",
+            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          },
+          "port_id": {
+            "description": "The ifAlias of the interface of the network device or endpoint.",
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "The ifAlias of the interface of the peer device. This option MUST not be used if the peer is an endpoint."
+              },
+              {
+                "type": "null",
+                "description": "When the peer is an endpoint (instead of network device) the port id MUST be null. A null value will explicitly identify this peer as an endpoint. An endpoint has only one port, so port value is redundant."
+              }
+            ]
+          }
+        },
+        "minItems": 2,
+        "maxItems": 2,
+        "uniqueItems": true
+      }
     },
     "speed": {
       "type": "string",

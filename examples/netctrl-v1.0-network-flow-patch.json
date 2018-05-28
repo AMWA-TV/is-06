@@ -2,5 +2,6 @@
   "bandwidth": "4Gbit/s",
   "profile": "constant-rate",
   "forward_flow": true,
-  "dscp": "AF11"
+  "dscp": "AF11",
+  "label": "Updated video network-flow"
 }

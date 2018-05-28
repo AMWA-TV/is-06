@@ -52,6 +52,10 @@
         "AF43",
         "EF"
       ]
+    },
+    "label": {
+      "description": "Freeform string label for the network-flow",
+      "type": "string"
     }
   }
 }

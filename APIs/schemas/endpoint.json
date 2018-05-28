@@ -3,8 +3,8 @@
   "type": "object",
   "required": [
     "id",
-    "port_id",
     "chassis_id",
+    "port_id",
     "ip_address",
     "attached_network_device"
   ],
@@ -19,7 +19,7 @@
       "anyOf": [
         {
           "type": "string",
-          "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$",
+          "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$",
           "description": "When the Chassis ID is a MAC address, use this format"
         },
         {
@@ -36,7 +36,7 @@
     "port_id": {
       "type": "string",
       "description": "MAC address of the endpoint.",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+      "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
     },
     "ip_address": {
       "type": "string",
@@ -61,7 +61,7 @@
         "chassis_id": {
           "type": "string",
           "description": "MAC address for the peer network device.",
-          "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+          "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
         },
         "port_id": {
           "type": "string",

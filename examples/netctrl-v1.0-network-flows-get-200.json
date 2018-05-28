@@ -17,6 +17,8 @@
     "id": "d2439cef-59bc-456d-8791-fc37b8e82691",
     "multicast_address": "226.1.1.16",
     "sender_endpoint_id": "20aece97-c2b8-4a6c-a451-34ad86aae367",
+    "receiver_endpoint_ids": [
+    ],
     "bandwidth": "2Gbit/s",
     "profile": "SMPTE-2110-21-narrow",
     "forward_flow": false,

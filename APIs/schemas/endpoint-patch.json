@@ -29,7 +29,7 @@
         "chassis_id": {
           "type": "string",
           "description": "MAC address for the peer network device.",
-          "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+          "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
         },
         "port_id": {
           "type": "string",

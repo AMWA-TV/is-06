@@ -5,6 +5,7 @@
     "id",
     "chassis_id",
     "mgmt_ip",
+    "mtu",
     "interfaces"
   ],
   "properties": {
@@ -16,7 +17,7 @@
     "chassis_id": {
       "type": "string",
       "description": "MAC address of the network device.",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+      "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
     },
     "mgmt_ip": {
       "type": "string",
@@ -29,6 +30,10 @@
           "format": "ipv6"
         }
       ]
+    },
+    "mtu": {
+      "description": "The device level MTU. If interface MTU is not present this will be used as the default value.",
+      "type": "integer"
     },
     "interfaces": {
       "type": "array",
