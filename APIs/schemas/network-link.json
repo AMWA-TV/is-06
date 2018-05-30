@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "description": "Describes a network link. A network link consists of two peers. A peer is either a network device or an endpoint. But a link can not have two endpoints as peers. Links are always bidirectional. That is, the order of the peers in this entity carries no special meaning. When a link is between a network device (switch) and an endpoint, the port_id for the endpoint peer must be null.",
   "required": [
     "peers",
     "speed"

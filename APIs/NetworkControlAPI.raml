@@ -194,7 +194,7 @@ documentation:
   get:
     is: [paged]
     description: >
-      Get all links in the network. Links can be between network devices and/or network device and endpoint. The endpoint must be the 'peer-device' when a link is between a network device and an endpoint. Links are otherwise bidirectional. That is, order of network devices in a link entity carries no special meaning. However, API implementation must ensure that query results is independent of how a bi-directional link is persisted.
+      Get all links in the network. Links are always bidirectional. Implementation of the API must ensure that query results is independent of how a bi-directional link is persisted.
     queryParameters:
       network_device_id:
       network_port_id:

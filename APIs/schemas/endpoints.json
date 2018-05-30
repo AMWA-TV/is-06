@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "array",
-  "description": "A list of network endpoints.",
-  "title": "List of network endpoints.",
+  "description": "Describes a list of endpoints.",
+  "title": "List of endpoints.",
   "items": {
     "$ref": "endpoint.json"
   },

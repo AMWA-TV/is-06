@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "description": "Describes an endpoint that is capable of sending or receiving network flows.",
   "required": [
     "id",
     "chassis_id",
@@ -72,10 +73,10 @@
     "max_bandwidth": {
       "type": "string",
       "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit\/s$",
-      "description": "Maximum bandwidth that the sender is allowed to send. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
+      "description": "Optional. Maximum bandwidth that the sender is allowed to send. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
     },
     "role": {
-      "description": "The role of the endpoint as a sender or receiver.",
+      "description": "Optional with default. The role of the endpoint as a sender or receiver.",
       "type": "string",
       "enum": [
         "sender",
@@ -85,7 +86,7 @@
       "default": "both"
     },
     "label": {
-      "description": "Freeform string label for the endpoint",
+      "description": "Optional. Freeform string label for the endpoint",
       "type": "string"
     }
   }

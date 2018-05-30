@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "description": "Describes a network device or switch.",
   "required": [
     "id",
     "chassis_id",
@@ -79,14 +80,14 @@
             ]
           },
           "mtu": {
-            "description": "The MTU of the interface.",
+            "description": "Optional. The MTU of the interface.",
             "type": "integer"
           }
         }
       }
     },
     "label": {
-      "description": "Freeform string label for the network device",
+      "description": "Optional. Freeform string label for the network device",
       "type": "string"
     }
   }

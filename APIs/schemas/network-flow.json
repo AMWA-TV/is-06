@@ -55,7 +55,7 @@
       "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit\/s$"
     },
     "profile": {
-      "description": "The transmission profile of the flow.",
+      "description": "Optional with default. The transmission profile of the flow.",
       "type": "string",
       "enum": [
         "constant-rate",
@@ -66,13 +66,13 @@
       "default": "constant-rate"
     },
     "forward_flow": {
-      "description": "Flag for forwarding the flow. If false, the network should not set up the flow. Only when this flag is changed to true should the flow be sent to all receivers.",
+      "description": "Optional with default. Flag for forwarding the flow. If false, the network should not set up the flow. Only when this flag is changed to true should the flow be sent to all receivers.",
       "type": "boolean",
       "default": true
     },
     "dscp": {
       "type": "string",
-      "description": "DSCP based QoS metrics number, default is CS0, best effort.",
+      "description": "Optional with default. DSCP based QoS metrics number, default is CS0, best effort.",
       "enum": [
         "CS0",
         "CS1",
@@ -99,7 +99,7 @@
       "default": "CS0"
     },
     "label": {
-      "description": "Freeform string label for the network-flow",
+      "description": "Optional. Freeform string label for the network-flow",
       "type": "string"
     }
   }
