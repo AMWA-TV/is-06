@@ -46,7 +46,7 @@
       },
       {
         "device_id": "ce2aff8d-fea1-42e1-bce0-7878024972c9",
-        "port_id": "null"
+        "port_id": null
       }
     ],
     "speed": "1Gbit/s"

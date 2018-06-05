@@ -74,9 +74,9 @@ documentation:
     is: [paged]
     description: List all network devices.
     queryParameters:
-      id:
       chassis_id:
       mgmt_ip:
+      mtu:
       label:
     responses:
       200:
@@ -101,7 +101,6 @@ documentation:
           description: Returned when the network device with the guid does not exist.
           body:
             type: ErrorSchema
-
 /endpoints:
   displayName: Endpoints
   get:
@@ -111,6 +110,7 @@ documentation:
       chassis_id:
       port_id:
       ip_address:
+      max_bandwidth:
       role:
       label:
     responses:
@@ -169,9 +169,12 @@ documentation:
         type: !include schemas/endpoint-patch.json
         example: !include ../examples/netctrl-v1.0-endpoint-patch-request.json
       responses:
-        204:
+        200:
           description: >
-            Returned when the endpoint is updated successfully. No response body.
+            Returned when the endpoint is updated successfully. The updated endpoint is returned in the response.
+          body:
+            type: Endpoint
+            example: !include ../examples/netctrl-v1.0-endpoint-id-get-200.json
         400:
           description: >
             Returned when the PATCH request is incorrectly formatted or can not be updated.
@@ -196,8 +199,8 @@ documentation:
     description: >
       Get all links in the network. Links are always bidirectional. Implementation of the API must ensure that query results is independent of how a bi-directional link is persisted.
     queryParameters:
-      network_device_id:
-      network_port_id:
+      peers.device_id:
+      peers.port_id:
       speed:
     responses:
       200:
@@ -212,7 +215,10 @@ documentation:
     queryParameters:
       multicast_address:
       sender_endpoint_id:
+      bandwidth:
       profile:
+      forward_flow:
+      dscp:
       label:
     responses:
       200:
@@ -271,9 +277,12 @@ documentation:
         type: !include schemas/network-flow-patch.json
         example: !include ../examples/netctrl-v1.0-network-flow-patch.json
       responses:
-        204:
+        200:
           description: >
-            Returned when the network flow is updated successfully. No response body.
+            Returned when the network flow is updated successfully. The updated network flow is returned in the response.
+          body:
+            type: NetworkFlow
+            example: !include ../examples/netctrl-v1.0-network-flow-id-get-200.json
         400:
           description: >
             Returned when the PATCH request is incorrectly formatted or has incorrect values.
