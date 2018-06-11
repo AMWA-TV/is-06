@@ -1,14 +1,14 @@
 {
   "id": "c386ff15-3b3f-4813-ac86-1c7b8cf753b6",
-  "flow_label": "Sample Video network flow",
-  "bandwidth": "4Gbit/s",
   "multicast_address": "226.1.1.1",
-  "dscp": "AF12",
   "sender_endpoint_id": "a9ab3d49-3b8f-49e1-bbe4-b46228a9e167",
   "receiver_endpoint_ids": [
     "231ea016-1553-4488-8c2b-26bee7b9a1aa",
     "7e54a194-45e7-44e6-8795-b3a21bfff253"
   ],
+  "bandwidth": "4Gbit/s",
+  "profile": "SMPTE-2110-21-wide",
   "forward_flow": true,
-  "profile": "SMPTE-2110-21-wide"
+  "dscp": "AF12",
+  "label": "Sample Video network flow"
 }

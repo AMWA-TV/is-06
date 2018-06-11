@@ -20,7 +20,7 @@
     },
     "attached_network_device": {
       "type": "object",
-      "description": "Peer network device (switch) details.",
+      "description": "Peer network device (switch) details. This can not be an endpoint.",
       "required": [
         "chassis_id",
         "port_id"
@@ -29,7 +29,7 @@
         "chassis_id": {
           "type": "string",
           "description": "MAC address for the peer network device.",
-          "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+          "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
         },
         "port_id": {
           "type": "string",
@@ -38,8 +38,9 @@
       }
     },
     "max_bandwidth": {
-      "type": "number",
-      "description": "Maximum bandwidth in kbps that the sender is allowed to send."
+      "type": "string",
+      "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit\/s$",
+      "description": "Maximum bandwidth that the sender is allowed to send. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
     },
     "role": {
       "description": "The role of the endpoint as a sender or receiver.",
@@ -49,6 +50,10 @@
         "receiver",
         "both"
       ]
+    },
+    "label": {
+      "description": "Freeform string label for the endpoint",
+      "type": "string"
     }
   }
 }

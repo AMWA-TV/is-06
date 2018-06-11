@@ -1,10 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "description": "Describes a network device or switch.",
   "required": [
     "id",
     "chassis_id",
     "mgmt_ip",
+    "mtu",
     "interfaces"
   ],
   "properties": {
@@ -13,14 +15,10 @@
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
     },
-    "label": {
-      "description": "Freeform string label for the network device",
-      "type": "string"
-    },
     "chassis_id": {
       "type": "string",
       "description": "MAC address of the network device.",
-      "pattern": "^([0-9A-Fa-f]{2}[-]){5}([0-9A-Fa-f]{2})$"
+      "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
     },
     "mgmt_ip": {
       "type": "string",
@@ -33,6 +31,10 @@
           "format": "ipv6"
         }
       ]
+    },
+    "mtu": {
+      "description": "The device level MTU. If interface MTU is not present this will be used as the default value.",
+      "type": "integer"
     },
     "interfaces": {
       "type": "array",
@@ -78,11 +80,15 @@
             ]
           },
           "mtu": {
-            "description": "The MTU of the interface.",
+            "description": "Optional. The MTU of the interface.",
             "type": "integer"
           }
         }
       }
+    },
+    "label": {
+      "description": "Optional. Freeform string label for the network device",
+      "type": "string"
     }
   }
 }
