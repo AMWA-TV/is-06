@@ -1,27 +1,27 @@
-# AMWA Network Control Specification
-
-This repository contains details of this AMWA Specification for Network Control API.  The Network Control API is the interface between the NMOS Services and the Network Controller to reserve and secure Network Services.  The Network Controller is the management entity which represents the Network as a whole: see AMWA's INFO-001 for more details. Specifically it is the Northbound API from the Network Controller to the NMOS services. It is defined in the JTMN Architecture document in the Network Layer. 
-
-The main areas of work are:
-1. Discovery of Network Topology and Discovery of endpoint devices that are connected to the Network Switches
-2. Create/Retrieve/Update/Delete Network Streams (Flow Management) 
-3. Monitoring and Diagnostics
-
-This github is covering 1. above. 
+# AMWA Network Control Specification (IS-06)
+This repository contains details of this AMWA Specification. This REST API can be exposed by a network controller. The specification includes APIs to create and manage network flows, and senders/receivers of the flow.
 
 ## Getting started
 
 Readers are advised to be familiar with:
 * The JT-NM Reference Architecture (http://jt-nm.org/)
 * The [overview of Networked Media Open Specifications](https://github.com/AMWA-TV/nmos)
-* Arch Sprint to update JT-NM Reference Architecture: http://www.amwa.tv/projects/INFO-001.shtml
 
+Readers should read the [documentation](docs/) in this repository, starting with the [Overview](docs/1.0.%20Overview.md), and then look at the [APIs](APIs/), which are written in RAML and JSON Schema (if a suitable tool for reading RAML is not available, then [this](APIs/generateHTML) will create HTML versions).
+
+## Releases
+
+It is recommended that the tagged releases are used as a reference for development as opposed to the 'master' or development branches of this repository.
+
+Each version of the specification is available under a v&lt;#MAJOR&gt;.&lt;#MINOR&gt; tag such as 'v1.0'. Once a specification has been released, any updates to its documentation and schemas which do not modify the specification will be made available via a v&lt;#MAJOR&gt;.&lt;#MINOR&gt;.&lt;#UPDATE&gt; tag such as 'v1.0.1'.
 
 ## Contents
 
 * README.md -- This file
+* [docs/1.0. Overview.md](docs/1.0.%20Overview.md) -- Documentation targeting those implementing APIs and clients. Further topics are covered within the [docs/](docs/) directory
+* [APIs/NetworkControlAPI.raml](APIs/NetworkControlAPI.raml) -- Normative specification of the NMOS Network Control API
+* [APIs/schemas/](APIs/schemas/) -- JSON schemas used by API specifications
+* [APIs/generateHTML](APIs/generateHTML) -- Tool to create HTML browsable version of the API specifications. Requires raml2html (https://github.com/kevinrenskers/raml2html).
+* [examples/](examples/) -- Example JSON requests and responses for APIs
 * [LICENSE](LICENSE) -- Licenses for software and text documents
 * [NOTICE](NOTICE) -- Disclaimer
-* Use Cases: The list of use cases were used to create the required API
-* API: The API specification with the necessary schemas
-* Examples:  Using the API, there are some examples to guide the implementation.

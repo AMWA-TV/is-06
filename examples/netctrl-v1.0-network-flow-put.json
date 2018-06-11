@@ -1,0 +1,13 @@
+{
+  "id": "1650fbcc-d8a0-4bd2-8e61-c7abb38d78d2",
+  "multicast_address": "227.1.1.1",
+  "sender_endpoint_id": "76beb838-3ad7-4011-bd68-5c203a4446ab",
+  "receiver_endpoint_ids": [
+    "3f80b3fa-74e3-4dcc-a1c0-5dbf5a199e20"
+  ],
+  "bandwidth": "4Gbit/s",
+  "profile": "constant-rate",
+  "forward_flow": false,
+  "dscp": "AF11",
+  "label": "New video network-flow"
+}

@@ -1,10 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "array",
-  "description": "A list of Network Links resources",
-  "title": "Collection of Network Links",
+  "description": "A list of network devices.",
+  "title": "List of network devices.",
   "items": {
-    "$ref": "networklink.json"
+    "$ref": "network-device.json"
   },
   "minItems": 0,
   "uniqueItems": true

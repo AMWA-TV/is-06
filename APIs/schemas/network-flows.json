@@ -1,10 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "array",
-  "description": "A list of Endpoint Link resources",
-  "title": "Collection of Endpoint Links",
+  "description": "A list of network flows.",
+  "title": "List of network flows.",
   "items": {
-    "$ref": "endpointlinks.json"
+    "$ref": "network-flow.json"
   },
   "minItems": 0,
   "uniqueItems": true
