@@ -12,5 +12,5 @@ In the case of the network device, the Chassis ID contains the MAC address and t
 The only operation permitted for this resource is GET. When a broadcast controller performs a GET by providing a network device ID, the network controller returns all the links that originate/terminate in the specified network device; the one that is connected to the endpoint and/or the one that it is connected to a neighboring switch. 
 As these links are bi-directional, the same link information will be reported by both network devices when a GET operation is performed on both the neighboring network devices.
 
-![Class Diagram](images/Bidirectional-Link.png)
+![Class Diagram](images/Bidirectional-Links.png)
  
