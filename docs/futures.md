@@ -1,8 +1,8 @@
-# AMWA NMOS Network Control API Specification: Overview
+# AMWA NMOS Network Control API Specification: Futures
 
 _(c) AMWA 2017, CC Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)_
 
-# Future
+# In later Phases:
 
 The list of things that will be addressed in subsequent phases:
 
