@@ -1,5 +1,5 @@
-# AMWA Network Control Specification (IS-06)
-This repository contains details of this AMWA Specification. This REST API can be exposed by a network controller. The specification includes APIs to create and manage network flows, and senders/receivers of the flow.
+# AMWA IS-06 NMOS Network Control Specification 
+This repository contains details of this AMWA IS-06 NMOS Specification. This REST API can be exposed by a network controller. The specification includes APIs to create and manage network flows, and senders/receivers of the flow.
 
 ## Getting started
 
