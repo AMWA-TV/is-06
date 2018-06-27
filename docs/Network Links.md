@@ -1,4 +1,4 @@
-# AMWA NMOS Network Control API Specification: Network links
+# AMWA IS-06 NMOS Network Control API Specification: Network links
 
 _(c) AMWA 2017, CC Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)_
 
