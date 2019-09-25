@@ -3,8 +3,6 @@
   "type": "object",
   "description": "Describes a patch of a network flow.",
   "title": "Network flow with attributes that can be patched",
-  "required": [
-  ],
   "properties": {
     "bandwidth": {
       "type": "string",
