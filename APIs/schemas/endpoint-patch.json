@@ -3,8 +3,6 @@
   "type": "object",
   "description": "Patch request schema for updating an existing endpoint.",
   "title": "Schema to modify an endpoint with new values.",
-  "required": [
-  ],
   "properties": {
     "ip_address": {
       "type": "string",
