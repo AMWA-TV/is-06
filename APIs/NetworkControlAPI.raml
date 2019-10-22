@@ -72,8 +72,11 @@ documentation:
   displayName: Network Devices
   get:
     is: [paged]
-    description: List Network Devices.
+    description: |
+      List Network Devices.
+      NB: Query parameters should be implemented for all permitted resource attributes.
     queryParameters:
+      id:
       chassis_id:
       mgmt_ip:
       mtu:
@@ -105,11 +108,16 @@ documentation:
   displayName: Endpoints
   get:
     is: [paged]
-    description: List Endpoints.
+    description: |
+      List Endpoints.
+      NB: Query parameters should be implemented for all permitted resource attributes.
     queryParameters:
+      id:
       chassis_id:
       port_id:
       ip_address:
+      attached_network_device.chassis_id:
+      attached_network_device.port_id:
       max_bandwidth:
       role:
       label:
@@ -200,6 +208,7 @@ documentation:
     description: |
       List Network Links.
       Get all links in the network. Network Links are always bidirectional. The implementation of the API must ensure that query results are independent of how a bi-directional link is persisted.
+      NB: Query parameters should be implemented for all permitted resource attributes.
     queryParameters:
       peers.device_id:
       peers.port_id:
@@ -213,10 +222,14 @@ documentation:
   displayName: Network Flows
   get:
     is: [paged]
-    description: List Network Flows.
+    description: |
+      List Network Flows.
+      NB: Query parameters should be implemented for all permitted resource attributes.
     queryParameters:
+      id:
       multicast_address:
       sender_endpoint_id:
+      receiver_endpoint_ids:
       bandwidth:
       profile:
       forward_flow:
