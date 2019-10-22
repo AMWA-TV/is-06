@@ -191,6 +191,8 @@ documentation:
             Returned when the Endpoint is successfully deleted. No response body.
         404:
           description: Returned when the requested Endpoint ID does not exist.
+          body:
+            type: ErrorSchema
 /network-links:
   displayName: Network Links
   get:
