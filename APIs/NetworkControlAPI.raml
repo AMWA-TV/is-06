@@ -130,7 +130,6 @@ documentation:
       responses:
         200:
         403:
-        404:
     get:
       description: Get a single Endpoint
       responses:
@@ -238,7 +237,6 @@ documentation:
       responses:
         200:
         403:
-        404:
     get:
       description: Get a single Network Flow
       responses:
@@ -309,7 +307,6 @@ documentation:
         responses:
           200:
           403:
-          404:
       post:
         description: >
           Add one or more receivers to this Network Flow. Receivers included in the body should be appended to the existing receivers, if any. If the forward flow flag is set for this Network Flow, both bandwidth reservation and flow switching must occur for all new receivers. If the forward flow flag is not set, only resource reservation should take place. Failure to satisfy for any one receiver should fail for all and fail the complete request. Proper error message should be provided in this scenario. No task should be completed partially, that is, server should employ all-or-nothing strategy.
@@ -342,7 +339,6 @@ documentation:
           responses:
             200:
             403:
-            404:
         delete:
           description: >
             Delete the receiver of this Network Flow with the specified ID.
