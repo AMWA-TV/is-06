@@ -21,7 +21,7 @@
         "string",
         "null"
       ],
-      "description": "Multicast group address is an ip address, the ipv4 range is 224.1.1.1 to 239.255.255.255. Provisioned for ipv6 but implementation may depend or may not exist. A null value and null type option is added for future use of this schema for unicast flow",
+      "description": "Multicast group address is an IP address, the IPv4 range is 224.1.1.1 to 239.255.255.255. Provisioned for IPv6 but implementation may depend or may not exist. A null value and null type option is added for future use of this schema for unicast flow",
       "anyOf": [
         {
           "format": "ipv4"
