@@ -6,7 +6,7 @@
   "properties": {
     "ip_address": {
       "type": "string",
-      "description": "IP address on which the endpoint sends/receives flows. IP must be unique in the network.",
+      "description": "IP address on which the endpoint sends/receives flows. IP address must be unique in the network.",
       "anyOf": [
         {
           "format": "ipv4"
@@ -18,7 +18,7 @@
     },
     "attached_network_device": {
       "type": "object",
-      "description": "Peer network device (switch) details. This can not be an endpoint.",
+      "description": "Peer network device (switch) details. This cannot be an endpoint.",
       "required": [
         "chassis_id",
         "port_id"
@@ -31,7 +31,7 @@
         },
         "port_id": {
           "type": "string",
-          "description": "The ifAlias of the peer network device the end point is connected to."
+          "description": "The ifAlias of the peer network device the endpoint is connected to."
         }
       }
     },

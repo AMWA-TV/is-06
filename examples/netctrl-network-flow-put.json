@@ -9,5 +9,5 @@
   "profile": "constant-rate",
   "forward_flow": false,
   "dscp": "AF11",
-  "label": "New video network-flow"
+  "label": "New video network flow"
 }
