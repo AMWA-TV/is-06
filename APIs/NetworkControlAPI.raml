@@ -67,6 +67,7 @@ documentation:
     responses:
       200:
         body:
+          type: !include schemas/netctrl-base.json
           example: !include ../examples/netctrl-base-get-200.json
 /network-devices:
   displayName: Network Devices
