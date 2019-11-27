@@ -55,11 +55,15 @@ traits:
               description: Identifies the current value of the query parameter 'paging.until' in use, or if not specified identifies what value it would have had to return this data set. This value may be re-used as the paging.since value of a query to return the next page of results. Combining this with the X-Paging-Since header value provides the absolute time bounds of the current returned data set.
               type: string
               example: 1520976651:318744030
+      501:
+        description: The query parameters specified are not currently supported by this implementation.
 documentation:
   - title: Overview
     content: |
       The Network Control API is exposed by an NMOS network controller. It provides APIs to create and manage network flows, add senders and receivers for the flows, and fetch network details.
-
+  - title: Further Documentation
+    content: |
+      Further normative documentation covering the behaviour of this API is contained in the [docs](../docs) folder of this repository.
 /:
   displayName: Base
   get:
@@ -87,6 +91,10 @@ documentation:
         body:
           type: NetworkDevices
           example: !include ../examples/netctrl-network-devices-get-200.json
+      501:
+        description: The query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
   /{networkDeviceId}:
     uriParameters:
       networkDeviceId:
@@ -127,6 +135,10 @@ documentation:
         body:
           type: Endpoints
           example: !include ../examples/netctrl-endpoints-get-200.json
+      501:
+        description: The query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
   /{endpointId}:
     uriParameters:
       endpointId:
@@ -219,6 +231,10 @@ documentation:
         body:
           type: NetworkLinks
           example: !include ../examples/netctrl-network-links-get-200.json
+      501:
+        description: The query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
 /network-flows:
   displayName: Network Flows
   get:
@@ -241,6 +257,10 @@ documentation:
         body:
           type: NetworkFlows
           example: !include ../examples/netctrl-network-flows-get-200.json
+      501:
+        description: The query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
   /{networkFlowId}:
     uriParameters:
       networkFlowId:
