@@ -9,11 +9,8 @@
   "translated_source_port": 20000,
   "translated_destination_ip": "40.1.2.3",
   "translated_destination_port": 40000,
-  "receiver_endpoint_ids" : [
+  "receiver_endpoint_ids": [
     "ac7c36a5-cd6d-44bb-a1ac-6e328c018214",
     "ac7c36a5-cd6d-44bb-a1ac-6e328c018215"
   ]
 }
-
-	
-
