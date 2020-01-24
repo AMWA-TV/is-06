@@ -3,6 +3,32 @@
   "type": "object",
   "description": "Describes a simple network address translation policy for IP Address and/or Port.",
   "title": "Network address translation policy",
+  "required": [
+    "id",
+    "receiver_endpoint_ids"
+  ],
+  "anyOf": [
+    {
+      "required": [
+        "translated_source_ip"
+      ]
+    },
+    {
+      "required": [
+        "translated_source_port"
+      ]
+    },
+    {
+      "required": [
+        "translated_destination_ip"
+      ]
+    },
+    {
+      "required": [
+        "translated_destination_port"
+      ]
+    }
+  ],
   "properties": {
     "id": {
       "description": "Globally unique identifier for translation policy",
@@ -95,31 +121,5 @@
       "minItems": 0,
       "uniqueItems": true
     }
-  },
-  "anyOf": [
-    {
-      "required": [
-        "translated_source_ip"
-      ]
-    },
-    {
-      "required": [
-        "translated_source_port"
-      ]
-    },
-    {
-      "required": [
-        "translated_destination_ip"
-      ]
-    },
-    {
-      "required": [
-        "translated_destination_port"
-      ]
-    }
-  ],
-  "required": [
-    "id",
-    "receiver_endpoint_ids"
-  ]
+  }
 }
