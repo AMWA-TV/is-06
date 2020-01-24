@@ -49,7 +49,7 @@
       "minimum": 1,
       "maximum": 65535
     },
-    "translated-source-ip": {
+    "translated_source_ip": {
       "type": "string",
       "description" : "Optional. If present, translate source to this IP if match condition(s) are true",
       "anyOf" : [
@@ -67,7 +67,7 @@
       "minimum": 1,
       "maximum": 65535
     },
-    "translated-destination-ip": {
+    "translated_destination_ip": {
       "type": "string",
       "description" : "Optional. If present, translate destination to this IP if match condition(s) are true",
       "anyOf" : [
