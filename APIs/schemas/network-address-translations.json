@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "description": "A list of network address translation policies.",
+  "title": "List of network address translation policies.",
+  "items": {
+    "$ref": "network-address-translation.json"
+  },
+  "minItems": 0,
+  "uniqueItems": true
+}
