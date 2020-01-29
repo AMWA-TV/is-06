@@ -1,0 +1,144 @@
+#%RAML 1.0
+
+# AMWA NMOS Network Control Specification: Network Control API
+# (c) AMWA 2018
+
+title: Network Control
+mediaType: application/json
+types:
+  - NetworkAddressTranslation: !include schemas/network-address-translation.json
+    NetworkAddressTranslations: !include schemas/network-address-translations.json
+    ErrorSchema: !include schemas/error.json
+traits:
+  - paged:
+      description: API resource supporting pagination of results
+      queryParameters:
+        paging.since:
+          description: Return only the results which have been created/updated since the time specified (non-inclusive) (seconds:nanoseconds)
+          type: string
+          pattern: "^[0-9]+:[0-9]+$"
+        paging.until:
+          description: Return only the results which were created/updated up until the time specified (inclusive) (seconds:nanoseconds)
+          type: string
+          pattern: "^[0-9]+:[0-9]+$"
+        paging.limit:
+          description: Restrict the response to the specified number of results. Implementations may specify their own default and maximum for the limit
+          type: integer
+        paging.order:
+          description: Specify whether paging should be based upon initial resource creation time, or when it was last modified. In both cases the response should be provided in descending order
+          type: string
+          enum: ["create", "update"]
+          default: "update"
+      responses:
+        200:
+          headers:
+            Link:
+              description: Provides references to cursors for paging. The 'rel' attribute may be one of 'next', 'prev', 'first' or 'last'
+              type: string
+              example: <http://example.api.com/x-nmos/netctrl/{version}/endpoints/?paging.since=1520976651:318744030&paging.limit=20>; rel="next", <http://example.api.com/x-nmos/netctrl/{version}/endpoints/?paging.until=1520976651:4939634&paging.limit=20>; rel="prev"
+            X-Paging-Limit:
+              description: Identifies the current limit being used for paging. This may not match the requested value if the requested value was too high for the implementation
+              type: integer
+            X-Paging-Since:
+              description: Identifies the current value of the query parameter 'paging.since' in use, or if not specified identifies what value it would have had to return this data set. This value may be re-used as the paging.until value of a query to return the previous page of results. Combining this with the X-Paging-Until header value provides the absolute time bounds of the current returned data set.
+              type: string
+              example: 1520976651:4939634
+            X-Paging-Until:
+              description: Identifies the current value of the query parameter 'paging.until' in use, or if not specified identifies what value it would have had to return this data set. This value may be re-used as the paging.since value of a query to return the next page of results. Combining this with the X-Paging-Since header value provides the absolute time bounds of the current returned data set.
+              type: string
+              example: 1520976651:318744030
+        501:
+          description: The query parameters specified are not currently supported by this implementation.
+displayName: Network Address Translation Policies
+get:
+  is: [paged]
+  description: |
+    List Network Address Translation Policies.
+    NB: Query parameters should be implemented for all permitted resource attributes.
+  queryParameters:
+    id:
+    label:
+    match_source_ip:
+    match_source_port:
+    match_destination_ip:
+    match_destination_port:
+    translated_source_ip:
+    translated_source_port:
+    translated_destination_ip:
+    translated_destination_port:
+    receiver_endpoint_ids:
+  responses:
+    200:
+      body:
+        type: NetworkAddressTranslations
+        example: !include ../examples/netctrl-network-address-translations-get-200.json
+    501:
+      description: This NAT scope is not supported, or the query parameters specified are not currently supported by this implementation.
+      body:
+        type: ErrorSchema
+/{policyId}:
+  uriParameters:
+    policyId:
+      type: string
+      pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      description: The globally unique identifier for the Network Address Translation Policy.
+      example: 57066e00-b777-4c7f-b8ea-e16b3eacb325
+  options:
+    description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
+    responses:
+      200:
+      403:
+  get:
+    description: Get a single Network Address Translation Policy
+    responses:
+      200:
+        body: 
+          type: NetworkAddressTranslation
+          example: !include ../examples/netctrl-network-address-translation-get-200.json
+      404:
+        description: Returned when the Network Address Translation Policy ID does not exist.
+        body: 
+          type: ErrorSchema
+      501:
+        description: This NAT scope is not supported, or the query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
+  put:
+    description: >
+      Create a Network Address Translation Policy with the specified ID. Subsequent PUT requests should receive an error response.
+    body:
+      type: NetworkAddressTranslation
+      example: !include ../examples/netctrl-network-address-translation-get-200.json
+    responses:
+      201:
+        description: >
+          Returned when the Network Address Translation Policy is created successfully. The Location header should indicate the location of the created resource.
+        headers:
+          Location:
+            example: /x-nmos/netctrl/{version}/network-address-translations/57066e00-b777-4c7f-b8ea-e16b3eacb325/
+        body: 
+          type: NetworkAddressTranslation
+          example: !include ../examples/netctrl-network-address-translation-get-200.json
+      400:
+        description: >
+          Returned when the PUT request is incorrectly formatted or has missing mandatory attributes or an attribute is invalid given the API's configuration, such as when the Network Address Translation Policy ID already exists. Error responses should contain a relevant message.
+        body:
+          type: ErrorSchema
+      501:
+        description: The global NAT functionality is not supported by this implementation.
+        body:
+          type: ErrorSchema
+  delete:
+    description: Delete the Network Address Translation Policy with the specified ID.
+    responses:
+      204:
+        description: >
+          Returned when the Network Address Translation Policy is successfully deleted. No response body.
+      404:
+        description: Returned when the Network Address Translation Policy ID does not exist.
+        body:
+          type: ErrorSchema
+      501:
+        description: The global NAT functionality is not supported by this implementation.
+        body:
+          type: ErrorSchema
