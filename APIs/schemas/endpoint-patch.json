@@ -37,8 +37,8 @@
     },
     "max_bandwidth": {
       "type": "string",
-      "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit\/s$",
-      "description": "Maximum bandwidth that the sender is allowed to send. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
+      "pattern": "^(0|[1-9][0-9]*)(\.[0-9]+)?[kMG]bit\/s$",
+      "description": "Maximum bandwidth that the sender is allowed to send. Formatted as a number followed by kbit/s, Mbit/s, Gbit/s."
     },
     "role": {
       "description": "The role of the endpoint as a sender or receiver.",
