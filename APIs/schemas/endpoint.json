@@ -20,7 +20,7 @@
       "anyOf": [
         {
           "type": "string",
-          "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$",
+          "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
           "description": "When the Chassis ID is a MAC address, use this format"
         },
         {
@@ -37,7 +37,7 @@
     "port_id": {
       "type": "string",
       "description": "MAC address of the endpoint.",
-      "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
+      "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$"
     },
     "ip_address": {
       "type": "string",
@@ -62,7 +62,7 @@
         "chassis_id": {
           "type": "string",
           "description": "MAC address for the peer network device.",
-          "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
+          "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$"
         },
         "port_id": {
           "type": "string",
@@ -72,8 +72,8 @@
     },
     "max_bandwidth": {
       "type": "string",
-      "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit\/s$",
-      "description": "Optional. Maximum bandwidth that the sender is allowed to send. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?[kMG]bit\\/s$",
+      "description": "Optional. Maximum bandwidth that the sender is allowed to send, formatted as a number followed by kbit/s, Mbit/s, Gbit/s. NB: Values should be formatted with no fraction component if possible, using the largest unit that allows that."
     },
     "role": {
       "description": "Optional with default. The role of the endpoint as a sender or receiver.",

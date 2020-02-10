@@ -6,8 +6,8 @@
   "properties": {
     "bandwidth": {
       "type": "string",
-      "description": "Average bandwidth requirement for the flow. Format as number followed by kbit/s, Mbit/s, Gbit/s.",
-      "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit\/s$"
+      "description": "Average bandwidth requirement for the flow, formatted as a number followed by kbit/s, Mbit/s, Gbit/s. NB: Values should be formatted with no fraction component if possible, using the largest unit that allows that.",
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?[kMG]bit\\/s$"
     },
     "profile": {
       "description": "The transmission profile of the flow.",
