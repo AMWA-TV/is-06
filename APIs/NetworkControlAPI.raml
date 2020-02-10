@@ -164,7 +164,7 @@ documentation:
             type: ErrorSchema
     put:
       description: >
-        Register a new Endpoint. The PUT is invoked to inform the network controller about the presence of an Endpoint. The endpoint schema includes mandatory details of the network device the endpoint is attached to. The attached network device details can be fetched by the endpoint through LLDP (if the endpoint is LLDP capable) or manual entry in the caller of this API (e.g., a broadcast controller). The network _may_ verify these details for security purposes. Verification _may_ happen synchronously, as part of the request. The network controller _must_ create a corresponding network link with this endpoint as the peer device. Peer port id of the new link may or may not be assigned, i.e, this is implementation dependent. Subsequent PUT requests should receive an error response. Updates should be done using PATCH.
+        Register a new Endpoint. The PUT is invoked to inform the network controller about the presence of an Endpoint. The Endpoint schema includes mandatory details of the Network Device the Endpoint is attached to. The attached network device details can be fetched by the endpoint through LLDP (if the endpoint is LLDP capable) or manual entry in the caller of this API (e.g., a broadcast controller). The network _may_ verify these details for security purposes. Verification _may_ happen synchronously, as part of the request. The network controller _must_ create a corresponding Network Link with this Endpoint as the peer device. Peer port id of the new link may or may not be assigned, i.e, this is implementation dependent. Subsequent PUT requests should receive an error response. Updates should be done using PATCH.
       body:
         type: Endpoint
         example: !include ../examples/netctrl-endpoint-put-request.json
@@ -205,13 +205,17 @@ documentation:
           body:
             type: ErrorSchema
     delete:
-      description: Delete an existing Endpoint.
+      description: Delete an existing Endpoint. On a successful request, the network controller _must_ also delete the corresponding Network Link.
       responses:
         204:
           description: >
             Returned when the Endpoint is successfully deleted. No response body.
         404:
           description: Returned when the requested Endpoint ID does not exist.
+          body:
+            type: ErrorSchema
+        409:
+          description: Returned when the operation cannot be performed because one or more Network Flows refer to this Endpoint. The Network Flows must be deleted first.
           body:
             type: ErrorSchema
 /network-links:
@@ -307,7 +311,7 @@ documentation:
             type: ErrorSchema
     patch:
       description: >
-        Update an existing Network Flow with the specified ID. A Network Flow is equivalent to and also uniquely identified by the Sender Endpoint ID and the multicast address, or the <S,G> pair. So, neither the Sender Endpoint ID nor the multicast address can be updated of an existing Network Flow. A new Network Flow should be created for a different pair of <S,G>. Moreover, for simplicity, Receiver Endpoint IDs can only be updated using a /receivers POST or DELETE request.
+        Update an existing Network Flow with the specified ID. A Network Flow is equivalent to and also uniquely identified by the Sender Endpoint ID and the multicast address, or the <S,G> pair. So, neither the Sender Endpoint ID nor the multicast address can be updated of an existing Network Flow. A new Network Flow should be created for a different pair of <S,G>. Moreover, for simplicity, receiver Endpoint IDs can only be updated using a /receivers POST or DELETE request.
       body:
         type: !include schemas/network-flow-patch.json
         example: !include ../examples/netctrl-network-flow-patch.json
@@ -355,7 +359,7 @@ documentation:
               Returned when the receivers are successfully added. No response body.
           400:
             description: >
-              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the Receivers. If the request failed due to partial error, appropriate message should be added in error response.
+              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to partial error, appropriate message should be added in error response.
             body:
               type: ErrorSchema
           404:
@@ -368,7 +372,7 @@ documentation:
           receiverId:
             type: string
             pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-            description: The globally unique identifier for the Receiver endpoint.
+            description: The globally unique identifier for the receiver Endpoint.
             example: 77b52221-c789-45fd-90b3-d9d8211de9d3
         options:
           description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
