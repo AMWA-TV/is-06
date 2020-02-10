@@ -177,12 +177,20 @@ documentation:
             example: !include ../examples/netctrl-endpoint-id-get-200.json
           headers:
             Location:
-              example: /x-nmos/netctrl/{version}/endpoints/d0729fa2-83ba-4e6b-8817-d48a4bf28f74/
+              example: /x-nmos/netctrl/{version}/endpoints/d0729fa2-83ba-4e6b-8817-d48a4bf28f74
         400:
           description: >
             Returned when the PUT request is incorrectly formatted or has missing mandatory attributes or an attribute is invalid given the API's configuration, such as when the Endpoint ID already exists. Error responses should contain a relevant message.
           body:
             type: ErrorSchema
+        409:
+          description: >
+            Returned when the PUT request is invalid because an Endpoint with the same unique details (Chassis ID, Port ID and IP Address) already exists. The existing Endpoint is indicated via the Location header.
+          body:
+            type: ErrorSchema
+          headers:
+            Location:
+              example: /x-nmos/netctrl/{version}/endpoints/b2ff7bc0-de0c-478a-bd93-4be0b13a2ffe
     patch:
       description: Update an existing Endpoint's attributes.
       body:
@@ -296,7 +304,7 @@ documentation:
             Returned when the Network Flow is created successfully. The Location header should indicate the location of the created resource.
           headers:
             Location:
-              example: /x-nmos/netctrl/{version}/network-flows/6fb3c057-a363-40cc-8f3d-cbaee5e35248/
+              example: /x-nmos/netctrl/{version}/network-flows/6fb3c057-a363-40cc-8f3d-cbaee5e35248
           body: 
             type: NetworkFlow
             example: !include ../examples/netctrl-network-flow-id-get-200.json
