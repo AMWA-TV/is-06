@@ -1,33 +1,12 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "description": "Describes a simple network address translation policy for IP Address and/or Port.",
+  "description": "Describes a simple network address translation policy for IP Addresses and/or Ports.",
   "title": "Network address translation policy",
   "required": [
     "id",
+    "translated",
     "receiver_endpoint_ids"
-  ],
-  "anyOf": [
-    {
-      "required": [
-        "translated_source_ip"
-      ]
-    },
-    {
-      "required": [
-        "translated_source_port"
-      ]
-    },
-    {
-      "required": [
-        "translated_destination_ip"
-      ]
-    },
-    {
-      "required": [
-        "translated_destination_port"
-      ]
-    }
   ],
   "properties": {
     "id": {
@@ -37,79 +16,13 @@
     },
     "label": {
       "type": "string",
-      "description": "Optional. Translation policy name."
+      "description": "Translation policy name."
     },
-    "match_source_ip": {
-      "type": "string",
-      "description": "Optional. If supplied, translate only if sender IP address matches.",
-      "anyOf": [
-        {
-          "format": "ipv4"
-        },
-        {
-         "format": "ipv6"
-        }
-      ]
+    "match": {
+      "$ref": "network-address-translation-tuple.json"
     },
-    "match_source_port": {
-      "description": "Optional. If supplied, translate only if sender port matches.",
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 65535
-    },
-    "match_destination_ip": {
-      "type": "string",
-      "description": "Optional. If supplied, translate only if destination IP address matches",
-      "anyOf": [
-        {
-          "format": "ipv4"
-        },
-        {
-         "format": "ipv6"
-        }
-      ]
-    },
-    "match_destination_port": {
-      "description": "Optional. If supplied, translate only if sender port matches.",
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 65535
-    },
-    "translated_source_ip": {
-      "type": "string",
-      "description": "Optional. If present, translate source to this IP address if all match conditions are true.",
-      "anyOf": [
-        {
-          "format": "ipv4"
-        },
-        {
-         "format": "ipv6"
-        }
-      ]
-    },
-    "translated_source_port": {
-      "description": "Optional. If present, translate source port to this port if all match conditions are true.",
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 65535
-    },
-    "translated_destination_ip": {
-      "type": "string",
-      "description": "Optional. If present, translate destination to this IP address if all match conditions are true.",
-      "anyOf": [
-        {
-          "format": "ipv4"
-        },
-        {
-         "format": "ipv6"
-        }
-      ]
-    },
-    "translated_destination_port": {
-      "description": "Optional. If present, translate destination to this port if all match conditions are true.",
-      "type": "integer",
-      "minimum": 1,
-      "maximum": 65535
+    "translated": {
+      "$ref": "network-address-translation-tuple.json"
     },
     "receiver_endpoint_ids": {
       "type": "array",
