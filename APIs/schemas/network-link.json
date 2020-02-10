@@ -43,7 +43,7 @@
     },
     "speed": {
       "type": "string",
-      "pattern": "^(0|[1-9][0-9]*)(\.[0-9]+)?[kMG]bit\/s$",
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?[kMG]bit\\/s$",
       "description": "Speed of the link, formatted as a number followed by kbit/s, Mbit/s, Gbit/s. NB: Values should be formatted with no fraction component if possible, using the largest unit that allows that."
     }
   }
