@@ -477,6 +477,10 @@ documentation:
             Returned when the PUT request is incorrectly formatted or has missing mandatory attributes or an attribute is invalid given the API's configuration, such as when the Network Address Translation policy ID already exists. Error responses should contain a relevant message.
           body:
             type: ErrorSchema
+        501:
+          description: The global NAT functionality is not supported by this implementation.
+          body:
+            type: ErrorSchema
     delete:
       description: Delete the Network Address Translation policy with the specified ID.
       responses:
@@ -485,5 +489,9 @@ documentation:
             Returned when the Network Address Translation policy is successfully deleted. No response body.
         404:
           description: Returned when the Network Address Translation policy ID does not exist.
+          body:
+            type: ErrorSchema
+        501:
+          description: The global NAT functionality is not supported by this implementation.
           body:
             type: ErrorSchema
