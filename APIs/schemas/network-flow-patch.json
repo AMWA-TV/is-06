@@ -21,12 +21,11 @@
     },
     "forward_flow": {
       "description": "Flag for forwarding the flow. If false, the network should not set up the flow. Only when this flag is changed to true should the flow be sent to all receivers.",
-      "type": "boolean",
-      "default": true
+      "type": "boolean"
     },
     "dscp": {
       "type": "string",
-      "description": "DSCP based QoS metrics number, default is CS0, best effort.",
+      "description": "DSCP based QoS metrics number",
       "enum": [
         "CS0",
         "CS1",
