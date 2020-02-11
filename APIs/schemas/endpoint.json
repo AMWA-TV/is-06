@@ -36,7 +36,7 @@
     },
     "port_id": {
       "type": "string",
-      "description": "MAC address of the endpoint.",
+      "description": "MAC address of the endpoint. Where LLDP is implemented on the endpoint, the LLDP Port ID should match this value. Matches to IS-04 nodes' interfaces.port_id and should be same.",
       "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$"
     },
     "ip_address": {
@@ -60,13 +60,34 @@
       ],
       "properties": {
         "chassis_id": {
-          "type": "string",
-          "description": "MAC address for the peer network device.",
-          "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$"
+          "description": "Matches the chassis_id of the peer network device. Where LLDP is implemented on the network device interfaces, the LLDP Chassis ID should match this value.",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+              "description": "When the Chassis ID is a MAC address, use this format."
+            },
+            {
+              "type": "string",
+              "pattern": "^.+$",
+              "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used."
+            }
+          ]
         },
         "port_id": {
-          "type": "string",
-          "description": "The ifAlias of the peer network device the endpoint is connected to."
+          "description": "Matches the port_id of the interface on the peer network device to which the endpoint is connected. Where LLDP is implemented on the network device interfaces, the LLDP Port ID should match this value.",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+              "description": "When the Chassis ID is a MAC address, use this format."
+            },
+            {
+              "type": "string",
+              "pattern": "^.+$",
+              "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used."
+            }
+          ]
         }
       }
     },
