@@ -4,7 +4,7 @@
 # (c) AMWA 2018
 
 title: Network Control
-baseUri: http://example.api.com/x-nmos/netctrl/{version}
+baseUri: http://api.example.com/x-nmos/netctrl/{version}
 version: v1.0
 mediaType: application/json
 types:
@@ -55,8 +55,8 @@ traits:
               description: Identifies the current value of the query parameter 'paging.until' in use, or if not specified identifies what value it would have had to return this data set. This value may be re-used as the paging.since value of a query to return the next page of results. Combining this with the X-Paging-Since header value provides the absolute time bounds of the current returned data set.
               type: string
               example: 1520976651:318744030
-      501:
-        description: The query parameters specified are not currently supported by this implementation.
+        501:
+          description: The query parameters specified are not currently supported by this implementation.
 documentation:
   - title: Overview
     content: |
@@ -295,7 +295,7 @@ documentation:
         404:
           description: Returned when the Network Flow ID does not exist.
           body: 
-              type: ErrorSchema
+            type: ErrorSchema
     put:
       description: >
         Create a Network Flow with the specified ID. Subsequent PUT requests should receive an error response. Updates should be done using PATCH.
@@ -338,7 +338,7 @@ documentation:
         404:
           description: Returned when the Network Flow ID does not exist.
           body: 
-              type: ErrorSchema
+            type: ErrorSchema
     delete:
       description: Delete the Network Flow with the specified ID.
       responses:
