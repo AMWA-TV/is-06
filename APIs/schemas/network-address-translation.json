@@ -18,6 +18,33 @@
       "type": "string",
       "description": "Translation policy name."
     },
+    "translation_scope": {
+      "type": "object",
+      "description": "Indicates where the policy is applied",
+      "required": [
+        "level"
+      ],
+      "properties": {
+        "level": {
+          "description": "Indicates the level at which the policy is applied",
+          "type": "string",
+          "enum": [
+            "root",
+            "network_device",
+            "network_device_interface"
+          ]
+        },
+        "device_id": {
+          "description": "Globally unique identifier of the network device. This property is required if level is 'network_device' or 'network_device_interface', but must not be included if level is 'root'.",
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "port_id": {
+          "description": "The port identifier of the network device's interface. This property is required if level is 'network_device_interface', but must not be included if level is 'root' or 'network_device'.",
+          "type": "string"
+        }
+      }
+    },
     "match": {
       "$ref": "network-address-translation-tuple.json"
     },
@@ -29,7 +56,7 @@
       "description": "List of receiver endpoint IDs.",
       "items": {
         "type": "string",
-          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
       },
       "minItems": 0,
       "uniqueItems": true
