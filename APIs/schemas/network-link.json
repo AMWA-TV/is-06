@@ -28,12 +28,12 @@
               {
                 "type": "string",
                 "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
-                "description": "When the Chassis ID is a MAC address, use this format."
+                "description": "When the Port ID is a MAC address, use this format."
               },
               {
                 "type": "string",
                 "pattern": "^.+$",
-                "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used."
+                "description": "When the Port ID is anything other than a MAC address, a freeform string may be used."
               },
               {
                 "type": "null",
