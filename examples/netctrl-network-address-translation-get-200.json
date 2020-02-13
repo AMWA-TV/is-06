@@ -1,6 +1,6 @@
 {
   "id": "57066e00-b777-4c7f-b8ea-e16b3eacb325",
-  "description": "This policy translates source & destination if all match conditions are true",
+  "label": "This policy translates source & destination if all match conditions are true",
   "match_source_ip": "10.1.2.3",
   "match_source_port": 10000,
   "match_destination_ip": "30.1.2.3",

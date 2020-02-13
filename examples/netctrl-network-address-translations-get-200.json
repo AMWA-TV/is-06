@@ -1,7 +1,7 @@
 [
   {
     "id": "58066e00-b777-4c7f-b8ea-e16b3eacb325",
-    "description": "This policy translates only destination ip by default as no match conditions are provided (wildcard)",
+    "label": "This policy translates only destination ip by default as no match conditions are provided (wildcard)",
     "translated_destination_ip": "50.1.2.3",
     "receiver_endpoint_ids": [
       "dc7c36a5-cd6d-44bb-a1ac-6e328c018215"
@@ -9,7 +9,7 @@
   },
   {
     "id": "57066e00-b777-4c7f-b8ea-e16b3eacb325",
-    "description": "This policy translates source & destination if all match conditions are true",
+    "label": "This policy translates source & destination if all match conditions are true",
     "match_source_ip": "10.1.2.3",
     "match_source_port": 10000,
     "match_destination_ip": "30.1.2.3",
