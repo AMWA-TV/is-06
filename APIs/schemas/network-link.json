@@ -1,47 +1,66 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
-  "description": "Describes a network link. A network link consists of two peers. A peer is either a network device or an endpoint. But a link cannot have two endpoints as peers. Links are always bidirectional. That is, the order of the peers in this entity carries no special meaning. When a link is between a network device (switch) and an endpoint, the port_id for the endpoint peer must be null.",
+  "description": "Describes a network link. A network link consists of two peers. A peer is either a network device or an endpoint. But a link cannot have two endpoints as peers. Links are always bidirectional. That is, the order of the peers in this entity carries no special meaning.",
   "required": [
+    "id",
     "peers",
     "speed"
   ],
   "properties": {
+    "id": {
+      "description": "Globally unique identifier for the network link",
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
     "peers": {
       "description": "List of peer devices in a link. Peer can be a network device (switch) or an endpoint. There must be exactly two peers in the list.",
       "type": "array",
       "items": {
-        "type": "object",
-        "required": [
-          "device_id",
-          "port_id"
-        ],
-        "properties": {
-          "device_id": {
-            "description": "Globally unique identifier of a network device or an endpoint.",
-            "type": "string",
-            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
-          },
-          "port_id": {
-            "description": "When the peer is a network device, matches the port_id of the interface on the network device to which the link is connected. When the peer is an endpoint, this value must be null.",
-            "anyOf": [
-              {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "device_id",
+              "port_id"
+            ],
+            "properties": {
+              "device_id": {
+                "description": "Globally unique identifier of a network device.",
                 "type": "string",
-                "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
-                "description": "When the Port ID is a MAC address, use this format."
+                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
               },
-              {
-                "type": "string",
-                "pattern": "^.+$",
-                "description": "When the Port ID is anything other than a MAC address, a freeform string may be used."
-              },
-              {
-                "type": "null",
-                "description": "When the peer is an endpoint (instead of network device) the port_id MUST be null. A null value will explicitly identify this peer as an endpoint. An endpoint has only one port, so a port_id value is redundant."
+              "port_id": {
+                "description": "Matches the port_id of the interface on the network device to which the link is connected.",
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+                    "description": "When the Port ID is a MAC address, use this format."
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^.+$",
+                    "description": "When the Port ID is anything other than a MAC address, a freeform string may be used."
+                  }
+                ]
               }
-            ]
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "endpoint_id"
+            ],
+            "properties": {
+              "endpoint_id": {
+                "description": "Globally unique identifier of an endpoint.",
+                "type": "string",
+                "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+              }
+            }
           }
-        }
+        ]
       },
       "minItems": 2,
       "maxItems": 2,
