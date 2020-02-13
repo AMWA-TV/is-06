@@ -481,6 +481,31 @@ documentation:
           description: The global NAT functionality is not supported by this implementation.
           body:
             type: ErrorSchema
+    patch:
+      description: Update an existing Network Address Translation policy's attributes.
+      body:
+        type: !include schemas/network-address-translation-patch.json
+        example: !include ../examples/netctrl-network-address-translation-patch-request.json
+      responses:
+        200:
+          description: >
+            Returned when the Network Address Translation policy is updated successfully. The updated Network Address Translation policy is returned in the response.
+          body:
+            type: NetworkAddressTranslation
+            example: !include ../examples/netctrl-network-address-translation-get-200.json
+        400:
+          description: >
+            Returned when the PATCH request is incorrectly formatted or cannot be applied.
+          body:
+            type: ErrorSchema
+        404:
+          description: Returned when the requested Network Address Translation policy ID does not exist.
+          body:
+            type: ErrorSchema
+        501:
+          description: The global NAT functionality is not supported by this implementation.
+          body:
+            type: ErrorSchema
     delete:
       description: Delete the Network Address Translation policy with the specified ID.
       responses:
