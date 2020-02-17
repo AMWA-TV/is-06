@@ -6,8 +6,7 @@
     "id",
     "chassis_id",
     "port_id",
-    "ip_address",
-    "attached_network_device"
+    "ip_address"
   ],
   "properties": {
     "id": {
