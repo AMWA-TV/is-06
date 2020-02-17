@@ -1,6 +1,11 @@
 {
   "id": "58066e00-b777-4c7f-b8ea-e16b3eacb325",
   "label": "This policy translates only destination ip by default as no match conditions are provided (wildcard)",
+  "translation_scope": {
+    "level": "network_device_interface",
+    "device_id": "11b8973e-91c9-462d-8dad-6b37e53b3b9f",
+    "port_id": "Ethernet 1/1"
+  },
   "translated_destination_ip": "50.1.2.3",
   "receiver_endpoint_ids": [
     "dc7c36a5-cd6d-44bb-a1ac-6e328c018215"

@@ -411,6 +411,9 @@ documentation:
     queryParameters:
       id:
       label:
+      translation_scope.level:
+      translation_scope.device_id:
+      translation_scope.port_id:
       match.source_ip:
       match.source_port:
       match.destination_ip:
@@ -426,7 +429,7 @@ documentation:
           type: NetworkAddressTranslations
           example: !include ../examples/netctrl-network-address-translations-get-200.json
       501:
-        description: The global NAT functionality is not supported, or the query parameters specified are not currently supported by this implementation.
+        description: The NAT functionality is not supported, or the query parameters specified are not currently supported by this implementation.
         body:
           type: ErrorSchema
   /{policyId}:
@@ -453,7 +456,7 @@ documentation:
           body: 
             type: ErrorSchema
         501:
-          description: The global NAT functionality is not supported, or the query parameters specified are not currently supported by this implementation.
+          description: The NAT functionality is not supported, or the query parameters specified are not currently supported by this implementation.
           body:
             type: ErrorSchema
     put:
@@ -478,7 +481,7 @@ documentation:
           body:
             type: ErrorSchema
         501:
-          description: The global NAT functionality is not supported by this implementation.
+          description: The NAT functionality, or the requested translation scope, is not supported by this implementation.
           body:
             type: ErrorSchema
     patch:
@@ -503,7 +506,7 @@ documentation:
           body:
             type: ErrorSchema
         501:
-          description: The global NAT functionality is not supported by this implementation.
+          description: The NAT functionality is not supported by this implementation.
           body:
             type: ErrorSchema
     delete:
@@ -517,6 +520,6 @@ documentation:
           body:
             type: ErrorSchema
         501:
-          description: The global NAT functionality is not supported by this implementation.
+          description: The NAT functionality is not supported by this implementation.
           body:
             type: ErrorSchema
