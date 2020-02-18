@@ -9,6 +9,8 @@ Readers are advised to be familiar with:
 
 Readers should read the [documentation](docs/) in this repository, starting with the [Overview](docs/1.0.%20Overview.md), and then look at the [APIs](APIs/), which are written in RAML and JSON Schema (if a suitable tool for reading RAML is not available, then [this](APIs/generateHTML) will create HTML versions).
 
+> HTML rendered versions of all NMOS Specifications are available at <https://amwa-tv.github.io/nmos>
+
 ## Releases
 
 It is recommended that the tagged releases are used as a reference for development as opposed to the 'master' or development branches of this repository.
@@ -21,7 +23,7 @@ Each version of the specification is available under a v&lt;#MAJOR&gt;.&lt;#MINO
 * [docs/1.0. Overview.md](docs/1.0.%20Overview.md) -- Documentation targeting those implementing APIs and clients. Further topics are covered within the [docs/](docs/) directory
 * [APIs/NetworkControlAPI.raml](APIs/NetworkControlAPI.raml) -- Normative specification of the NMOS Network Control API
 * [APIs/schemas/](APIs/schemas/) -- JSON schemas used by API specifications
-* [APIs/generateHTML](APIs/generateHTML) -- Tool to create HTML browsable version of the API specifications. Requires raml2html (https://github.com/kevinrenskers/raml2html).
+* [APIs/generateHTML](APIs/generateHTML) -- Tool to create HTML browsable version of the API specifications. Requires raml2html (<https://github.com/kevinrenskers/raml2html>).
 * [examples/](examples/) -- Example JSON requests and responses for APIs
 * [LICENSE](LICENSE) -- Licenses for software and text documents
 * [NOTICE](NOTICE) -- Disclaimer
