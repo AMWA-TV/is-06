@@ -41,11 +41,11 @@
               }
             ]
           }
-        },
-        "minItems": 2,
-        "maxItems": 2,
-        "uniqueItems": true
-      }
+        }
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
     },
     "speed": {
       "type": "string",
