@@ -164,7 +164,16 @@ documentation:
             type: ErrorSchema
     put:
       description: >
-        Register a new Endpoint. The PUT is invoked to inform the network controller about the presence of an Endpoint. The Endpoint schema includes mandatory details of the Network Device the Endpoint is attached to. The attached network device details can be fetched by the endpoint through LLDP (if the endpoint is LLDP capable) or manual entry in the caller of this API (e.g., a broadcast controller). The network _may_ verify these details for security purposes. Verification _may_ happen synchronously, as part of the request. The network controller _must_ create a corresponding Network Link with this Endpoint as the peer device. Subsequent PUT requests should receive an error response. Updates should be done using PATCH.
+        Register a new Endpoint.
+        The PUT is invoked to inform the network controller about the presence of an Endpoint.
+        The Endpoint _should_ include details of the Network Device the Endpoint is attached to.
+        The attached network device details can be fetched by the endpoint through LLDP (if the endpoint is LLDP capable)
+        or manual entry in the caller of this API (e.g., a broadcast controller).
+        The network controller _may_ verify these details. If the details are invalid, the network controller _may_ reject the request.
+        When the attached network device details are not included in the request, the network controller _may_ attempt to determine them and include them in the registered Endpoint.
+        However, if the network controller cannot determine them, it may reject the the request.
+        The network controller _should_ create a corresponding Network Link with this Endpoint as the peer device.
+        Subsequent PUT requests should receive an error response. Updates should be done using PATCH.
       body:
         type: Endpoint
         example: !include ../examples/netctrl-endpoint-put-request.json

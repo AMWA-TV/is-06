@@ -16,9 +16,19 @@
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
     },
     "chassis_id": {
-      "type": "string",
-      "description": "MAC address of the network device.",
-      "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$"
+      "description": "A persistent identifier of the network device, often the MAC address. Where LLDP is implemented on the network device interfaces, the LLDP Chassis ID should match this value.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+          "description": "When the Chassis ID is a MAC address, use this format."
+        },
+        {
+          "type": "string",
+          "pattern": "^.+$",
+          "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used."
+        }
+      ]
     },
     "mgmt_ip": {
       "type": "string",
@@ -48,8 +58,19 @@
         ],
         "properties": {
           "port_id": {
-            "description": "The ifAlias of the network device.",
-            "type": "string"
+            "description": "A persistent identifier of the interface on the network device, often the ifAlias. Where LLDP is implemented on the network device interfaces, the LLDP Port ID should match this value.",
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+                "description": "When the Port ID is a MAC address, use this format."
+              },
+              {
+                "type": "string",
+                "pattern": "^.+$",
+                "description": "When the Port ID is anything other than a MAC address, a freeform string may be used."
+              }
+            ]
           },
           "admin_status": {
             "description": "The administrative status of the interface.",
