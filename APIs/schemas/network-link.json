@@ -4,6 +4,7 @@
   "description": "Describes a network link. A network link consists of two peers. A peer is either a network device or an endpoint. But a link cannot have two endpoints as peers. Links are always bidirectional. That is, the order of the peers in this entity carries no special meaning.",
   "required": [
     "id",
+    "link_type",
     "peers",
     "speed"
   ],
@@ -12,6 +13,14 @@
       "description": "Globally unique identifier for the network link",
       "type": "string",
       "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "link_type": {
+      "description": "Type of the network link, either 'network-device' (inter-switch links) or 'endpoint' (switch-host links).",
+      "type": "string",
+      "enum": [
+        "network-device",
+        "endpoint"
+      ]
     },
     "peers": {
       "description": "List of peer devices in a link. Peer can be a network device (switch) or an endpoint. There must be exactly two peers in the list.",
