@@ -4,7 +4,7 @@ This repository contains details of this AMWA IS-06 NMOS Specification. This RES
 ## Getting started
 
 Readers are advised to be familiar with:
-* The JT-NM Reference Architecture (<http://jt-nm.org/>)
+* The [JT-NM Reference Architecture](http://jt-nm.org/RA-1.0/)
 * The [overview of Networked Media Open Specifications](https://github.com/AMWA-TV/nmos)
 
 Readers should read the [documentation](docs/) in this repository, starting with the [Overview](docs/1.0.%20Overview.md), and then look at the [APIs](APIs/), which are written in RAML and JSON Schema (if a suitable tool for reading RAML is not available, then [this](APIs/generateHTML) will create HTML versions).
@@ -23,7 +23,7 @@ Each version of the specification is available under a v&lt;#MAJOR&gt;.&lt;#MINO
 * [docs/1.0. Overview.md](docs/1.0.%20Overview.md) -- Documentation targeting those implementing APIs and clients. Further topics are covered within the [docs/](docs/) directory
 * [APIs/NetworkControlAPI.raml](APIs/NetworkControlAPI.raml) -- Normative specification of the NMOS Network Control API
 * [APIs/schemas/](APIs/schemas/) -- JSON schemas used by API specifications
-* [APIs/generateHTML](APIs/generateHTML) -- Tool to create HTML browsable version of the API specifications. Requires raml2html (<https://github.com/kevinrenskers/raml2html>).
+* [APIs/generateHTML](APIs/generateHTML) -- Tool to create HTML browsable version of the API specifications. Requires [raml2html](https://github.com/kevinrenskers/raml2html).
 * [examples/](examples/) -- Example JSON requests and responses for APIs
 * [LICENSE](LICENSE) -- Licenses for software and text documents
 * [NOTICE](NOTICE) -- Disclaimer
