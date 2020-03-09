@@ -172,7 +172,6 @@ documentation:
         The network controller _may_ verify these details. If the details are invalid, the network controller _may_ reject the request.
         When the attached network device details are not included in the request, the network controller _may_ attempt to determine them and include them in the registered Endpoint.
         However, if the network controller cannot determine them, it may reject the the request.
-        The network controller _should_ create a corresponding Network Link with this Endpoint as the peer device.
         Subsequent PUT requests should receive an error response. Updates should be done using PATCH.
       body:
         type: Endpoint
@@ -222,7 +221,7 @@ documentation:
           body:
             type: ErrorSchema
     delete:
-      description: Delete an existing Endpoint. On a successful request, the network controller _must_ also delete the corresponding Network Link.
+      description: Delete an existing Endpoint.
       responses:
         204:
           description: >
@@ -241,9 +240,9 @@ documentation:
     is: [paged]
     description: |
       List Network Links.
-      Get all links in the network. Network Links are always bidirectional. The implementation of the API must ensure that query results are independent of how a bi-directional link is persisted.
       NB: Query parameters should be implemented for all permitted resource attributes.
     queryParameters:
+      id:
       peers.device_id:
       peers.port_id:
       speed:
@@ -256,6 +255,24 @@ documentation:
         description: The query parameters specified are not currently supported by this implementation.
         body:
           type: ErrorSchema
+  /{networkLinkId}:
+    uriParameters:
+      networkLinkId:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        description: The globally unique identifier for the Network Link.
+        example: 9468239c-afae-43eb-b711-bb7b8e817a83
+    get:
+      description: Get a single Network Link
+      responses:
+        200:
+          body:
+            type: NetworkLink
+            example: !include ../examples/netctrl-network-link-id-get-200.json
+        404:
+          description: Returned when the Network Link ID does not exist.
+          body:
+            type: ErrorSchema
 /network-flows:
   displayName: Network Flows
   get:

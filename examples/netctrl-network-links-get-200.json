@@ -1,5 +1,6 @@
 [
   {
+    "id": "9468239c-afae-43eb-b711-bb7b8e817a83",
     "peers": [
       {
         "device_id": "f3841396-1cbf-4a8a-915c-dd1034121532",
@@ -13,6 +14,7 @@
     "speed": "100Gbit/s"
   },
   {
+    "id": "a5b16a69-b64c-4bb4-816d-07c9701140eb",
     "peers": [
       {
         "device_id": "aa4df211-284e-4417-9827-b1ceda12a4ff",
@@ -26,6 +28,7 @@
     "speed": "100Gbit/s"
   },
   {
+    "id": "abc0ca32-f723-45e4-a143-b23e3b3ad7e7",
     "peers": [
       {
         "device_id": "cf333591-82ac-456a-898b-f56ff83d1d22",
@@ -39,6 +42,7 @@
     "speed": "1Gbit/s"
   },
   {
+    "id": "b7bacccd-d433-4133-a0e3-b4d383212ba1",
     "peers": [
       {
         "device_id": "71706c18-49f2-481d-914a-d711d773dacb",
