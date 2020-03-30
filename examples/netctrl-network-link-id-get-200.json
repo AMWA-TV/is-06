@@ -1,0 +1,14 @@
+{
+  "id": "9468239c-afae-43eb-b711-bb7b8e817a83",
+  "peers": [
+    {
+      "device_id": "f3841396-1cbf-4a8a-915c-dd1034121532",
+      "port_id": "Ethernet 1/2"
+    },
+    {
+      "device_id": "2c516096-4fa6-4b93-8b84-248ad79dff3a",
+      "port_id": "Ethernet 2/1"
+    }
+  ],
+  "speed": "100Gbit/s"
+}

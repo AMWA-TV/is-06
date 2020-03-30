@@ -51,7 +51,7 @@
       ]
     },
     "label": {
-      "description": "Freeform string label for the network-flow",
+      "description": "Freeform string label for the network flow",
       "type": "string"
     }
   }
