@@ -10,9 +10,9 @@
       "endpoints/",
       "network-links/",
       "network-flows/"
-    ],
-    "minItems": 4,
-    "maxItems": 4,
-    "uniqueItems": true
-  }
+    ]
+  },
+  "minItems": 4,
+  "maxItems": 4,
+  "uniqueItems": true
 }
