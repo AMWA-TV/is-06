@@ -11,9 +11,9 @@
       "network-links/",
       "network-flows/",
       "network-address-translations/"
-    ],
-    "minItems": 5,
-    "maxItems": 5,
-    "uniqueItems": true
-  }
+    ]
+  },
+  "minItems": 5,
+  "maxItems": 5,
+  "uniqueItems": true
 }
