@@ -395,7 +395,7 @@ documentation:
               Returned when the receivers are successfully added. No response body.
           400:
             description: >
-              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to partial error, appropriate message should be added in error response.
+              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to a partial error, an appropriate message should be added in the error response.
             body:
               type: ErrorSchema
           404:
@@ -424,7 +424,7 @@ documentation:
                 Returned when the receiver is successfully deleted. No response body.
             404:
               description: >
-                Returned when no receiver with specified ID exists for this Network Flow.
+                Returned when no receiver with the specified ID exists for this Network Flow.
               body:
                 type: ErrorSchema
 /network-address-translations:
@@ -479,7 +479,7 @@ documentation:
           body: 
             type: ErrorSchema
         501:
-          description: The NAT functionality is not supported, or the query parameters specified are not currently supported by this implementation.
+          description: The NAT functionality is not supported by this implementation.
           body:
             type: ErrorSchema
     put:
@@ -564,7 +564,7 @@ documentation:
               Returned when the receivers are successfully added. No response body.
           400:
             description: >
-              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to partial error, appropriate message should be added in error response.
+              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to a partial error, an appropriate message should be added in the error response.
             body:
               type: ErrorSchema
           404:
@@ -597,7 +597,7 @@ documentation:
                 Returned when the receiver is successfully deleted. No response body.
             404:
               description: >
-                Returned when no receiver with specified ID exists for this Network Address Translation policy.
+                Returned when no receiver with the specified ID exists for this Network Address Translation policy.
               body:
                 type: ErrorSchema
             501:
