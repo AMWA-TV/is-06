@@ -3,6 +3,7 @@
   "type": "object",
   "description": "Describes the 4-tuple of IP Addresses and/or Ports to be matched or translated to.",
   "title": "Network address translation 4-tuple",
+  "minProperties": 1,
   "additionalProperties": false,
   "properties": {
     "source_ip": {
