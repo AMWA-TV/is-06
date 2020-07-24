@@ -262,17 +262,17 @@
 			<path d="M0 457.04 L92.13 457.04" class="st6"/>
 		</g>
 		<g id="shape236-117" transform="translate(67.9813,-174.281)">
-			<desc>Leaf switch 1</desc>
+			<desc>Leaf Switch 1</desc>
 			<rect x="0" y="440.029" width="55.5591" height="17.0079" class="st8"/>
-			<text x="6.66" y="450.93" class="st9">Leaf switch 1</text>		</g>
+			<text x="6.39" y="450.93" class="st9">Leaf Switch 1</text>		</g>
 		<g id="shape238-120" transform="translate(359.666,-174.281)">
-			<desc>Leaf switch 2</desc>
+			<desc>Leaf Switch 2</desc>
 			<rect x="0" y="440.029" width="55.5591" height="17.0079" class="st8"/>
-			<text x="6.66" y="450.93" class="st9">Leaf switch 2</text>		</g>
+			<text x="6.39" y="450.93" class="st9">Leaf Switch 2</text>		</g>
 		<g id="shape239-123" transform="translate(217.367,-240.895)">
-			<desc>Spine switch</desc>
+			<desc>Spine Switch</desc>
 			<rect x="0" y="440.029" width="55.5591" height="17.0079" class="st8"/>
-			<text x="7.45" y="450.93" class="st9">Spine switch</text>		</g>
+			<text x="7.18" y="450.93" class="st9">Spine Switch</text>		</g>
 		<g id="shape240-126" transform="translate(337.84,-281.288)">
 			<desc>Network Controller</desc>
 			<rect x="0" y="440.029" width="55.5591" height="17.0079" class="st8"/>
@@ -342,43 +342,42 @@
 			<desc>IS-06</desc>
 			<rect x="0" y="440.029" width="55.5591" height="17.0079" class="st8"/>
 			<text x="19.65" y="450.93" class="st9">IS-06</text>		</g>
-		<g id="shape258-167" transform="translate(110.218,-284.832)">
+		<g id="shape258-167" transform="translate(109.134,-284.832)">
 			<desc>2. Broadcast Controller makes IS-06 request to Network Contro...</desc>
-			<path d="M0 457.04 L162.14 457.04 L162.14 389 L0 389 L0 457.04 Z" class="st14"/>
-			<path d="M162.14 406.98 L210.05 397.51" class="st5"/>
-			<path d="M0 457.04 L162.14 457.04 L162.14 389 L0 389 L0 457.04" class="st5"/>
+			<path d="M0 457.04 L163.23 457.04 L163.23 389 L0 389 L0 457.04 Z" class="st14"/>
+			<path d="M163.23 406.98 L211.45 397.51" class="st5"/>
+			<path d="M0 457.04 L163.23 457.04 L163.23 389 L0 389 L0 457.04" class="st5"/>
 			<text x="4" y="402.02" class="st15">2. Broadcast Controller makes IS-06 <tspan x="4" dy="1.2em" class="st10">request to Network Controller to set </tspan><tspan
 						x="4" dy="1.2em" class="st10">up NAT policy to translate destination </tspan><tspan x="4" dy="1.2em"
-						class="st10">IP address from </tspan>239.1.2.3 to <tspan x="4" dy="1.2em" class="st10">235</tspan>.7.8.9 for non-NMOS Receiver, R2 </text>		</g>
-		<g id="shape260-176" transform="translate(60.3278,-376.107)">
+						class="st10">IP address from </tspan>239.1.2.3 to 235.7.8.9 <tspan x="4" dy="1.2em" class="st10">for non</tspan>-NMOS Receiver, R2 </text>		</g>
+		<g id="shape260-176" transform="translate(48.189,-376.107)">
 			<desc>1. Broadcast Controller operator wishes non-NMOS Receiver R2,...</desc>
-			<path d="M0 457.04 L206.36 457.04 L206.36 397.51 L0 397.51 L0 457.04 Z" class="st14"/>
-			<path d="M206.36 427.71 L235.84 427.84" class="st5"/>
-			<path d="M0 457.04 L206.36 457.04 L206.36 397.51 L0 397.51 L0 457.04" class="st5"/>
-			<text x="4" y="412.27" class="st15">1. Broadcast Controller operator wishes non-<tspan x="4" dy="1.2em" class="st10">NMOS Receiver R</tspan>2, that is tuned to a fixed dest. <tspan
-						x="4" dy="1.2em" class="st10">IP address </tspan>235.7.8.9, to receive stream from <tspan x="4" dy="1.2em"
-						class="st10">Sender S</tspan>1 with dest. IP address 239.1.2.3 </text>		</g>
+			<path d="M0 457.04 L218.5 457.04 L218.5 397.51 L0 397.51 L0 457.04 Z" class="st14"/>
+			<path d="M218.5 427.71 L249.72 427.84" class="st5"/>
+			<path d="M0 457.04 L218.5 457.04 L218.5 397.51 L0 397.51 L0 457.04" class="st5"/>
+			<text x="4" y="412.27" class="st15">1. Broadcast Controller operator wishes non-NMOS <tspan x="4" dy="1.2em"
+						class="st10">Receiver R</tspan>2, that is tuned to a fixed dest. IP address <tspan x="4" dy="1.2em"
+						class="st10">235</tspan>.7.8.9, to receive stream from Sender S1 with <tspan x="4" dy="1.2em" class="st10">dest</tspan>. IP address 239.1.2.3 </text>		</g>
 		<g id="shape259-184" transform="translate(382.91,-210.989)">
 			<desc>3. Network Controller creates appropriate NAT policy on netwo...</desc>
-			<path d="M0 457.04 L162.14 457.04 L162.14 397.51 L0 397.51 L0 457.04 Z" class="st14"/>
-			<path d="M0 397.51 L-30.05 394.53" class="st5"/>
-			<path d="M0 457.04 L162.14 457.04 L162.14 397.51 L0 397.51 L0 457.04" class="st5"/>
-			<text x="20.9" y="412.27" class="st15">3. Network Controller creates <tspan x="9.67" dy="1.2em" class="st10">appropriate NAT policy on network </tspan><tspan
-						x="11.14" dy="1.2em" class="st10">(</tspan>e.g. on Leaf switch 2’s egress port <tspan x="36" dy="1.2em"
+			<path d="M0 457.04 L151.42 457.04 L151.42 397.51 L0 397.51 L0 457.04 Z" class="st14"/>
+			<path d="M0 397.51 L-28.06 394.53" class="st5"/>
+			<path d="M0 457.04 L151.42 457.04 L151.42 397.51 L0 397.51 L0 457.04" class="st5"/>
+			<text x="4" y="412.27" class="st15">3. Network Controller creates <tspan x="4" dy="1.2em" class="st10">appropriate NAT policy on network </tspan><tspan
+						x="4" dy="1.2em" class="st10">(</tspan>e.g. on Leaf Switch 2’s egress port <tspan x="4" dy="1.2em"
 						class="st10">that is attached to R</tspan>2)</text>		</g>
 		<g id="shape262-192" transform="translate(32.5482,-18.375)">
 			<desc>5. Other Receivers such as R1 continue to receive stream from...</desc>
 			<path d="M0 457.04 L168.94 457.04 L168.94 410.26 L0 410.26 L0 457.04 Z" class="st14"/>
 			<path d="M107.7 410.26 L159.79 357.82" class="st5"/>
 			<path d="M0 457.04 L168.94 457.04 L168.94 410.26 L0 410.26 L0 457.04" class="st5"/>
-			<text x="5.79" y="424.65" class="st15">5. Other Receivers such as R1 continue <tspan x="5.67" dy="1.2em" class="st10">to receive stream from S</tspan>1 with dest. IP <tspan
-						x="28.44" dy="1.2em" class="st10">address </tspan>239.1.2.3 as before</text>		</g>
-		<g id="shape263-199" transform="translate(249.682,-18.375)">
+			<text x="4" y="424.65" class="st15">5. Other Receivers such as R1 continue <tspan x="4" dy="1.2em" class="st10">to receive stream from S</tspan>1 with dest. IP <tspan
+						x="4" dy="1.2em" class="st10">address </tspan>239.1.2.3 as before</text>		</g>
+		<g id="shape263-199" transform="translate(249.682,-24.753)">
 			<desc>4. R2 receives stream from S1, now with translated dest. IP a...</desc>
-			<path d="M0 457.04 L162.14 457.04 L162.14 410.26 L0 410.26 L0 457.04 Z" class="st14"/>
-			<path d="M93.09 410.26 L125.91 346.44" class="st5"/>
-			<path d="M0 457.04 L162.14 457.04 L162.14 410.26 L0 410.26 L0 457.04" class="st5"/>
-			<text x="9.49" y="424.65" class="st15">4. R2 receives stream from S1, now <tspan x="17.16" dy="1.2em" class="st10">with translated dest</tspan>. IP address <tspan
-						x="62.08" dy="1.2em" class="st10">235</tspan>.7.8.9</text>		</g>
+			<path d="M0 457.04 L172.68 457.04 L172.68 423.02 L0 423.02 L0 457.04 Z" class="st14"/>
+			<path d="M93.85 423.02 L121.09 361.32" class="st5"/>
+			<path d="M0 457.04 L172.68 457.04 L172.68 423.02 L0 423.02 L0 457.04" class="st5"/>
+			<text x="4" y="437.03" class="st15">4. R2 receives stream from S1, now with <tspan x="4" dy="1.2em" class="st10">translated dest</tspan>. IP address 235.7.8.9</text>		</g>
 	</g>
 </svg>
