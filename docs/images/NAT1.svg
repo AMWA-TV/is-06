@@ -26,7 +26,6 @@
 	</style>
 
 	<g>
-		<title>Supporting non-NMOS devices with fixed multicast addresses</title>
 		<g id="group52-1" transform="translate(291.068,-147.351)">
 			<g id="shape53-2" transform="translate(0,-23.9715)">
 				<path d="M65.4 457.04 L66.82 454.2 L4.05 454.2 L5.46 457.04 L65.4 457.04 ZM0 452.85 L70.87 452.85 L70.87 434.11 L0
@@ -263,17 +262,17 @@
 			<path d="M0 457.04 L92.13 457.04" class="st6"/>
 		</g>
 		<g id="shape236-117" transform="translate(67.9813,-174.281)">
-			<desc>Leaf switch 1</desc>
+			<desc>Leaf Switch 1</desc>
 			<rect x="0" y="440.029" width="55.5591" height="17.0079" class="st8"/>
-			<text x="6.66" y="450.93" class="st9">Leaf switch 1</text>		</g>
+			<text x="6.39" y="450.93" class="st9">Leaf Switch 1</text>		</g>
 		<g id="shape238-120" transform="translate(359.666,-174.281)">
-			<desc>Leaf switch 2</desc>
+			<desc>Leaf Switch 2</desc>
 			<rect x="0" y="440.029" width="55.5591" height="17.0079" class="st8"/>
-			<text x="6.66" y="450.93" class="st9">Leaf switch 2</text>		</g>
+			<text x="6.39" y="450.93" class="st9">Leaf Switch 2</text>		</g>
 		<g id="shape239-123" transform="translate(217.367,-240.895)">
-			<desc>Spine switch</desc>
+			<desc>Spine Switch</desc>
 			<rect x="0" y="440.029" width="55.5591" height="17.0079" class="st8"/>
-			<text x="7.45" y="450.93" class="st9">Spine switch</text>		</g>
+			<text x="7.18" y="450.93" class="st9">Spine Switch</text>		</g>
 		<g id="shape240-126" transform="translate(337.84,-281.288)">
 			<desc>Network Controller</desc>
 			<rect x="0" y="440.029" width="55.5591" height="17.0079" class="st8"/>
@@ -365,7 +364,7 @@
 			<path d="M0 397.51 L-28.06 394.53" class="st5"/>
 			<path d="M0 457.04 L151.42 457.04 L151.42 397.51 L0 397.51 L0 457.04" class="st5"/>
 			<text x="4" y="412.27" class="st15">3. Network Controller creates <tspan x="4" dy="1.2em" class="st10">appropriate NAT policy on network </tspan><tspan
-						x="4" dy="1.2em" class="st10">(</tspan>e.g. on Leaf switch 2’s egress port <tspan x="4" dy="1.2em"
+						x="4" dy="1.2em" class="st10">(</tspan>e.g. on Leaf Switch 2’s egress port <tspan x="4" dy="1.2em"
 						class="st10">that is attached to R</tspan>2)</text>		</g>
 		<g id="shape262-192" transform="translate(32.5482,-18.375)">
 			<desc>5. Other Receivers such as R1 continue to receive stream from...</desc>
