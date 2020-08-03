@@ -393,7 +393,7 @@ documentation:
               Returned when the receivers are successfully added. No response body.
           400:
             description: >
-              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to partial error, appropriate message should be added in error response.
+              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to a partial error, an appropriate message should be added in the error response.
             body:
               type: ErrorSchema
           404:
@@ -401,9 +401,9 @@ documentation:
               Returned when the Network Flow ID does not exist.
             body:
               type: ErrorSchema
-      /{receiverId}:
+      /{receiverEndpointId}:
         uriParameters:
-          receiverId:
+          receiverEndpointId:
             type: string
             pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
             description: The globally unique identifier for the receiver Endpoint.
@@ -415,13 +415,13 @@ documentation:
             403:
         delete:
           description: >
-            Delete the receiver of this Network Flow with the specified ID.
+            Delete the receiver with the specified ID from this Network Flow.
           responses:
             204:
               description: >
                 Returned when the receiver is successfully deleted. No response body.
             404:
               description: >
-                Returned when no receiver with specified ID exists for this Network Flow.
+                Returned when no receiver with the specified ID exists for this Network Flow.
               body:
                 type: ErrorSchema
