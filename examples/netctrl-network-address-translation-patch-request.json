@@ -1,3 +1,3 @@
 {
-  "label": "This policy translates source and destination if all match conditions are true"
+  "label": "NAT S1-R3-video (both destination IP address and port must match for this policy to be applied)"
 }

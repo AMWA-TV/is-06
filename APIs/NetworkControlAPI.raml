@@ -461,7 +461,7 @@ documentation:
         type: string
         pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
         description: The globally unique identifier for the Network Address Translation policy.
-        example: 57066e00-b777-4c7f-b8ea-e16b3eacb325
+        example: b46fa060-a5fe-4144-94dc-24d5041c9f10
     options:
       description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
       responses:
@@ -494,7 +494,7 @@ documentation:
             Returned when the Network Address Translation policy is created successfully. The Location header should indicate the location of the created resource.
           headers:
             Location:
-              example: /x-nmos/netctrl/{version}/network-address-translations/57066e00-b777-4c7f-b8ea-e16b3eacb325/
+              example: /x-nmos/netctrl/{version}/network-address-translations/b46fa060-a5fe-4144-94dc-24d5041c9f10
           body: 
             type: NetworkAddressTranslation
             example: !include ../examples/netctrl-network-address-translation-get-200.json
@@ -518,7 +518,7 @@ documentation:
             Returned when the Network Address Translation policy is updated successfully. The updated Network Address Translation policy is returned in the response.
           body:
             type: NetworkAddressTranslation
-            example: !include ../examples/netctrl-network-address-translation-get-200.json
+            example: !include ../examples/netctrl-network-address-translation-patch-200.json
         400:
           description: >
             Returned when the PATCH request is incorrectly formatted or cannot be applied.
