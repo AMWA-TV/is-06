@@ -1,0 +1,13 @@
+{
+  "id": "6b397632-d8af-4116-ad34-39ae9cc2806e",
+  "label": "NAT S1-R2",
+  "match": {
+    "destination_ip": "239.1.2.3"
+  },
+  "translated": {
+    "destination_ip": "235.7.8.9"
+  },
+  "receiver_endpoint_ids": [
+    "8268e254-e054-409b-b4ab-65ee18ae684d"
+  ]
+}

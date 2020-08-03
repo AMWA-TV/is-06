@@ -5,7 +5,7 @@
 
 title: Network Control
 baseUri: http://api.example.com/x-nmos/netctrl/{version}
-version: v1.0
+version: v1.1
 mediaType: application/json
 types:
   - NetworkDevice: !include schemas/network-device.json
@@ -16,6 +16,8 @@ types:
     NetworkLinks: !include schemas/network-links.json
     NetworkFlow: !include schemas/network-flow.json
     NetworkFlows: !include schemas/network-flows.json
+    NetworkAddressTranslation: !include schemas/network-address-translation.json
+    NetworkAddressTranslations: !include schemas/network-address-translations.json
     ErrorSchema: !include schemas/error.json
 traits:
   - paged:
@@ -385,15 +387,15 @@ documentation:
         description: >
           Add one or more receivers to this Network Flow. Receivers included in the body should be appended to the existing receivers, if any. If the forward flow flag is set for this Network Flow, both bandwidth reservation and flow switching must occur for all new receivers. If the forward flow flag is not set, only resource reservation should take place. Failure to satisfy for any one receiver should fail for all and fail the complete request. Proper error message should be provided in this scenario. No task should be completed partially, that is, server should employ all-or-nothing strategy.
         body:
-          type: !include schemas/network-flow-receivers.json
-          example: !include ../examples/netctrl-network-flow-receiver-post.json
+          type: !include schemas/receivers-post.json
+          example: !include ../examples/netctrl-receivers-post.json
         responses:
           204:
             description: >
               Returned when the receivers are successfully added. No response body.
           400:
             description: >
-              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to partial error, appropriate message should be added in error response.
+              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to a partial error, an appropriate message should be added in the error response.
             body:
               type: ErrorSchema
           404:
@@ -401,9 +403,9 @@ documentation:
               Returned when the Network Flow ID does not exist.
             body:
               type: ErrorSchema
-      /{receiverId}:
+      /{receiverEndpointId}:
         uriParameters:
-          receiverId:
+          receiverEndpointId:
             type: string
             pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
             description: The globally unique identifier for the receiver Endpoint.
@@ -415,13 +417,190 @@ documentation:
             403:
         delete:
           description: >
-            Delete the receiver of this Network Flow with the specified ID.
+            Delete the receiver with the specified ID from this Network Flow.
           responses:
             204:
               description: >
                 Returned when the receiver is successfully deleted. No response body.
             404:
               description: >
-                Returned when no receiver with specified ID exists for this Network Flow.
+                Returned when no receiver with the specified ID exists for this Network Flow.
+              body:
+                type: ErrorSchema
+/network-address-translations:
+  displayName: Network Address Translation policies
+  get:
+    is: [paged]
+    description: |
+      List Network Address Translation policies.
+      NB: Query parameters should be implemented for all permitted resource attributes.
+    queryParameters:
+      id:
+      label:
+      match.source_ip:
+      match.source_port:
+      match.destination_ip:
+      match.destination_port:
+      translated.source_ip:
+      translated.source_port:
+      translated.destination_ip:
+      translated.destination_port:
+      receiver_endpoint_ids:
+    responses:
+      200:
+        body:
+          type: NetworkAddressTranslations
+          example: !include ../examples/netctrl-network-address-translations-get-200.json
+      501:
+        description: The NAT functionality is not supported, or the query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
+  /{policyId}:
+    uriParameters:
+      policyId:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        description: The globally unique identifier for the Network Address Translation policy.
+        example: b46fa060-a5fe-4144-94dc-24d5041c9f10
+    options:
+      description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
+      responses:
+        200:
+        403:
+    get:
+      description: Get a single Network Address Translation policy
+      responses:
+        200:
+          body: 
+            type: NetworkAddressTranslation
+            example: !include ../examples/netctrl-network-address-translation-get-200.json
+        404:
+          description: Returned when the Network Address Translation policy ID does not exist.
+          body: 
+            type: ErrorSchema
+        501:
+          description: The NAT functionality is not supported by this implementation.
+          body:
+            type: ErrorSchema
+    put:
+      description: >
+        Create a Network Address Translation policy with the specified ID. Subsequent PUT requests should receive an error response.
+      body:
+        type: NetworkAddressTranslation
+        example: !include ../examples/netctrl-network-address-translation-get-200.json
+      responses:
+        201:
+          description: >
+            Returned when the Network Address Translation policy is created successfully. The Location header should indicate the location of the created resource.
+          headers:
+            Location:
+              example: /x-nmos/netctrl/{version}/network-address-translations/b46fa060-a5fe-4144-94dc-24d5041c9f10
+          body: 
+            type: NetworkAddressTranslation
+            example: !include ../examples/netctrl-network-address-translation-get-200.json
+        400:
+          description: >
+            Returned when the PUT request is incorrectly formatted or has missing mandatory attributes or an attribute is invalid given the API's configuration, such as when the Network Address Translation policy ID already exists. Error responses should contain a relevant message.
+          body:
+            type: ErrorSchema
+        501:
+          description: The NAT functionality is not supported by this implementation.
+          body:
+            type: ErrorSchema
+    patch:
+      description: Update an existing Network Address Translation policy's attributes.
+      body:
+        type: !include schemas/network-address-translation-patch.json
+        example: !include ../examples/netctrl-network-address-translation-patch-request.json
+      responses:
+        200:
+          description: >
+            Returned when the Network Address Translation policy is updated successfully. The updated Network Address Translation policy is returned in the response.
+          body:
+            type: NetworkAddressTranslation
+            example: !include ../examples/netctrl-network-address-translation-patch-200.json
+        400:
+          description: >
+            Returned when the PATCH request is incorrectly formatted or cannot be applied.
+          body:
+            type: ErrorSchema
+        404:
+          description: Returned when the requested Network Address Translation policy ID does not exist.
+          body:
+            type: ErrorSchema
+        501:
+          description: The NAT functionality is not supported by this implementation.
+          body:
+            type: ErrorSchema
+    delete:
+      description: Delete the Network Address Translation policy with the specified ID.
+      responses:
+        204:
+          description: >
+            Returned when the Network Address Translation policy is successfully deleted. No response body.
+        404:
+          description: Returned when the Network Address Translation policy ID does not exist.
+          body:
+            type: ErrorSchema
+        501:
+          description: The NAT functionality is not supported by this implementation.
+          body:
+            type: ErrorSchema
+    /receivers:
+      options:
+        description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
+        responses:
+          200:
+          403:
+      post:
+        description: >
+          Add one or more receivers to this Network Address Translation policy. Receivers included in the body should be appended to the existing receivers, if any.
+        body:
+          type: !include schemas/receivers-post.json
+          example: !include ../examples/netctrl-receivers-post.json
+        responses:
+          204:
+            description: >
+              Returned when the receivers are successfully added. No response body.
+          400:
+            description: >
+              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to a partial error, an appropriate message should be added in the error response.
+            body:
+              type: ErrorSchema
+          404:
+            description: >
+              Returned when the Network Address Translation policy ID does not exist.
+            body:
+              type: ErrorSchema
+          501:
+            description: The NAT functionality is not supported by this implementation.
+            body:
+              type: ErrorSchema
+      /{receiverEndpointId}:
+        uriParameters:
+          receiverEndpointId:
+            type: string
+            pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            description: The globally unique identifier for the receiver Endpoint.
+            example: 77b52221-c789-45fd-90b3-d9d8211de9d3
+        options:
+          description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
+          responses:
+            200:
+            403:
+        delete:
+          description: >
+            Delete the receiver with the specified ID from this Network Address Translation policy.
+          responses:
+            204:
+              description: >
+                Returned when the receiver is successfully deleted. No response body.
+            404:
+              description: >
+                Returned when no receiver with the specified ID exists for this Network Address Translation policy.
+              body:
+                type: ErrorSchema
+            501:
+              description: The NAT functionality is not supported by this implementation.
               body:
                 type: ErrorSchema

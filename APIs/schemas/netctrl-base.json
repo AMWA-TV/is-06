@@ -9,10 +9,11 @@
       "network-devices/",
       "endpoints/",
       "network-links/",
-      "network-flows/"
+      "network-flows/",
+      "network-address-translations/"
     ]
   },
-  "minItems": 4,
-  "maxItems": 4,
+  "minItems": 5,
+  "maxItems": 5,
   "uniqueItems": true
 }
