@@ -1,4 +1,8 @@
 # AMWA IS-06 NMOS Network Control Specification
+
+[![Lint Status](https://github.com/AMWA-TV/nmos-network-control/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/nmos-network-control/actions?query=workflow%3ALint)
+[![Render Status](https://github.com/AMWA-TV/nmos-network-control/workflows/Render/badge.svg)](https://github.com/AMWA-TV/nmos-network-control/actions?query=workflow%3ARender)
+
 This repository contains details of this AMWA IS-06 NMOS Specification. This REST API can be exposed by a network controller. The specification includes APIs to create and manage network flows, and senders/receivers of the flow.
 
 ## Getting started
