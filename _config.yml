@@ -3,10 +3,10 @@ theme: jekyll-theme-primer
 spec_server: specs.amwa.tv
 
 # AMWA ID
-amwa_id: IS-TEMPLATE
+amwa_id: IS-06
 
 # Base name for site (typically lower case version of AMWA ID, or the repo name)
-baseurl: /is-template
+baseurl: /is-06
 
 # Which relase or branch appears in header links and on the home page
 default_tree: tags/v1.0.1 # alternatively e.g. branches/v1.0.x
