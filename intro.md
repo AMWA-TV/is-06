@@ -1,10 +1,3 @@
-# AMWA IS-06 NMOS Network Control Specification
-
-[![Lint Status](https://github.com/AMWA-TV/nmos-network-control/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/nmos-network-control/actions?query=workflow%3ALint)
-[![Render Status](https://github.com/AMWA-TV/nmos-network-control/workflows/Render/badge.svg)](https://github.com/AMWA-TV/nmos-network-control/actions?query=workflow%3ARender)
-
-[//]: # "INTRO-START"
-
 IS-06 is an AMWA NMOS Specification for API control of a managed network.
 
 ### What does it do?
@@ -22,8 +15,3 @@ IS-06 is an AMWA NMOS Specification for API control of a managed network.
 - Provides a “Northbound” API from network fabric’s controller
 - Includes topology discovery, flow authorization and assurances of flow bandwidth
 
-[//]: # "INTRO-END"
-
-## Getting started
-
-There is more information about the NMOS Specifications and their GitHub repos at <https://specs.amwa.tv/nmos>.
