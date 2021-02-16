@@ -22,7 +22,7 @@ IS-06 is an AMWA NMOS Specification for API control of a managed network.
 - Provides a “Northbound” API from network fabric’s controller
 - Includes topology discovery, flow authorization and assurances of flow bandwidth
 
-<!-- INTRO-START -->
+<!-- INTRO-END -->
 
 ## Getting started
 
