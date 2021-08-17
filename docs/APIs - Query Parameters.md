@@ -14,7 +14,7 @@ Network Control API clients MUST detect whether pagination is being used by exam
 
 The following implementation notes should be observed:
 
-* The network controller which serves the Network Control API is expected to maintain a 'creation' and 'update' timestamp alongside each resource in the [Data Model](3.0.%20Data%20Model.md). These values should not be returned to API clients in the response body, but will be made available via headers and used as pagination cursors.
+* The network controller which serves the Network Control API is expected to maintain a 'creation' and 'update' timestamp alongside each resource in the [Data Model](Data%20Model.md). These values should not be returned to API clients in the response body, but will be made available via headers and used as pagination cursors.
 
 * In order to ensure that pagination does not result in resources being skipped, it is important that there are no duplicate creation or update timestamps stored against resources of the same type (Network Device, Endpoint, etc). It is suggested (although not mandated) that these timestamps are stored with nanosecond resolution using a TAI timebase, which will allow clients to navigate collections based on a common understanding of time.
 

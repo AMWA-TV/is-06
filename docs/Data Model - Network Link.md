@@ -2,7 +2,7 @@
 
 _(c) AMWA 2017, CC Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)_
 
-A Network Link represents the bidirectional link between a [Network Device](3.3.%20Data%20Model%20-%20Network%20Device.md) and another Network Device.
+A Network Link represents the bidirectional link between a [Network Device](Data%20Model%20-%20Network%20Device.md) and another Network Device.
 
 The parameters of a Network Link are:
 
