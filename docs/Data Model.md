@@ -3,10 +3,10 @@
 _(c) AMWA 2017, CC Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)_
 
 The resources that are managed by the Network Control API are as follows:
-- [Network Devices](3.3.%20Data%20Model%20-%20Network%20Device.md) (switches) 
-- [Endpoints](3.1.%20Data%20Model%20-%20Endpoint.md)
-- [Network Links](3.4.%20Data%20Model%20-%20Network%20Link.md) between the network switches or between a network switch and an endpoint
-- [Network Flows](3.2.%20Data%20Model%20-%20Network%20Flow.md)
+- [Network Devices](Data%20Model%20-%20Network%20Device.md) (switches) 
+- [Endpoints](Data%20Model%20-%20Endpoint.md)
+- [Network Links](Data%20Model%20-%20Network%20Link.md) between the network switches or between a network switch and an endpoint
+- [Network Flows](Data%20Model%20-%20Network%20Flow.md)
 
 The broadcast controller is responsible for uniquely identifying the endpoint connected to the network to authorize it. The objective of the endpoint authorization is that no endpoint is allowed to send or receive any packet and no packet moves on the network without authorization. The broadcast controller tells the network controller through the API, which endpoint is allowed to send and which endpoint is allowed to receive. It also registers the flow, the flow bandwidth and the DSCP-based QoS tag to be used with the flow. More details can be found in the following sections.
 
