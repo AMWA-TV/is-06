@@ -1,17 +1,17 @@
-# AMWA IS-06 NMOS Network Control Specification
+# AMWA IS-06 NMOS Network Control Specification (Deprecated)
 
 [![Lint Status](https://github.com/AMWA-TV/is-06/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/is-06/actions?query=workflow%3ALint)
 [![Render Status](https://github.com/AMWA-TV/is-06/workflows/Render/badge.svg)](https://github.com/AMWA-TV/is-06/actions?query=workflow%3ARender)
 
 <!-- INTRO-START -->
 
-IS-06 is an AMWA NMOS Specification for API control of a managed network.
+> AMWA IS-06 IS DEPRECATED
 
 ### What does it do?
 
-- Lets broadcast control applications manage what happens on the network itself
+- IS-06 lets broadcast control applications manage what happens on the network itself
 
-### Why does it matter?
+### What was the motivation?
 
 - Ethernet switch output ports might only support a limited number of media flows before they start dropping packets
   - This is different to what happens in a typical SDI router
