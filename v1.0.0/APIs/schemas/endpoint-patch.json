@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Patch request schema for updating an existing endpoint.",
+  "title": "Schema to modify an endpoint with new values.",
+  "required": [
+  ],
+  "properties": {
+    "ip_address": {
+      "type": "string",
+      "description": "IP address on which the endpoint sends/receives flows. IP must be unique in the network.",
+      "anyOf": [
+        {
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        }
+      ]
+    },
+    "attached_network_device": {
+      "type": "object",
+      "description": "Peer network device (switch) details. This can not be an endpoint.",
+      "required": [
+        "chassis_id",
+        "port_id"
+      ],
+      "properties": {
+        "chassis_id": {
+          "type": "string",
+          "description": "MAC address for the peer network device.",
+          "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
+        },
+        "port_id": {
+          "type": "string",
+          "description": "The ifAlias of the peer network device the end point is connected to."
+        }
+      }
+    },
+    "max_bandwidth": {
+      "type": "string",
+      "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit\/s$",
+      "description": "Maximum bandwidth that the sender is allowed to send. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
+    },
+    "role": {
+      "description": "The role of the endpoint as a sender or receiver.",
+      "type": "string",
+      "enum": [
+        "sender",
+        "receiver",
+        "both"
+      ]
+    },
+    "label": {
+      "description": "Freeform string label for the endpoint",
+      "type": "string"
+    }
+  }
+}

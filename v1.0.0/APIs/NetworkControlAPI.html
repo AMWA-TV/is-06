@@ -1,0 +1,2467 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>AMWA IS-06 NMOS Network-control-API</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="generator" content="https://github.com/raml2html/raml2html 7.8.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+              history.replaceState({}, '', '#');
+            }
+          } catch (e) {}
+        });
+      });
+    </script>
+    <style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item>.badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title>.methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group,
+      .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h1 {
+        font-size: 1.3em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+      pre code {
+        overflow: auto;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      .items {
+        background: #f5f5f5;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+      }
+      .examples {
+        margin-left: 0.5em;
+      }
+      .resource-modal li>ul {
+        margin-bottom: 1em;
+      }
+      .required {
+        color: #f00;
+      }
+    </style>
+  </head>
+  <body data-spy="scroll" data-target="#sidebar">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9" role="main">
+          <div class="page-header">
+            <h1>AMWA IS-06 NMOS Network-control-API <small>version v1.0</small></h1>
+            <p>http://example.api.com/x-nmos/netctrl/{version}</p>
+            <ul>
+              <li>
+                <strong>version</strong>:
+                <em><span class="required">required </span>(v1.0)
+      </em>
+              </li>
+            </ul>
+            <h3 id="overview"><a href="#overview">Overview</a></h3>
+            <p>The Phase 2 network control API is exposed by NMOS network controller. It provides Phase 2 APIs to create and manage network flows, add senders and receivers for the flows, and fetch network details.</p>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 id="" class="panel-title">Base</h3>
+            </div>
+            <div class="panel-body">
+              <div class="panel-group">
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_">
+                        <span class="parent"></span>/
+                      </a>
+                      <span class="methods">
+            <a href="#_get">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_get">get</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#_get'" class="list-group-item">
+                          <span class="badge badge_get">get</span>
+                          <div class="method_description">
+                            <p>List the resources that can be accessed from the base url</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="_get">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent"></span>/
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>List the resources that can be accessed from the base url</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#_get_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="_get_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: any</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>[
+  "network-devices/",
+  "endpoints/",
+  "network-links/",
+  "network-flows/"
+]
+</code></pre>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 id="network_devices" class="panel-title">Network Devices</h3>
+            </div>
+            <div class="panel-body">
+              <div class="panel-group">
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_network_devices">
+                        <span class="parent"></span>/network-devices
+                      </a>
+                      <span class="methods">
+            <a href="#network_devices_get">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_get">get</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_network_devices" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#network_devices_get'" class="list-group-item">
+                          <span class="badge badge_get">get</span>
+                          <div class="method_description">
+                            <p>List all network devices.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_devices_get">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent"></span>/network-devices
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>List all network devices.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_devices_get_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_devices_get_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_devices_get_request">
+                              <h3>Query Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>chassis_id</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>mgmt_ip</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>mtu</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>label</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_devices_get_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: NetworkDevices</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>[
+  {
+    "id": "5482feef-49a2-4f3a-bf9c-d62b38a686c1",
+    "chassis_id": "8a-3a-99-4b-e0-1b",
+    "mgmt_ip": "10.10.16.16",
+    "mtu": 1500,
+    "interfaces": [
+      {
+        "port_id": "Ethernet 1/1",
+        "admin_status": "up",
+        "oper_status": "up",
+        "speed": "1Gbit/s",
+        "mtu": 1500
+      },
+      {
+        "port_id": "Ethernet 1/2",
+        "admin_status": "up",
+        "oper_status": "up",
+        "speed": "100Gbit/s"
+      },
+      {
+        "port_id": "Ethernet 1/3",
+        "admin_status": "up",
+        "oper_status": "up",
+        "speed": "100Gbit/s"
+      }
+    ],
+    "label": "Network spine"
+  },
+  {
+    "id": "4b6452a8-6132-40e9-a8c3-aa0576e791f6",
+    "chassis_id": "42-b7-25-29-79-0e",
+    "mgmt_ip": "10.10.18.18",
+    "mtu": 1500,
+    "interfaces": [
+      {
+        "port_id": "Ethernet 1/1",
+        "admin_status": "up",
+        "oper_status": "up",
+        "speed": "1Gbit/s",
+        "mtu": 1800
+      },
+      {
+        "port_id": "Ethernet 1/2",
+        "admin_status": "up",
+        "oper_status": "up",
+        "speed": "10Gbit/s"
+      },
+      {
+        "port_id": "Ethernet 1/3",
+        "admin_status": "up",
+        "oper_status": "up",
+        "speed": "10Gbit/s"
+      }
+    ],
+    "label": "Network leaf 1"
+  },
+  {
+    "id": "035a3ee6-1588-4ed3-a081-0a18539ad7d9",
+    "chassis_id": "2f-12-3e-be-13-07",
+    "mgmt_ip": "10.10.24.20",
+    "mtu": 1500,
+    "interfaces": [
+      {
+        "port_id": "Ethernet 1/1",
+        "admin_status": "up",
+        "oper_status": "up",
+        "speed": "1Gbit/s",
+        "mtu": 1800
+      },
+      {
+        "port_id": "Ethernet 1/2",
+        "admin_status": "up",
+        "oper_status": "up",
+        "speed": "10Gbit/s"
+      },
+      {
+        "port_id": "Ethernet 1/3",
+        "admin_status": "up",
+        "oper_status": "up",
+        "speed": "10Gbit/s"
+      }
+    ],
+    "label": "Network leaf 2"
+  }
+]
+</code></pre>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_network_devices__id_">
+                        <span class="parent">/network-devices</span>/{id}
+                      </a>
+                      <span class="methods">
+            <a href="#network_devices__id__get">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_get">get</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_network_devices__id_" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#network_devices__id__get'" class="list-group-item">
+                          <span class="badge badge_get">get</span>
+                          <div class="method_description">
+                            <p>Get a single Network Device</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_devices__id__get">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent">/network-devices</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Get a single Network Device</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_devices__id__get_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_devices__id__get_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_devices__id__get_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network device.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>3f383f86-c977-498f-81bf-04c5cb8a0e0d</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_devices__id__get_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: NetworkDevice</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "id": "11b8973e-91c9-462d-8dad-6b37e53b3b9f",
+  "chassis_id": "95-a6-37-bb-b2-61",
+  "mgmt_ip": "10.10.10.16",
+  "mtu": 1500,
+  "interfaces": [
+    {
+      "port_id": "Ethernet 1/1",
+      "admin_status": "up",
+      "oper_status": "up",
+      "speed": "1Gbit/s",
+      "mtu": 1500
+    },
+    {
+      "port_id": "Ethernet 1/2",
+      "admin_status": "up",
+      "oper_status": "up",
+      "speed": "100Gbit/s"
+    },
+    {
+      "port_id": "Ethernet 1/3",
+      "admin_status": "up",
+      "oper_status": "up",
+      "speed": "100Gbit/s"
+    }
+  ],
+  "label": "Network spine"
+}
+</code></pre>
+                              </div>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                              <p>Returned when the network device with the guid does not exist.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 id="endpoints" class="panel-title">Endpoints</h3>
+            </div>
+            <div class="panel-body">
+              <div class="panel-group">
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_endpoints">
+                        <span class="parent"></span>/endpoints
+                      </a>
+                      <span class="methods">
+            <a href="#endpoints_get">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_get">get</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_endpoints" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#endpoints_get'" class="list-group-item">
+                          <span class="badge badge_get">get</span>
+                          <div class="method_description">
+                            <p>Retrieve a collection of endpoints.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="endpoints_get">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent"></span>/endpoints
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Retrieve a collection of endpoints.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#endpoints_get_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#endpoints_get_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="endpoints_get_request">
+                              <h3>Query Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>chassis_id</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>port_id</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>ip_address</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>max_bandwidth</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>role</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>label</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="endpoints_get_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: Endpoints</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>[
+  {
+    "id": "fa08a879-488d-4e2b-8104-805e2288d8e9",
+    "chassis_id": "2d-af-a9-41-01-b4",
+    "port_id": "fe-97-94-bb-d2-ed",
+    "ip_address": "10.10.34.44",
+    "attached_network_device": {
+      "chassis_id": "2f-8c-af-79-c7-00",
+      "port_id": "Ethernet 1/3"
+    },
+    "max_bandwidth": "50Gbit/s",
+    "role": "both",
+    "label": "Video transmitter/receiver gateway endpoint."
+  },
+  {
+    "id": "d9c88a0a-c0c8-4ec8-ade5-fde9106e5040",
+    "chassis_id": null,
+    "port_id": "58-f9-46-71-39-c2",
+    "ip_address": "10.10.36.88",
+    "attached_network_device": {
+      "chassis_id": "2d-51-2b-85-89-7b",
+      "port_id": "Ethernet 1/2"
+    },
+    "max_bandwidth": "10Gbit/s",
+    "role": "receiver",
+    "label": "Video receiver gateway endpoint."
+  },
+  {
+    "id": "e90af02c-03ff-4a43-9cb9-4d86e0f3161a",
+    "chassis_id": "58-fb-07-76-56-6b",
+    "port_id": "a8-84-32-ef-1c-8c",
+    "ip_address": "10.10.48.16",
+    "attached_network_device": {
+      "chassis_id": "72-0c-a1-2c-87-0d",
+      "port_id": "Ethernet 2/2"
+    },
+    "max_bandwidth": "100Mbit/s",
+    "role": "receiver",
+    "label": "Audio receiver gateway endpoint."
+  }
+]
+</code></pre>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_endpoints__id_">
+                        <span class="parent">/endpoints</span>/{id}
+                      </a>
+                      <span class="methods">
+            <a href="#endpoints__id__options">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_options">options</span>
+                      </a>
+                      <a href="#endpoints__id__get">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_get">get</span>
+                      </a>
+                      <a href="#endpoints__id__put">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_put">put</span>
+                      </a>
+                      <a href="#endpoints__id__patch">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_patch">patch</span>
+                      </a>
+                      <a href="#endpoints__id__delete">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_delete">delete</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_endpoints__id_" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#endpoints__id__options'" class="list-group-item">
+                          <span class="badge badge_options">options</span>
+                          <div class="method_description">
+                            <p>A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#endpoints__id__get'" class="list-group-item">
+                          <span class="badge badge_get">get</span>
+                          <div class="method_description">
+                            <p>Get a single Endpoint</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#endpoints__id__put'" class="list-group-item">
+                          <span class="badge badge_put">put</span>
+                          <div class="method_description">
+                            <p>Register a new endpoint. The PUT is invoked to inform the network controller about the presence of an endpoint. The endpoint schema includes mandatory details of the network device the endpoint is attached to. The attached network device details can be fetched by the endpoint through LLDP (if the endpoint is LLDP capabale) or manual entry in the caller of this API (e.g., broadcast controller). The network <em>may</em> verify these details for security purposes. Verification <em>may</em> happen synchronously, as part of the request. Network controller <em>must</em> create a corresponding network link with this endpoint as the peer device. Peer port id of the new link may or maynot be assigned, i.e, implementation dependent. Subsequent PUT requests should throw error. Updates should be done using PATCH.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#endpoints__id__patch'" class="list-group-item">
+                          <span class="badge badge_patch">patch</span>
+                          <div class="method_description">
+                            <p>Update an existing endpoint attributes.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#endpoints__id__delete'" class="list-group-item">
+                          <span class="badge badge_delete">delete</span>
+                          <div class="method_description">
+                            <p>Delete an existing endpoint.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="endpoints__id__options">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_options">options</span>
+                            <span class="parent">/endpoints</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#endpoints__id__options_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#endpoints__id__options_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="endpoints__id__options_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network endpoint.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>3607f868-c762-4220-8caf-e5a546395b29</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="endpoints__id__options_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="endpoints__id__get">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent">/endpoints</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Get a single Endpoint</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#endpoints__id__get_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#endpoints__id__get_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="endpoints__id__get_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network endpoint.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>3607f868-c762-4220-8caf-e5a546395b29</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="endpoints__id__get_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: Endpoint</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "id": "d9c88a0a-c0c8-4ec8-ade5-fde9106e5040",
+  "chassis_id":"1e-a1-79-16-0a-6b",
+  "port_id": "bf-f8-01-60-49-bc",
+  "ip_address": "10.10.34.24",
+  "attached_network_device": {
+    "chassis_id": "7a-c9-d7-f0-e2-03",
+    "port_id": "Ethernet 2/2"
+  },
+  "max_bandwidth": "10Gbit/s",
+  "role": "sender",
+  "label": "Video transmitter gateway endpoint."
+}
+</code></pre>
+                              </div>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                              <p>Returned when the requested Node ID does not exist.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="endpoints__id__put">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_put">put</span>
+                            <span class="parent">/endpoints</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Register a new endpoint. The PUT is invoked to inform the network controller about the presence of an endpoint. The endpoint schema includes mandatory details of the network device the endpoint is attached to. The attached network device details can be fetched by the endpoint through LLDP (if the endpoint is LLDP capabale) or manual entry in the caller of this API (e.g., broadcast controller). The network <em>may</em> verify these details for security purposes. Verification <em>may</em> happen synchronously, as part of the request. Network controller <em>must</em> create a corresponding network link with this endpoint as the peer device. Peer port id of the new link may or maynot be assigned, i.e, implementation dependent. Subsequent PUT requests should throw error. Updates should be done using PATCH.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#endpoints__id__put_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#endpoints__id__put_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="endpoints__id__put_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network endpoint.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>3607f868-c762-4220-8caf-e5a546395b29</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: Endpoint</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "id": "dc7c36a5-cd6d-44bb-a1ac-6e328c018de0",
+  "chassis_id":"91-0c-41-81-fb-40",
+  "port_id": "d6-f2-fa-ae-29-78",
+  "ip_address": "10.10.26.24",
+  "attached_network_device": {
+    "chassis_id": "d7-28-68-a3-89-4f",
+    "port_id": "Ethernet 1/2"
+  },
+  "max_bandwidth": "40Gbit/s",
+  "role": "receiver",
+  "label": "Video receiver gateway endpoint."
+}
+</code></pre>
+                              </div>
+                            </div>
+                            <div class="tab-pane" id="endpoints__id__put_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2>
+                              <p>Returns when the endpoint is registered with network controller successfully. Header should indicate the location of the created resource.</p>
+                              <h3>Headers</h3>
+                              <ul>
+                                <li>
+                                  <strong>Location</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>/x-nmos/netctrl/v1.0/endpoints/d0729fa2-83ba-4e6b-8817-d48a4bf28f74/</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: Endpoint</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "id": "d9c88a0a-c0c8-4ec8-ade5-fde9106e5040",
+  "chassis_id":"1e-a1-79-16-0a-6b",
+  "port_id": "bf-f8-01-60-49-bc",
+  "ip_address": "10.10.34.24",
+  "attached_network_device": {
+    "chassis_id": "7a-c9-d7-f0-e2-03",
+    "port_id": "Ethernet 2/2"
+  },
+  "max_bandwidth": "10Gbit/s",
+  "role": "sender",
+  "label": "Video transmitter gateway endpoint."
+}
+</code></pre>
+                              </div>
+                              <h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2>
+                              <p>Returned when the PUT request is incorrectly formatted or missing mandatory attributes. Also when an endpoint with this guid already exists. Errors should contain relevant msg.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="endpoints__id__patch">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_patch">patch</span>
+                            <span class="parent">/endpoints</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Update an existing endpoint attributes.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#endpoints__id__patch_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#endpoints__id__patch_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="endpoints__id__patch_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network endpoint.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>3607f868-c762-4220-8caf-e5a546395b29</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>:</p>
+                              <pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Patch request schema for updating an existing endpoint.",
+  "title": "Schema to modify an endpoint with new values.",
+  "required": [
+  ],
+  "properties": {
+    "ip_address": {
+      "type": "string",
+      "description": "IP address on which the endpoint sends/receives flows. IP must be unique in the network.",
+      "anyOf": [
+        {
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        }
+      ]
+    },
+    "attached_network_device": {
+      "type": "object",
+      "description": "Peer network device (switch) details. This can not be an endpoint.",
+      "required": [
+        "chassis_id",
+        "port_id"
+      ],
+      "properties": {
+        "chassis_id": {
+          "type": "string",
+          "description": "MAC address for the peer network device.",
+          "pattern": "^([0-9a-f]{2}[-]){5}([0-9a-f]{2})$"
+        },
+        "port_id": {
+          "type": "string",
+          "description": "The ifAlias of the peer network device the end point is connected to."
+        }
+      }
+    },
+    "max_bandwidth": {
+      "type": "string",
+      "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit&#92;/s$",
+      "description": "Maximum bandwidth that the sender is allowed to send. Format as numbers followed by kbit/s, Mbit/s, Gbit/s."
+    },
+    "role": {
+      "description": "The role of the endpoint as a sender or receiver.",
+      "type": "string",
+      "enum": [
+        "sender",
+        "receiver",
+        "both"
+      ]
+    },
+    "label": {
+      "description": "Freeform string label for the endpoint",
+      "type": "string"
+    }
+  }
+}
+</code></pre>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "ip_address": "10.18.34.24",
+  "max_bandwidth": "10Gbit/s",
+  "role": "both"
+}
+</code></pre>
+                              </div>
+                            </div>
+                            <div class="tab-pane" id="endpoints__id__patch_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <p>Returned when the endpoint is updated successfully. The updated endpoint is returned in the response.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: Endpoint</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "id": "d9c88a0a-c0c8-4ec8-ade5-fde9106e5040",
+  "chassis_id":"1e-a1-79-16-0a-6b",
+  "port_id": "bf-f8-01-60-49-bc",
+  "ip_address": "10.10.34.24",
+  "attached_network_device": {
+    "chassis_id": "7a-c9-d7-f0-e2-03",
+    "port_id": "Ethernet 2/2"
+  },
+  "max_bandwidth": "10Gbit/s",
+  "role": "sender",
+  "label": "Video transmitter gateway endpoint."
+}
+</code></pre>
+                              </div>
+                              <h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2>
+                              <p>Returned when the PATCH request is incorrectly formatted or can not be updated.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                              <p>Returned when the requested Endpoint with guid does not exist.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="endpoints__id__delete">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_delete">delete</span>
+                            <span class="parent">/endpoints</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Delete an existing endpoint.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#endpoints__id__delete_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#endpoints__id__delete_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="endpoints__id__delete_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network endpoint.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>3607f868-c762-4220-8caf-e5a546395b29</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="endpoints__id__delete_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
+                              <p>Returned when the endpoint is successfully deleted. No response body.</p>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                              <p>Returned when the requested Endpoint with guid does not exist</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 id="network_links" class="panel-title">Network Links</h3>
+            </div>
+            <div class="panel-body">
+              <div class="panel-group">
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_network_links">
+                        <span class="parent"></span>/network-links
+                      </a>
+                      <span class="methods">
+            <a href="#network_links_get">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_get">get</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_network_links" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#network_links_get'" class="list-group-item">
+                          <span class="badge badge_get">get</span>
+                          <div class="method_description">
+                            <p>Get all links in the network. Links are always bidirectional. Implementation of the API must ensure that query results is independent of how a bi-directional link is persisted.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_links_get">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent"></span>/network-links
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Get all links in the network. Links are always bidirectional. Implementation of the API must ensure that query results is independent of how a bi-directional link is persisted.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_links_get_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_links_get_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_links_get_request">
+                              <h3>Query Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>peers.device_id</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>peers.port_id</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>speed</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_links_get_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: NetworkLinks</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>[
+  {
+    "peers": [
+      {
+        "device_id": "f3841396-1cbf-4a8a-915c-dd1034121532",
+        "port_id": "Ethernet 1/2"
+      },
+      {
+        "device_id": "2c516096-4fa6-4b93-8b84-248ad79dff3a",
+        "port_id": "Ethernet 2/1"
+      }
+    ],
+    "speed": "100Gbit/s"
+  },
+  {
+    "peers": [
+      {
+        "device_id": "aa4df211-284e-4417-9827-b1ceda12a4ff",
+        "port_id": "Ethernet 1/3"
+      },
+      {
+        "device_id": "fc3cec11-fcb1-4933-97a3-d5c3dde9d1cc",
+        "port_id": "Ethernet 2/1"
+      }
+    ],
+    "speed": "100Gbit/s"
+  },
+  {
+    "peers": [
+      {
+        "device_id": "cf333591-82ac-456a-898b-f56ff83d1d22",
+        "port_id": "Ethernet 2/2"
+      },
+      {
+        "device_id": "e2d3b1e1-cf03-4399-9247-6c238dc16327",
+        "port_id": "Ethernet 1/1"
+      }
+    ],
+    "speed": "1Gbit/s"
+  },
+  {
+    "peers": [
+      {
+        "device_id": "71706c18-49f2-481d-914a-d711d773dacb",
+        "port_id": "Ethernet 2/2"
+      },
+      {
+        "device_id": "ce2aff8d-fea1-42e1-bce0-7878024972c9",
+        "port_id": null
+      }
+    ],
+    "speed": "1Gbit/s"
+  }
+]
+</code></pre>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 id="network_flows" class="panel-title">Network flow</h3>
+            </div>
+            <div class="panel-body">
+              <div class="panel-group">
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_network_flows">
+                        <span class="parent"></span>/network-flows
+                      </a>
+                      <span class="methods">
+            <a href="#network_flows_get">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_get">get</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_network_flows" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#network_flows_get'" class="list-group-item">
+                          <span class="badge badge_get">get</span>
+                          <div class="method_description">
+                            <p>Retrieve a collection of network flows.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows_get">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent"></span>/network-flows
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Retrieve a collection of network flows.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows_get_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows_get_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows_get_request">
+                              <h3>Query Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>multicast_address</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>sender_endpoint_id</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>bandwidth</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>profile</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>forward_flow</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>dscp</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                                <li>
+                                  <strong>label</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_flows_get_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: NetworkFlows</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>[
+  {
+    "id": "af789265-3786-4e68-ac55-c473f32e6b61",
+    "multicast_address": "226.8.1.1",
+    "sender_endpoint_id": "e576574b-3b29-4f44-bb0e-784008ee26fb",
+    "receiver_endpoint_ids": [
+      "92ecbc58-2f65-4f98-a426-6c479e0698cd",
+      "600be553-0384-4405-97f9-7f4abb29051d"
+    ],
+    "bandwidth": "4Gbit/s",
+    "profile": "SMPTE-2110-21-wide",
+    "forward_flow": true,
+    "dscp": "AF12",
+    "label": "Broadcast Video"
+  },
+  {
+    "id": "d2439cef-59bc-456d-8791-fc37b8e82691",
+    "multicast_address": "226.1.1.16",
+    "sender_endpoint_id": "20aece97-c2b8-4a6c-a451-34ad86aae367",
+    "receiver_endpoint_ids": [
+    ],
+    "bandwidth": "2Gbit/s",
+    "profile": "SMPTE-2110-21-narrow",
+    "forward_flow": false,
+    "dscp": "AF12",
+    "label": "Staged broadcast video"
+  },
+  {
+    "id": "c519def6-2e4c-4c7f-91b1-4cdbcbe60e8c",
+    "multicast_address": "226.8.1.2",
+    "sender_endpoint_id": "e576574b-3b29-4f44-bb0e-784008ee26fb",
+    "receiver_endpoint_ids": [
+      "92ecbc58-2f65-4f98-a426-6c479e0698cd",
+      "600be553-0384-4405-97f9-7f4abb29051d"
+    ],
+    "bandwidth": "400Mbit/s",
+    "profile": "constant-rate",
+    "forward_flow": true,
+    "dscp": "AF12",
+    "label": "Audio stream accompanying video stream"
+  }
+]
+</code></pre>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_network_flows__id_">
+                        <span class="parent">/network-flows</span>/{id}
+                      </a>
+                      <span class="methods">
+            <a href="#network_flows__id__options">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_options">options</span>
+                      </a>
+                      <a href="#network_flows__id__get">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_get">get</span>
+                      </a>
+                      <a href="#network_flows__id__put">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_put">put</span>
+                      </a>
+                      <a href="#network_flows__id__patch">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_patch">patch</span>
+                      </a>
+                      <a href="#network_flows__id__delete">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_delete">delete</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_network_flows__id_" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#network_flows__id__options'" class="list-group-item">
+                          <span class="badge badge_options">options</span>
+                          <div class="method_description">
+                            <p>A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#network_flows__id__get'" class="list-group-item">
+                          <span class="badge badge_get">get</span>
+                          <div class="method_description">
+                            <p>Retrieve a single network-flow with the specified guid.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#network_flows__id__put'" class="list-group-item">
+                          <span class="badge badge_put">put</span>
+                          <div class="method_description">
+                            <p>Create a network flow with the specific guid. No subsequent PUT request should be made for this flow and should return error. Use PATCH to update existing network flow.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#network_flows__id__patch'" class="list-group-item">
+                          <span class="badge badge_patch">patch</span>
+                          <div class="method_description">
+                            <p>Update an existing network flow with the specific guid. A network flow is equivalent to and uniquely identified by the sender id and the multicast address, or the &lt;S,G&gt; pair. So, neither the sender id or the multicast address can be updated of an existing flow. A new network flow should be created for a different pair of &lt;S,G&gt;. Moreover, for simplicity, receiver endpoint ids can only be updated using /receivers post or delete request.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#network_flows__id__delete'" class="list-group-item">
+                          <span class="badge badge_delete">delete</span>
+                          <div class="method_description">
+                            <p>Delete the network-flow with the specified guid.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows__id__options">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_options">options</span>
+                            <span class="parent">/network-flows</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows__id__options_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows__id__options_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows__id__options_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network-flow.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>cfd02532-1c83-45a5-ae38-1cb7614346db</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_flows__id__options_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows__id__get">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_get">get</span>
+                            <span class="parent">/network-flows</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Retrieve a single network-flow with the specified guid.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows__id__get_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows__id__get_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows__id__get_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network-flow.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>cfd02532-1c83-45a5-ae38-1cb7614346db</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_flows__id__get_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: NetworkFlow</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "id": "c386ff15-3b3f-4813-ac86-1c7b8cf753b6",
+  "multicast_address": "226.1.1.1",
+  "sender_endpoint_id": "a9ab3d49-3b8f-49e1-bbe4-b46228a9e167",
+  "receiver_endpoint_ids": [
+    "231ea016-1553-4488-8c2b-26bee7b9a1aa",
+    "7e54a194-45e7-44e6-8795-b3a21bfff253"
+  ],
+  "bandwidth": "4Gbit/s",
+  "profile": "SMPTE-2110-21-wide",
+  "forward_flow": true,
+  "dscp": "AF12",
+  "label": "Sample Video network flow"
+}
+</code></pre>
+                              </div>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                              <p>Returned when the network-flow with guid does not exist.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows__id__put">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_put">put</span>
+                            <span class="parent">/network-flows</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Create a network flow with the specific guid. No subsequent PUT request should be made for this flow and should return error. Use PATCH to update existing network flow.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows__id__put_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows__id__put_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows__id__put_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network-flow.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>cfd02532-1c83-45a5-ae38-1cb7614346db</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: NetworkFlow</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "id": "1650fbcc-d8a0-4bd2-8e61-c7abb38d78d2",
+  "multicast_address": "227.1.1.1",
+  "sender_endpoint_id": "76beb838-3ad7-4011-bd68-5c203a4446ab",
+  "receiver_endpoint_ids": [
+    "3f80b3fa-74e3-4dcc-a1c0-5dbf5a199e20"
+  ],
+  "bandwidth": "4Gbit/s",
+  "profile": "constant-rate",
+  "forward_flow": false,
+  "dscp": "AF11",
+  "label": "New video network-flow"
+}
+</code></pre>
+                              </div>
+                            </div>
+                            <div class="tab-pane" id="network_flows__id__put_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/201" target="_blank">201</a></h2>
+                              <p>Returned when the network flow is created successfully. Response body is same as 200 on GET. Location header should indicate the location of the network flow.</p>
+                              <h3>Headers</h3>
+                              <ul>
+                                <li>
+                                  <strong>Location</strong>:
+                                  <em><span class="required">required </span>(string)
+      </em>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>/x-nmos/netctrl/v1.0/network-flows/6fb3c057-a363-40cc-8f3d-cbaee5e35248/</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: NetworkFlow</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "id": "c386ff15-3b3f-4813-ac86-1c7b8cf753b6",
+  "multicast_address": "226.1.1.1",
+  "sender_endpoint_id": "a9ab3d49-3b8f-49e1-bbe4-b46228a9e167",
+  "receiver_endpoint_ids": [
+    "231ea016-1553-4488-8c2b-26bee7b9a1aa",
+    "7e54a194-45e7-44e6-8795-b3a21bfff253"
+  ],
+  "bandwidth": "4Gbit/s",
+  "profile": "SMPTE-2110-21-wide",
+  "forward_flow": true,
+  "dscp": "AF12",
+  "label": "Sample Video network flow"
+}
+</code></pre>
+                              </div>
+                              <h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2>
+                              <p>Returned when the PUT request is incorrectly formatted or has missing values. Also returned when a network-flow exists with the given guid. Explicit message should be added to indicate the cause of the error.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows__id__patch">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_patch">patch</span>
+                            <span class="parent">/network-flows</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Update an existing network flow with the specific guid. A network flow is equivalent to and uniquely identified by the sender id and the multicast address, or the &lt;S,G&gt; pair. So, neither the sender id or the multicast address can be updated of an existing flow. A new network flow should be created for a different pair of &lt;S,G&gt;. Moreover, for simplicity, receiver endpoint ids can only be updated using /receivers post or delete request.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows__id__patch_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows__id__patch_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows__id__patch_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network-flow.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>cfd02532-1c83-45a5-ae38-1cb7614346db</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>:</p>
+                              <pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Describes a patch of a network flow.",
+  "title": "Network flow with attributes that can be patched",
+  "required": [
+  ],
+  "properties": {
+    "bandwidth": {
+      "type": "string",
+      "description": "Average bandwidth requirement for the flow. Format as number followed by kbit/s, Mbit/s, Gbit/s.",
+      "pattern": "^(?:0.|[1-9][0-9]*[.])?[0-9]+[kMG]bit&#92;/s$"
+    },
+    "profile": {
+      "description": "The transmission profile of the flow.",
+      "type": "string",
+      "enum": [
+        "constant-rate",
+        "SMPTE-2110-21-narrow",
+        "SMPTE-2110-21-wide",
+        "unknown"
+      ]
+    },
+    "forward_flow": {
+      "description": "Flag for forwarding the flow. If false, the network should not set up the flow. Only when this flag is changed to true should the flow be sent to all receivers.",
+      "type": "boolean",
+      "default": true
+    },
+    "dscp": {
+      "type": "string",
+      "description": "DSCP based QoS metrics number, default is CS0, best effort.",
+      "enum": [
+        "CS0",
+        "CS1",
+        "CS2",
+        "CS3",
+        "CS4",
+        "CS5",
+        "CS6",
+        "CS7",
+        "AF11",
+        "AF12",
+        "AF13",
+        "AF21",
+        "AF22",
+        "AF23",
+        "AF31",
+        "AF32",
+        "AF33",
+        "AF41",
+        "AF42",
+        "AF43",
+        "EF"
+      ]
+    },
+    "label": {
+      "description": "Freeform string label for the network-flow",
+      "type": "string"
+    }
+  }
+}
+</code></pre>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "bandwidth": "4Gbit/s",
+  "profile": "constant-rate",
+  "forward_flow": true,
+  "dscp": "AF11",
+  "label": "Updated video network-flow"
+}
+</code></pre>
+                              </div>
+                            </div>
+                            <div class="tab-pane" id="network_flows__id__patch_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <p>Returned when the network flow is updated successfully. The updated network flow is returned in the response.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: NetworkFlow</p>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "id": "c386ff15-3b3f-4813-ac86-1c7b8cf753b6",
+  "multicast_address": "226.1.1.1",
+  "sender_endpoint_id": "a9ab3d49-3b8f-49e1-bbe4-b46228a9e167",
+  "receiver_endpoint_ids": [
+    "231ea016-1553-4488-8c2b-26bee7b9a1aa",
+    "7e54a194-45e7-44e6-8795-b3a21bfff253"
+  ],
+  "bandwidth": "4Gbit/s",
+  "profile": "SMPTE-2110-21-wide",
+  "forward_flow": true,
+  "dscp": "AF12",
+  "label": "Sample Video network flow"
+}
+</code></pre>
+                              </div>
+                              <h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2>
+                              <p>Returned when the PATCH request is incorrectly formatted or has incorrect values.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                              <p>Returned when the network-flow with guid does not exist.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows__id__delete">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_delete">delete</span>
+                            <span class="parent">/network-flows</span>/{id}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Delete the network-flow with the specified guid.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows__id__delete_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows__id__delete_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows__id__delete_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network-flow.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>cfd02532-1c83-45a5-ae38-1cb7614346db</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_flows__id__delete_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
+                              <p>Returned when the network-flow is successfully deleted. No response body.</p>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                              <p>Returned when the network-flow with guid does not exist.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_network_flows__id__receivers">
+                        <span class="parent">/network-flows/{id}</span>/receivers
+                      </a>
+                      <span class="methods">
+            <a href="#network_flows__id__receivers_options">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_options">options</span>
+                      </a>
+                      <a href="#network_flows__id__receivers_post">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_post">post</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_network_flows__id__receivers" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#network_flows__id__receivers_options'" class="list-group-item">
+                          <span class="badge badge_options">options</span>
+                          <div class="method_description">
+                            <p>A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#network_flows__id__receivers_post'" class="list-group-item">
+                          <span class="badge badge_post">post</span>
+                          <div class="method_description">
+                            <p>Add one or more receivers to this network flow. Receivers included in the body should be appended to the existing receivers, if any. If the forward-flow is set for this network flow, both bandwidth resrvation and flow switching must occur for all new receivers. If the fowrad-flow is not set, only resource reservation should take place. Failure to satisfy for any one receiver should fail for all and fail the complete request. Proper error message should be provided in this scenario. No task should be completed partially, that is, server should employ all-or-nothing strategy.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows__id__receivers_options">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_options">options</span>
+                            <span class="parent">/network-flows/{id}</span>/receivers
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows__id__receivers_options_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows__id__receivers_options_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows__id__receivers_options_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network-flow.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>cfd02532-1c83-45a5-ae38-1cb7614346db</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_flows__id__receivers_options_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows__id__receivers_post">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_post">post</span>
+                            <span class="parent">/network-flows/{id}</span>/receivers
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Add one or more receivers to this network flow. Receivers included in the body should be appended to the existing receivers, if any. If the forward-flow is set for this network flow, both bandwidth resrvation and flow switching must occur for all new receivers. If the fowrad-flow is not set, only resource reservation should take place. Failure to satisfy for any one receiver should fail for all and fail the complete request. Proper error message should be provided in this scenario. No task should be completed partially, that is, server should employ all-or-nothing strategy.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows__id__receivers_post_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows__id__receivers_post_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows__id__receivers_post_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network-flow.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>cfd02532-1c83-45a5-ae38-1cb7614346db</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>:</p>
+                              <pre><code>{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Post request schema for adding new receivers to an existing network flow.",
+  "title": "One or many receivers for a multicast network-flow.",
+  "required": [
+    "receiver_endpoint_ids"
+  ],
+  "properties": {
+    "receiver_endpoint_ids": {
+      "type": "array",
+      "description": "List of receiver endpoint IDs.",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  }
+}
+</code></pre>
+                              <p><strong>Example</strong>:</p>
+                              <div class="examples">
+                                <pre><code>{
+  "receiver_endpoint_ids": [
+    "ff458774-0fdc-4948-b0ee-2d6043c2c689",
+    "4d3cfb9f-5a1b-4a92-a4f5-6f3812795629",
+    "79b9e6ec-8d14-4c87-b1f1-45e763f4c077",
+    "d60bbf82-6b5d-4a56-ab8e-eeae3e40e534",
+    "e0cfe384-0a3e-4256-9a70-4251c423ad00"
+  ]
+}
+</code></pre>
+                              </div>
+                            </div>
+                            <div class="tab-pane" id="network_flows__id__receivers_post_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
+                              <p>Returned when the receivers are successfully added. No response body.</p>
+                              <h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2>
+                              <p>Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to partial error, appropriate message should be added in error response.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                              <p>Returned when the network flow with guid does not exist.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-white resource-modal">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" href="#panel_network_flows__id__receivers__receiverid_">
+                        <span class="parent">/network-flows/{id}/receivers</span>/{receiverId}
+                      </a>
+                      <span class="methods">
+            <a href="#network_flows__id__receivers__receiverid__options">
+<!-- modal shown by hashchange event -->
+              <span class="badge badge_options">options</span>
+                      </a>
+                      <a href="#network_flows__id__receivers__receiverid__delete">
+<!-- modal shown by hashchange event -->
+                        <span class="badge badge_delete">delete</span>
+                      </a>
+                      </span>
+                    </h4>
+                  </div>
+                  <div id="panel_network_flows__id__receivers__receiverid_" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div class="list-group">
+                        <div onclick="window.location.href = '#network_flows__id__receivers__receiverid__options'" class="list-group-item">
+                          <span class="badge badge_options">options</span>
+                          <div class="method_description">
+                            <p>A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                        <div onclick="window.location.href = '#network_flows__id__receivers__receiverid__delete'" class="list-group-item">
+                          <span class="badge badge_delete">delete</span>
+                          <div class="method_description">
+                            <p>Delete receiver of this network flow with given id.</p>
+                          </div>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows__id__receivers__receiverid__options">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_options">options</span>
+                            <span class="parent">/network-flows/{id}/receivers</span>/{receiverId}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows__id__receivers__receiverid__options_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows__id__receivers__receiverid__options_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows__id__receivers__receiverid__options_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network-flow.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>cfd02532-1c83-45a5-ae38-1cb7614346db</code></pre>
+                                  </div>
+                                </li>
+                                <li>
+                                  <strong>receiverId</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the receiver endpoint.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>77b52221-c789-45fd-90b3-d9d8211de9d3</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_flows__id__receivers__receiverid__options_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2>
+                              <h2>HTTP status code <a href="http://httpstatus.es/403" target="_blank">403</a></h2>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal fade" tabindex="0" id="network_flows__id__receivers__receiverid__delete">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" id="myModalLabel">
+                            <span class="badge badge_delete">delete</span>
+                            <span class="parent">/network-flows/{id}/receivers</span>/{receiverId}
+                          </h4>
+                        </div>
+                        <div class="modal-body">
+                          <div class="alert alert-info">
+                            <p>Delete receiver of this network flow with given id.</p>
+                          </div>
+
+                          <!-- Nav tabs -->
+                          <ul class="nav nav-tabs">
+                            <li class="active">
+                              <a href="#network_flows__id__receivers__receiverid__delete_request" data-toggle="tab">Request</a>
+                            </li>
+                            <li>
+                              <a href="#network_flows__id__receivers__receiverid__delete_response" data-toggle="tab">Response</a>
+                            </li>
+                          </ul>
+
+                          <!-- Tab panes -->
+                          <div class="tab-content">
+                            <div class="tab-pane active" id="network_flows__id__receivers__receiverid__delete_request">
+                              <h3>URI Parameters</h3>
+                              <ul>
+                                <li>
+                                  <strong>id</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the network-flow.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>cfd02532-1c83-45a5-ae38-1cb7614346db</code></pre>
+                                  </div>
+                                </li>
+                                <li>
+                                  <strong>receiverId</strong>:
+                                  <em><span class="required">required </span>(string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$)
+      </em>
+                                  <p>The globally unique identifier for the receiver endpoint.</p>
+                                  <p><strong>Example</strong>:</p>
+                                  <div class="examples">
+                                    <pre><code>77b52221-c789-45fd-90b3-d9d8211de9d3</code></pre>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="tab-pane" id="network_flows__id__receivers__receiverid__delete_response">
+                              <h2>HTTP status code <a href="http://httpstatus.es/204" target="_blank">204</a></h2>
+                              <p>Returned when the receiver is successfully deleted. No response body.</p>
+                              <h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2>
+                              <p>Returned when no receiver with specifid id exists for this flow.</p>
+                              <h3>Body</h3>
+                              <p><strong>Media type</strong>: application/json</p>
+                              <p><strong>Type</strong>: ErrorSchema</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div id="sidebar" class="hidden-print affix" role="complementary">
+            <ul class="nav nav-pills nav-stacked">
+              <li><a href="#">Base</a></li>
+              <li><a href="#network_devices">Network Devices</a></li>
+              <li><a href="#endpoints">Endpoints</a></li>
+              <li><a href="#network_links">Network Links</a></li>
+              <li><a href="#network_flows">Network flow</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+[
+  {
+    "peers": [
+      {
+        "device_id": "f3841396-1cbf-4a8a-915c-dd1034121532",
+        "port_id": "Ethernet 1/2"
+      },
+      {
+        "device_id": "2c516096-4fa6-4b93-8b84-248ad79dff3a",
+        "port_id": "Ethernet 2/1"
+      }
+    ],
+    "speed": "100Gbit/s"
+  },
+  {
+    "peers": [
+      {
+        "device_id": "aa4df211-284e-4417-9827-b1ceda12a4ff",
+        "port_id": "Ethernet 1/3"
+      },
+      {
+        "device_id": "fc3cec11-fcb1-4933-97a3-d5c3dde9d1cc",
+        "port_id": "Ethernet 2/1"
+      }
+    ],
+    "speed": "100Gbit/s"
+  },
+  {
+    "peers": [
+      {
+        "device_id": "cf333591-82ac-456a-898b-f56ff83d1d22",
+        "port_id": "Ethernet 2/2"
+      },
+      {
+        "device_id": "e2d3b1e1-cf03-4399-9247-6c238dc16327",
+        "port_id": "Ethernet 1/1"
+      }
+    ],
+    "speed": "1Gbit/s"
+  },
+  {
+    "peers": [
+      {
+        "device_id": "71706c18-49f2-481d-914a-d711d773dacb",
+        "port_id": "Ethernet 2/2"
+      },
+      {
+        "device_id": "ce2aff8d-fea1-42e1-bce0-7878024972c9",
+        "port_id": null
+      }
+    ],
+    "speed": "1Gbit/s"
+  }
+]

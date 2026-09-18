@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "repository": "AMWA-TV/is-06",
+  "documents": [
+    {
+      "title": "AMWA IS-06 NMOS Network Control API Specification: Overview",
+      "url": "https://specs.amwa.tv/new/is-06/latest/1.0.%20Overview/",
+      "text": "AMWA IS-06 NMOS Network Control API Specification: Overview AMWA IS-06 NMOS Network Control API Specification: Overview Documentation Introduction Class diagram AMWA IS-06 NMOS Network Control API Specification: Overview - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content AMWA IS-06 NMOS Network Control API Specification: Overview (c) AMWA 2017, CC Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) Documentation The documents included in this directory provide details and recommendations for implementations of the defined APIs, or their consumers. Familiarity with the JT-NM reference architecture (http://jt-nm.org/) is assumed. Introduction The purpose of this document is to explain the AMWA NMOS IS-06, the network control API. The API is between the broadcast controller and the network controller as shown in the figure below. The broadcast controller is the overall policy control point for all media endpoints and sessions. The network controller abstracts the details of the network from the broadcast controller and provides an API for all required network services. The API is \"Northbound” of Network Controller. The purpose of this API is: * Discover network topology * Create and modify media flows in the network from a sender to one or more receiver devices * Control how flows move on the network * Assure bandwidth for these media flows * Ensure network security by only allowing authorized senders, receivers and flows. The resources that is managed by the AMWA NMOS IS-06 API are as follows: - Network devices - Endpoints - Links between the network switches or between the network switch and the endpoint - Flows The broadcast controller is responsible for uniquely identifying the endpoint connected to the network to authorize it. The objective of the endpoint authorization is that no endpoint is allowed to send or receive any packet and no packet moves on the network without authorization. The broadcast controller tells the network controller through the API, which endpoint is allowed to send and which endpoint is allowed to receive. It also registers the flow, the flow bandwidth and the QoS tag to be used with the flow. More details regarding the flow can be found in the \"Endpoints\" file in the same directory. Class diagram N.B. This diagram was prepared using yEd (http://www.yworks.com/products/yed) free version. Copyright issues are not considered yet. There can be multiple broadcast controllers managing a single network controller and likewise, there can be multiple network controllers managed by the same broadcast controller. In the case of multiple broadcast controllers managing a single network controller, this specification in its current phase, only supports the basic model. This means that there is no separation between the broadcast controllers. In other words, if a broadcast controller A, registers an endpoint SS, then a broadcast controller B can retrieve, modify and delete that endpoint SS. In future phases, logical separation of the broadcast controller and its devices plus the multi-tenancy models will be undertaken. Topics for the next phase can be found in the \"Futures\" file in the same directory.",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "AMWA IS-06 NMOS Network Control API Specification: Endpoint",
+      "url": "https://specs.amwa.tv/new/is-06/latest/2.0.%20Endpoint/",
+      "text": "AMWA IS-06 NMOS Network Control API Specification: Endpoint AMWA IS-06 NMOS Network Control API Specification: Endpoint Endpoint AMWA IS-06 NMOS Network Control API Specification: Endpoint - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content AMWA IS-06 NMOS Network Control API Specification: Endpoint (c) AMWA 2017, CC Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) Endpoint The endpoint, in this context, equals a single connection of the host devices to the network device. Therefore, if the host devices has multiple interfaces through which the flows are sent or received, then each of them will be classified as an \"endpoint\" as per this specification, IS-06. The broadcast controller can register as many \"endpoints\" as there are interfaces on the host devices that are connected to the network devices to send and receive flows. The endpoint has to be registered with the Network Controller before it can send and/or receive any flows. The Broadcast Controller will provide a unique identifier in the PUT request to register the endpoint. The Broadcast Controller may create this identifier by itself or it may be generated elsewhere in the system such as the Register and Discovery Server (RDS: refer AMWA NMOS IS-04). This identifier uniquely identifies the endpoint within the network and is used on all subsequently endpoint related operations. The required parameters for registering the endpoint are: • id: An unique identifier for this endpoint as explained above • chassis_id: The endpoint shall provide its MAC address or any information permitted by the IEEE Link Layer Discovery Protocol (LLDP) in for the Chassis ID parameter • port_id: The endpoint shall provide its MAC address as permitted by LLDP in this parameter • ip_address: The endpoint's ip_ address that will be used to send and/or receive the flows. • Attached_network_device: the switch's MAC address and its ethernet information which are provided by the switch in the LLDP's mandatory Chassis ID and MAC ID parameters The operations allowed on an endpoint is GET, PUT, PATCH and DELETE. GET is to retrieve an endpoint using the identifier. PUT is to create or register a new endpoint. PATCH is for modification of an endpoint. Only certain fields can be modified as explained in the API schema.",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "AMWA IS-06 NMOS Network Control API Specification: Network Flow",
+      "url": "https://specs.amwa.tv/new/is-06/latest/3.0.%20Network%20Flow/",
+      "text": "AMWA IS-06 NMOS Network Control API Specification: Network Flow AMWA IS-06 NMOS Network Control API Specification: Network Flow AMWA IS-06 NMOS Network Control API Specification: Network Flow - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content AMWA IS-06 NMOS Network Control API Specification: Network Flow (c) AMWA 2017, CC Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) In IS-06, the terms “flow” refers to a “Network Flow” or rather, the “networked stream” as defined in JT-NM. It is not the same as the “flow” described in IS-04. A key function of this specification is flow management, which includes flow creation, flow modification, and flow deletion. In IS-06, a flow is identified and used in the operations using a GUID which is generated or provided by the Broadcast controller. A network flow, identified by flow id, is equivalent to the sender id and the multicast address, or the pair. The sender id represents a unique sender endpoint. A sender endpoint can send more than one flow. Likewise, multiple senders may send to the same multicast address. In IS-06, the sender together with the multicast address must be unique and equals a flow. Therefore, neither the sender id nor the multicast address can be updated for an existing flow. A new network flow should be created for a different pair of . The required parameters of a flow are: • Id: uniquely identifies a flow • Multicast address: The multicast group address the flow is send to • Sender endpoint id: The sender who is sending the flow into the flow • Receiver endpoint ids: The receiver node or endpoint receiving the flow. • Bandwidth: The average rate of the flow. There can be zero or more receivers when the flow is created. If the flow is created with zero receivers, then the network does not do any bandwidth management until the receiver is known. A receiver can be added, updated or deleted by using the /receivers put, post or delete request. The flow can also be created with multiple receivers, in which case, the network does an admission control and bandwidth management to transmit the flow to all the named receivers. The profile of the flow is another parameter which helps the network in making admission control decisions. As the bandwidth value represents only an average rate of the flow, it does not provide a maximum value for the network to do admission control or to provision the flow with guarantees. The profile of the flow is an addition information which tells the network how much the flow is expected to burst. In constant rate, the average rate is also the max rate of the flow. The SMPTE 2110 wide profile, on the other hand, permits a flow to go over the average rate. It is left to implementation of how a network controller and network interprets the profile and bandwidth value to make an admission control decision. The operations that are permitted on a flow are GET, PUT, PATCH, and DELETE. One of the other parameters is “forward_flow”. This tells the network controller whether the flow should be transmitted to the receivers at this time. If the forward_flow is TRUE, then the network controller and network will do bandwidth management and forward the flow to the listed receivers. If the forward_flow is FALSE and receivers are listed, then subsequently, the broadcast controller should either make a flow request with forward_flow set to TRUE or the receiver should make an IGMP JOIN request to get the flow. If a receiver makes an IGMP JOIN request without being listed in the PUT request or being added by the /receivers PUT or POST request, then its IGMP join must be rejected. This is because the API also provides the authorization of the flow to the specific sender, multicast address and the receiver(s). This protects the network resource for valid use. If such an IGMP JOIN request is not rejected, it opens a security hole for any unauthorized endpoint to request and receive a flow to which it is not entitled to. As you can see above, IS-06 permits a full API operation or a combination of API and IGMP operation for flow management. In the combined method, the API is used for endpoint and flow authorization where the transmitting of the flow from the sender to the receiver is based on the direct request by the receiver using the IGMP protocol. The teardown can be done by either as well.",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "AMWA NMOS Network Control API Specification: Network Device",
+      "url": "https://specs.amwa.tv/new/is-06/latest/4.0.%20Network%20Device/",
+      "text": "AMWA NMOS Network Control API Specification: Network Device AMWA NMOS Network Control API Specification: Network Device AMWA NMOS Network Control API Specification: Network Device - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content AMWA NMOS Network Control API Specification: Network Device (c) AMWA 2017, CC Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) The Network Device API permits the broadcast controller to get the network device information which allows it to map the network topology into its GUI. The network device-Get API returns, at a minimum, an identifier for further reference, its chassis ID (same as what was reported via LLDP), its mgmt IP, the global (switch wide) MTU, and an array of interfaces. The interfaces information includes port id (same as what is transmitted through LLDP), speed, admin and operation status. The MTU is optional and can be included if different from the global MTU. Only a GET operation is permitted on Network device(s).",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "AMWA IS-06 NMOS Network Control API Specification: Network links",
+      "url": "https://specs.amwa.tv/new/is-06/latest/5.0.%20Network%20Links/",
+      "text": "AMWA IS-06 NMOS Network Control API Specification: Network links AMWA IS-06 NMOS Network Control API Specification: Network links Network Links AMWA IS-06 NMOS Network Control API Specification: Network links - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content AMWA IS-06 NMOS Network Control API Specification: Network links (c) AMWA 2017, CC Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) Network Links Network-Link is the link between a Network device and another network device or the link between the network device and the endpoint. It is identified by Chassis id and Port id, both mandatory parameters included in Link Layer Discovery protocol (LLDP). In the case of the network device, the Chassis ID contains the MAC address and the Port ID contains the Ethernet Interface information. This information is the same as what the network device sends in its LLDP message. In the case of an endpoint, the Port ID contains the MAC address. The Chassis ID may be null or any LLDP permitted types. This information is provided by the Broadcast Controller during Endpoint Registration process. The only operation permitted for this resource is GET. When a broadcast controller performs a GET by providing a network device ID, the network controller returns all the links that originate/terminate in the specified network device; the one that is connected to the endpoint and/or the one that it is connected to a neighboring switch. As these links are bi-directional, the same link information will be reported by both network devices when a GET operation is performed on both the neighboring network devices.",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "NetworkControlAPI",
+      "url": "https://specs.amwa.tv/new/is-06/latest/APIs/NetworkControlAPI/",
+      "text": "NetworkControlAPI NetworkControlAPI NetworkControlAPI - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content NetworkControlAPI The Phase 2 network control API is exposed by NMOS network controller. It provides Phase 2 APIs to create and manage network flows, add senders and receivers for the flows, and fetch network details. Open NetworkControlAPI API documentation",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "AMWA IS-06 NMOS Network-control-API version v1.0",
+      "url": "https://specs.amwa.tv/new/is-06/latest/APIs/NetworkControlAPI/",
+      "text": "AMWA IS-06 NMOS Network-control-API version v1.0 AMWA IS-06 NMOS Network-control-API version v1.0 Overview Base HTTP status code 200 Body Network Devices Query Parameters HTTP status code 200 Body URI Parameters HTTP status code 200 Body HTTP status code 404 Body Endpoints Query Parameters HTTP status code 200 Body URI Parameters HTTP status code 200 HTTP status code 403 HTTP status code 404 URI Parameters HTTP status code 200 Body HTTP status code 404 Body URI Parameters Body HTTP status code 201 Headers Body HTTP status code 400 Body URI Parameters Body HTTP status code 200 Body HTTP status code 400 Body HTTP status code 404 Body URI Parameters HTTP status code 204 HTTP status code 404 Network Links Query Parameters HTTP status code 200 Body Network flow Query Parameters HTTP status code 200 Body URI Parameters HTTP status code 200 HTTP status code 403 HTTP status code 404 URI Parameters HTTP status code 200 Body HTTP status code 404 Body URI Parameters Body HTTP status code 201 Headers Body HTTP status code 400 Body URI Parameters Body HTTP status code 200 Body HTTP status code 400 Body HTTP status code 404 Body URI Parameters HTTP status code 204 HTTP status code 404 Body URI Parameters HTTP status code 200 HTTP status code 403 HTTP status code 404 URI Parameters Body HTTP status code 204 HTTP status code 400 Body HTTP status code 404 Body URI Parameters HTTP status code 200 HTTP status code 403 HTTP status code 404 URI Parameters HTTP status code 204 HTTP status code 404 Body AMWA IS-06 NMOS Network-control-API AMWA IS-06 NMOS Network-control-API version v1.0 http://example.api.com/x-nmos/netctrl/{version} version : required (v1.0) Overview The Phase 2 network control API is exposed by NMOS network controller. It provides Phase 2 APIs to create and manage network flows, add senders and receivers for the flows, and fetch network details. Base / get get List the resources that can be accessed from the base url × get / List the resources that can be accessed from the base url Response HTTP status code 200 Body Media type : application/json Type : any Example : [ \"network-devices/\", \"endpoints/\", \"network-links/\", \"network-flows/\" ] Network Devices /network-devices get get List all network devices. × get /network-devices List all network devices. Request Response Query Parameters chassis_id : required (string) mgmt_ip : required (string) mtu : required (string) label : required (string) HTTP status code 200 Body Media type : application/json Type : NetworkDevices Example : [ { \"id\": \"5482feef-49a2-4f3a-bf9c-d62b38a686c1\", \"chassis_id\": \"8a-3a-99-4b-e0-1b\", \"mgmt_ip\": \"10.10.16.16\", \"mtu\": 1500, \"interfaces\": [ { \"port_id\": \"Ethernet 1/1\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"1Gbit/s\", \"mtu\": 1500 }, { \"port_id\": \"Ethernet 1/2\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"100Gbit/s\" }, { \"port_id\": \"Ethernet 1/3\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"100Gbit/s\" } ], \"label\": \"Network spine\" }, { \"id\": \"4b6452a8-6132-40e9-a8c3-aa0576e791f6\", \"chassis_id\": \"42-b7-25-29-79-0e\", \"mgmt_ip\": \"10.10.18.18\", \"mtu\": 1500, \"interfaces\": [ { \"port_id\": \"Ethernet 1/1\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"1Gbit/s\", \"mtu\": 1800 }, { \"port_id\": \"Ethernet 1/2\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"10Gbit/s\" }, { \"port_id\": \"Ethernet 1/3\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"10Gbit/s\" } ], \"label\": \"Network leaf 1\" }, { \"id\": \"035a3ee6-1588-4ed3-a081-0a18539ad7d9\", \"chassis_id\": \"2f-12-3e-be-13-07\", \"mgmt_ip\": \"10.10.24.20\", \"mtu\": 1500, \"interfaces\": [ { \"port_id\": \"Ethernet 1/1\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"1Gbit/s\", \"mtu\": 1800 }, { \"port_id\": \"Ethernet 1/2\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"10Gbit/s\" }, { \"port_id\": \"Ethernet 1/3\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"10Gbit/s\" } ], \"label\": \"Network leaf 2\" } ] /network-devices /{id} get get Get a single Network Device × get /network-devices /{id} Get a single Network Device Request Response URI Parameters id : required (string - pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$) The globally unique identifier for the network device. Example : 3f383f86-c977-498f-81bf-04c5cb8a0e0d HTTP status code 200 Body Media type : application/json Type : NetworkDevice Example : { \"id\": \"11b8973e-91c9-462d-8dad-6b37e53b3b9f\", \"chassis_id\": \"95-a6-37-bb-b2-61\", \"mgmt_ip\": \"10.10.10.16\", \"mtu\": 1500, \"interfaces\": [ { \"port_id\": \"Ethernet 1/1\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"1Gbit/s\", \"mtu\": 1500 }, { \"port_id\": \"Ethernet 1/2\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"100Gbit/s\" }, { \"port_id\": \"Ethernet 1/3\", \"admin_status\": \"up\", \"oper_status\": \"up\", \"speed\": \"100Gbit/s\" } ], \"label\": \"Network spine\" } HTTP status code 404 Returned when the network device with the guid does not exist. Body Media type : application/json Type : ErrorSchema Endpoints /endpoints get get Retrieve a collection of endpoints. × get /endpoints Retrieve a collection of endpoints. Request Response Query Parameters chassis_id : required (string) port_id : required (string) ip_address : required (string) max_bandwidth : required (string) role : required (string) label : required (string) HTTP status code 200 Body Media type : application/json Type : Endpoints Example : [ { \"id\": \"fa08a879-488d-4e2b-8104-805e2288d8e9\", \"chassis_id\": \"2d-af-a9-41-01-b4\", \"port_id\": \"fe-97-94-bb-d2-ed\", \"ip_address\": \"10.10.34.44\", \"attached_network_device\": { \"chassis_id\": \"2f-8c-af-79-c7-00\", \"port_id\": \"Ethernet 1/3\" }, \"max_bandwidth\": \"50Gbit/s\", \"role\": \"both\", \"label\": \"Video transmitter/receiver gateway endpoint.\" }, { \"id\": \"d9c88a0a-c0c8-4ec8-ade5-fde9106e5040\", \"chassis_id\": null, \"port_id\": \"58-f9-46-71-39-c2\", \"ip_address\": \"10.10.36.88\", \"attached_network_device\": { \"chassis_id\": \"2d-51-2b-85-89-7b\", \"port_id\": \"Ethernet 1/2\" }, \"max_bandwidth\": \"10Gbit/s\", \"role\": \"receiver\", \"label",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "APIs",
+      "url": "https://specs.amwa.tv/new/is-06/latest/APIs/",
+      "text": "APIs APIs APIs - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content APIs NetworkControlAPI",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "Examples",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/",
+      "text": "Examples Examples Examples - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content Examples netctrl-v1.0-base-get-200.json netctrl-v1.0-endpoint-id-get-200.json netctrl-v1.0-endpoint-patch-request.json netctrl-v1.0-endpoint-put-request.json netctrl-v1.0-endpoints-get-200.json netctrl-v1.0-network-device-id-get-200.json netctrl-v1.0-network-devices-get-200.json netctrl-v1.0-network-flow-id-get-200.json netctrl-v1.0-network-flow-patch.json netctrl-v1.0-network-flow-put.json netctrl-v1.0-network-flow-receiver-post.json netctrl-v1.0-network-flows-get-200.json netctrl-v1.0-network-links-get-200.json",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-base-get-200.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-base-get-200/",
+      "text": "netctrl-v1.0-base-get-200.json netctrl-v1.0-base-get-200.json netctrl-v1.0-base-get-200.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-base-get-200.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-endpoint-id-get-200.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-endpoint-id-get-200/",
+      "text": "netctrl-v1.0-endpoint-id-get-200.json netctrl-v1.0-endpoint-id-get-200.json netctrl-v1.0-endpoint-id-get-200.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-endpoint-id-get-200.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-endpoint-patch-request.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-endpoint-patch-request/",
+      "text": "netctrl-v1.0-endpoint-patch-request.json netctrl-v1.0-endpoint-patch-request.json netctrl-v1.0-endpoint-patch-request.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-endpoint-patch-request.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-endpoint-put-request.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-endpoint-put-request/",
+      "text": "netctrl-v1.0-endpoint-put-request.json netctrl-v1.0-endpoint-put-request.json netctrl-v1.0-endpoint-put-request.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-endpoint-put-request.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-endpoints-get-200.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-endpoints-get-200/",
+      "text": "netctrl-v1.0-endpoints-get-200.json netctrl-v1.0-endpoints-get-200.json netctrl-v1.0-endpoints-get-200.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-endpoints-get-200.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-network-device-id-get-200.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-network-device-id-get-200/",
+      "text": "netctrl-v1.0-network-device-id-get-200.json netctrl-v1.0-network-device-id-get-200.json netctrl-v1.0-network-device-id-get-200.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-network-device-id-get-200.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-network-devices-get-200.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-network-devices-get-200/",
+      "text": "netctrl-v1.0-network-devices-get-200.json netctrl-v1.0-network-devices-get-200.json netctrl-v1.0-network-devices-get-200.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-network-devices-get-200.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-network-flow-id-get-200.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-network-flow-id-get-200/",
+      "text": "netctrl-v1.0-network-flow-id-get-200.json netctrl-v1.0-network-flow-id-get-200.json netctrl-v1.0-network-flow-id-get-200.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-network-flow-id-get-200.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-network-flow-patch.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-network-flow-patch/",
+      "text": "netctrl-v1.0-network-flow-patch.json netctrl-v1.0-network-flow-patch.json netctrl-v1.0-network-flow-patch.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-network-flow-patch.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-network-flow-put.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-network-flow-put/",
+      "text": "netctrl-v1.0-network-flow-put.json netctrl-v1.0-network-flow-put.json netctrl-v1.0-network-flow-put.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-network-flow-put.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-network-flow-receiver-post.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-network-flow-receiver-post/",
+      "text": "netctrl-v1.0-network-flow-receiver-post.json netctrl-v1.0-network-flow-receiver-post.json netctrl-v1.0-network-flow-receiver-post.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-network-flow-receiver-post.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-network-flows-get-200.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-network-flows-get-200/",
+      "text": "netctrl-v1.0-network-flows-get-200.json netctrl-v1.0-network-flows-get-200.json netctrl-v1.0-network-flows-get-200.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-network-flows-get-200.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "netctrl-v1.0-network-links-get-200.json",
+      "url": "https://specs.amwa.tv/new/is-06/latest/examples/netctrl-v1.0-network-links-get-200/",
+      "text": "netctrl-v1.0-network-links-get-200.json netctrl-v1.0-network-links-get-200.json netctrl-v1.0-network-links-get-200.json - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content netctrl-v1.0-network-links-get-200.json View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "AMWA IS-06 NMOS Network Control Specification",
+      "url": "https://specs.amwa.tv/new/is-06/latest/",
+      "text": "AMWA IS-06 NMOS Network Control Specification AMWA IS-06 NMOS Network Control Specification Getting started Releases Contents AMWA IS-06 NMOS Network Control Specification - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content AMWA IS-06 NMOS Network Control Specification This repository contains details of this AMWA IS-06 NMOS Specification. This REST API can be exposed by a network controller. The specification includes APIs to create and manage network flows, and senders/receivers of the flow. Getting started Readers are advised to be familiar with: * The JT-NM Reference Architecture (http://jt-nm.org/) * The overview of Networked Media Open Specifications Readers should read the documentation in this repository, starting with the Overview , and then look at the APIs , which are written in RAML and JSON Schema (if a suitable tool for reading RAML is not available, then this will create HTML versions). Releases It is recommended that the tagged releases are used as a reference for development as opposed to the 'master' or development branches of this repository. Each version of the specification is available under a v<#MAJOR>.<#MINOR> tag such as 'v1.0'. Once a specification has been released, any updates to its documentation and schemas which do not modify the specification will be made available via a v<#MAJOR>.<#MINOR>.<#UPDATE> tag such as 'v1.0.1'. Contents README.md -- This file docs/1.0. Overview.md -- Documentation targeting those implementing APIs and clients. Further topics are covered within the docs/ directory APIs/NetworkControlAPI.raml -- Normative specification of the NMOS Network Control API APIs/schemas/ -- JSON schemas used by API specifications APIs/generateHTML -- Tool to create HTML browsable version of the API specifications. Requires raml2html (https://github.com/kevinrenskers/raml2html). examples/ -- Example JSON requests and responses for APIs LICENSE -- Licenses for software and text documents NOTICE -- Disclaimer",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "endpoint",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/endpoint/",
+      "text": "endpoint endpoint endpoint - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content endpoint With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "endpoint-patch",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/endpoint-patch/",
+      "text": "endpoint-patch endpoint-patch endpoint-patch - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content endpoint-patch With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "endpoints",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/endpoints/",
+      "text": "endpoints endpoints endpoints - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content endpoints With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "error",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/error/",
+      "text": "error error error - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content error With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "JSON Schemas",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/",
+      "text": "JSON Schemas JSON Schemas JSON Schemas - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content JSON Schemas endpoint-patch endpoint endpoints error network-device network-devices network-flow-patch network-flow-receivers network-flow network-flows network-link network-links",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "network-device",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/network-device/",
+      "text": "network-device network-device network-device - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content network-device With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "network-devices",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/network-devices/",
+      "text": "network-devices network-devices network-devices - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content network-devices With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "network-flow",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/network-flow/",
+      "text": "network-flow network-flow network-flow - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content network-flow With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "network-flow-patch",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/network-flow-patch/",
+      "text": "network-flow-patch network-flow-patch network-flow-patch - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content network-flow-patch With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "network-flow-receivers",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/network-flow-receivers/",
+      "text": "network-flow-receivers network-flow-receivers network-flow-receivers - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content network-flow-receivers With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "network-flows",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/network-flows/",
+      "text": "network-flows network-flows network-flows - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content network-flows With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "network-link",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/network-link/",
+      "text": "network-link network-link network-link - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content network-link With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    },
+    {
+      "title": "network-links",
+      "url": "https://specs.amwa.tv/new/is-06/latest/schemas/network-links/",
+      "text": "network-links network-links network-links - AMWA IS-06 NMOS Network Control Specification (Deprecated) Skip to content network-links With refs Resolved View: Folding Raw Expand all Collapse all View: Folding Raw Expand all Collapse all",
+      "repository": "AMWA-TV/is-06"
+    }
+  ]
+}
