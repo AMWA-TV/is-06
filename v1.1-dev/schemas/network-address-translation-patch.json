@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Describes a patch of a network address translation policy.",
+  "title": "Schema to modify a network address translation policy.",
+  "properties": {
+    "label": {
+      "description": "Translation policy name.",
+      "type": "string"
+    }
+  }
+}

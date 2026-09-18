@@ -1,0 +1,147 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "description": "A list of network address translation policies.",
+  "title": "List of network address translation policies.",
+  "items": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "description": "Describes a simple network address translation policy for IP Addresses and/or Ports.",
+    "title": "Network address translation policy",
+    "required": [
+      "id",
+      "match",
+      "translated",
+      "receiver_endpoint_ids"
+    ],
+    "properties": {
+      "id": {
+        "description": "Globally unique identifier for translation policy",
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "label": {
+        "type": "string",
+        "description": "Translation policy name."
+      },
+      "match": {
+        "allOf": [
+          {
+            "dependencies": {
+              "source_port": [
+                "source_ip"
+              ],
+              "destination_port": [
+                "destination_ip"
+              ]
+            }
+          },
+          {
+            "$schema": "http://json-schema.org/draft-04/schema#",
+            "type": "object",
+            "description": "Describes the 4-tuple of IP Addresses and/or Ports to be matched or translated to.",
+            "title": "Network address translation 4-tuple",
+            "minProperties": 1,
+            "additionalProperties": false,
+            "properties": {
+              "source_ip": {
+                "type": "string",
+                "description": "Sender IP address",
+                "anyOf": [
+                  {
+                    "format": "ipv4"
+                  },
+                  {
+                    "format": "ipv6"
+                  }
+                ]
+              },
+              "source_port": {
+                "description": "Sender port",
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65535
+              },
+              "destination_ip": {
+                "type": "string",
+                "description": "Destination IP address",
+                "anyOf": [
+                  {
+                    "format": "ipv4"
+                  },
+                  {
+                    "format": "ipv6"
+                  }
+                ]
+              },
+              "destination_port": {
+                "description": "Destination port",
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65535
+              }
+            }
+          }
+        ]
+      },
+      "translated": {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "type": "object",
+        "description": "Describes the 4-tuple of IP Addresses and/or Ports to be matched or translated to.",
+        "title": "Network address translation 4-tuple",
+        "minProperties": 1,
+        "additionalProperties": false,
+        "properties": {
+          "source_ip": {
+            "type": "string",
+            "description": "Sender IP address",
+            "anyOf": [
+              {
+                "format": "ipv4"
+              },
+              {
+                "format": "ipv6"
+              }
+            ]
+          },
+          "source_port": {
+            "description": "Sender port",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          },
+          "destination_ip": {
+            "type": "string",
+            "description": "Destination IP address",
+            "anyOf": [
+              {
+                "format": "ipv4"
+              },
+              {
+                "format": "ipv6"
+              }
+            ]
+          },
+          "destination_port": {
+            "description": "Destination port",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535
+          }
+        }
+      },
+      "receiver_endpoint_ids": {
+        "type": "array",
+        "description": "List of receiver endpoint IDs.",
+        "items": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        },
+        "minItems": 0,
+        "uniqueItems": true
+      }
+    }
+  },
+  "minItems": 0,
+  "uniqueItems": true
+}

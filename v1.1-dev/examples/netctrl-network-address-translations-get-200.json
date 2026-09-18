@@ -1,0 +1,45 @@
+[
+  {
+    "id": "6b397632-d8af-4116-ad34-39ae9cc2806e",
+    "label": "NAT S1-R2",
+    "match": {
+      "destination_ip": "239.1.2.3"
+    },
+    "translated": {
+      "destination_ip": "235.7.8.9"
+    },
+    "receiver_endpoint_ids": [
+      "8268e254-e054-409b-b4ab-65ee18ae684d"
+    ]
+  },
+  {
+    "id": "b46fa060-a5fe-4144-94dc-24d5041c9f10",
+    "label": "NAT S1-R3-video (both destination IP address and port must match for this policy to be applied)",
+    "match": {
+      "destination_ip": "239.1.2.3",
+      "destination_port": 4500
+    },
+    "translated": {
+      "destination_ip": "235.7.8.9",
+      "destination_port": 10500
+    },
+    "receiver_endpoint_ids": [
+      "b4aa4549-ef19-460b-9c93-76b41457af48"
+    ]
+  },
+  {
+    "id": "4e8ff5ab-4c74-464c-8073-3d5a7f886041",
+    "label": "NAT S1-R3-fec",
+    "match": {
+      "destination_ip": "239.1.2.3",
+      "destination_port": 4510
+    },
+    "translated": {
+      "destination_ip": "235.7.8.9",
+      "destination_port": 10510
+    },
+    "receiver_endpoint_ids": [
+      "b4aa4549-ef19-460b-9c93-76b41457af48"
+    ]
+  }
+]

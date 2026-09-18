@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Describes the 4-tuple of IP Addresses and/or Ports to be matched or translated to.",
+  "title": "Network address translation 4-tuple",
+  "minProperties": 1,
+  "additionalProperties": false,
+  "properties": {
+    "source_ip": {
+      "type": "string",
+      "description": "Sender IP address",
+      "anyOf": [
+        {
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        }
+      ]
+    },
+    "source_port": {
+      "description": "Sender port",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535
+    },
+    "destination_ip": {
+      "type": "string",
+      "description": "Destination IP address",
+      "anyOf": [
+        {
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        }
+      ]
+    },
+    "destination_port": {
+      "description": "Destination port",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 65535
+    }
+  }
+}

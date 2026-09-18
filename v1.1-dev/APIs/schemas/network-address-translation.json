@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Describes a simple network address translation policy for IP Addresses and/or Ports.",
+  "title": "Network address translation policy",
+  "required": [
+    "id",
+    "match",
+    "translated",
+    "receiver_endpoint_ids"
+  ],
+  "properties": {
+    "id": {
+      "description": "Globally unique identifier for translation policy",
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "label": {
+      "type": "string",
+      "description": "Translation policy name."
+    },
+    "match": {
+      "allOf": [
+        {
+          "dependencies": {
+            "source_port": ["source_ip"],
+            "destination_port": ["destination_ip"]
+          }
+        }, {
+          "$ref": "network-address-translation-tuple.json"
+        }
+      ]
+    },
+    "translated": {
+      "$ref": "network-address-translation-tuple.json"
+    },
+    "receiver_endpoint_ids": {
+      "type": "array",
+      "description": "List of receiver endpoint IDs.",
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    }
+  }
+}

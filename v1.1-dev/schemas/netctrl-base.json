@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "description": "Describes the Network Control API base resource",
+  "title": "Network Control API base resource",
+  "items": {
+    "type": "string",
+    "enum": [
+      "network-devices/",
+      "endpoints/",
+      "network-links/",
+      "network-flows/",
+      "network-address-translations/"
+    ]
+  },
+  "minItems": 5,
+  "maxItems": 5,
+  "uniqueItems": true
+}

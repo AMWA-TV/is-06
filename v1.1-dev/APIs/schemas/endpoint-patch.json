@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Patch request schema for updating an existing endpoint.",
+  "title": "Schema to modify an endpoint with new values.",
+  "properties": {
+    "ip_address": {
+      "type": "string",
+      "description": "IP address on which the endpoint sends/receives flows. IP address must be unique in the network.",
+      "anyOf": [
+        {
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        }
+      ]
+    },
+    "attached_network_device": {
+      "type": "object",
+      "description": "Peer network device (switch) details. This cannot be an endpoint.",
+      "required": [
+        "chassis_id",
+        "port_id"
+      ],
+      "properties": {
+        "chassis_id": {
+          "description": "Matches the chassis_id of the peer network device. Where LLDP is implemented on the network device interfaces, the LLDP Chassis ID should match this value.",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+              "description": "When the Chassis ID is a MAC address, use this format."
+            },
+            {
+              "type": "string",
+              "pattern": "^.+$",
+              "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used."
+            }
+          ]
+        },
+        "port_id": {
+          "description": "Matches the port_id of the interface on the peer network device to which the endpoint is connected. Where LLDP is implemented on the network device interfaces, the LLDP Port ID should match this value.",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+              "description": "When the Chassis ID is a MAC address, use this format."
+            },
+            {
+              "type": "string",
+              "pattern": "^.+$",
+              "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used."
+            }
+          ]
+        }
+      }
+    },
+    "max_bandwidth": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?[kMG]bit\\/s$",
+      "description": "Maximum bandwidth that the sender is allowed to send, formatted as a number followed by kbit/s, Mbit/s, Gbit/s. NB: Values should be formatted with no fraction component if possible, using the largest unit that allows that."
+    },
+    "role": {
+      "description": "The role of the endpoint as a sender or receiver.",
+      "type": "string",
+      "enum": [
+        "sender",
+        "receiver",
+        "both"
+      ]
+    },
+    "label": {
+      "description": "Freeform string label for the endpoint",
+      "type": "string"
+    }
+  }
+}
