@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "description": "Describes an endpoint that is capable of sending or receiving network flows.",
+  "required": [
+    "id",
+    "chassis_id",
+    "port_id",
+    "ip_address"
+  ],
+  "properties": {
+    "id": {
+      "description": "Globally unique identifier for the network endpoint",
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "chassis_id": {
+      "description": "Chassis ID of the interface, as signalled in LLDP from this endpoint. Maybe null where LLDP is unsuitable for use (i.e. virtualised environments). Matches to IS-04 nodes' interfaces.chassis_id and should be same.",
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+          "description": "When the Chassis ID is a MAC address, use this format"
+        },
+        {
+          "type": "string",
+          "pattern": "^.+$",
+          "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used"
+        },
+        {
+          "type": "null",
+          "description": "When the Chassis ID is unavailable it should be set to null"
+        }
+      ]
+    },
+    "port_id": {
+      "type": "string",
+      "description": "MAC address of the endpoint. Where LLDP is implemented on the endpoint, the LLDP Port ID should match this value. Matches to IS-04 nodes' interfaces.port_id and should be same.",
+      "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "IP address on which the endpoint sends/receives flows. IP address must be unique in the network.",
+      "anyOf": [
+        {
+          "format": "ipv4"
+        },
+        {
+          "format": "ipv6"
+        }
+      ]
+    },
+    "attached_network_device": {
+      "type": "object",
+      "description": "Peer network device (switch) details. This cannot be an endpoint.",
+      "required": [
+        "chassis_id",
+        "port_id"
+      ],
+      "properties": {
+        "chassis_id": {
+          "description": "Matches the chassis_id of the peer network device. Where LLDP is implemented on the network device interfaces, the LLDP Chassis ID should match this value.",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+              "description": "When the Chassis ID is a MAC address, use this format."
+            },
+            {
+              "type": "string",
+              "pattern": "^.+$",
+              "description": "When the Chassis ID is anything other than a MAC address, a freeform string may be used."
+            }
+          ]
+        },
+        "port_id": {
+          "description": "Matches the port_id of the interface on the peer network device to which the endpoint is connected. Where LLDP is implemented on the network device interfaces, the LLDP Port ID should match this value.",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+              "description": "When the Port ID is a MAC address, use this format."
+            },
+            {
+              "type": "string",
+              "pattern": "^.+$",
+              "description": "When the Port ID is anything other than a MAC address, a freeform string may be used."
+            }
+          ]
+        }
+      }
+    },
+    "max_bandwidth": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?[kMG]bit\\/s$",
+      "description": "Optional. Maximum bandwidth that the sender is allowed to send, formatted as a number followed by kbit/s, Mbit/s, Gbit/s. NB: Values should be formatted with no fraction component if possible, using the largest unit that allows that."
+    },
+    "role": {
+      "description": "Optional with default. The role of the endpoint as a sender or receiver.",
+      "type": "string",
+      "enum": [
+        "sender",
+        "receiver",
+        "both"
+      ],
+      "default": "both"
+    },
+    "label": {
+      "description": "Optional. Freeform string label for the endpoint",
+      "type": "string"
+    }
+  }
+}
