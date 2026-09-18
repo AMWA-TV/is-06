@@ -1,0 +1,427 @@
+#%RAML 1.0
+
+# AMWA NMOS Network Control Specification: Network Control API
+# (c) AMWA 2018
+
+title: Network Control
+baseUri: http://api.example.com/x-nmos/netctrl/{version}
+version: v1.0
+mediaType: application/json
+types:
+  - NetworkDevice: !include schemas/network-device.json
+    NetworkDevices: !include schemas/network-devices.json
+    Endpoint: !include schemas/endpoint.json
+    Endpoints: !include schemas/endpoints.json
+    NetworkLink: !include schemas/network-link.json
+    NetworkLinks: !include schemas/network-links.json
+    NetworkFlow: !include schemas/network-flow.json
+    NetworkFlows: !include schemas/network-flows.json
+    ErrorSchema: !include schemas/error.json
+traits:
+  - paged:
+      description: API resource supporting pagination of results
+      queryParameters:
+        paging.since:
+          description: Return only the results which have been created/updated since the time specified (non-inclusive) (seconds:nanoseconds)
+          type: string
+          pattern: "^[0-9]+:[0-9]+$"
+        paging.until:
+          description: Return only the results which were created/updated up until the time specified (inclusive) (seconds:nanoseconds)
+          type: string
+          pattern: "^[0-9]+:[0-9]+$"
+        paging.limit:
+          description: Restrict the response to the specified number of results. Implementations may specify their own default and maximum for the limit
+          type: integer
+        paging.order:
+          description: Specify whether paging should be based upon initial resource creation time, or when it was last modified. In both cases the response should be provided in descending order
+          type: string
+          enum: ["create", "update"]
+          default: "update"
+      responses:
+        200:
+          headers:
+            Link:
+              description: Provides references to cursors for paging. The 'rel' attribute may be one of 'next', 'prev', 'first' or 'last'
+              type: string
+              example: <http://example.api.com/x-nmos/netctrl/{version}/endpoints/?paging.since=1520976651:318744030&paging.limit=20>; rel="next", <http://example.api.com/x-nmos/netctrl/{version}/endpoints/?paging.until=1520976651:4939634&paging.limit=20>; rel="prev"
+            X-Paging-Limit:
+              description: Identifies the current limit being used for paging. This may not match the requested value if the requested value was too high for the implementation
+              type: integer
+            X-Paging-Since:
+              description: Identifies the current value of the query parameter 'paging.since' in use, or if not specified identifies what value it would have had to return this data set. This value may be re-used as the paging.until value of a query to return the previous page of results. Combining this with the X-Paging-Until header value provides the absolute time bounds of the current returned data set.
+              type: string
+              example: 1520976651:4939634
+            X-Paging-Until:
+              description: Identifies the current value of the query parameter 'paging.until' in use, or if not specified identifies what value it would have had to return this data set. This value may be re-used as the paging.since value of a query to return the next page of results. Combining this with the X-Paging-Since header value provides the absolute time bounds of the current returned data set.
+              type: string
+              example: 1520976651:318744030
+        501:
+          description: The query parameters specified are not currently supported by this implementation.
+documentation:
+  - title: Overview
+    content: |
+      The Network Control API is exposed by an NMOS network controller. It provides APIs to create and manage network flows, add senders and receivers for the flows, and fetch network details.
+  - title: Further Documentation
+    content: |
+      Further normative documentation covering the behaviour of this API is contained in the [docs](../docs) folder of this repository.
+/:
+  displayName: Base
+  get:
+    description: List the resources that can be accessed from the base URL
+    responses:
+      200:
+        body:
+          type: !include schemas/netctrl-base.json
+          example: !include ../examples/netctrl-base-get-200.json
+/network-devices:
+  displayName: Network Devices
+  get:
+    is: [paged]
+    description: |
+      List Network Devices.
+      NB: Query parameters should be implemented for all permitted resource attributes.
+    queryParameters:
+      id:
+      chassis_id:
+      mgmt_ip:
+      mtu:
+      label:
+    responses:
+      200:
+        body:
+          type: NetworkDevices
+          example: !include ../examples/netctrl-network-devices-get-200.json
+      501:
+        description: The query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
+  /{networkDeviceId}:
+    uriParameters:
+      networkDeviceId:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        description: The globally unique identifier for the Network Device.
+        example: 3f383f86-c977-498f-81bf-04c5cb8a0e0d
+    get:
+      description: Get a single Network Device
+      responses:
+        200:
+          body:
+            type: NetworkDevice
+            example: !include ../examples/netctrl-network-device-id-get-200.json
+        404:
+          description: Returned when the Network Device ID does not exist.
+          body:
+            type: ErrorSchema
+/endpoints:
+  displayName: Endpoints
+  get:
+    is: [paged]
+    description: |
+      List Endpoints.
+      NB: Query parameters should be implemented for all permitted resource attributes.
+    queryParameters:
+      id:
+      chassis_id:
+      port_id:
+      ip_address:
+      attached_network_device.chassis_id:
+      attached_network_device.port_id:
+      max_bandwidth:
+      role:
+      label:
+    responses:
+      200:
+        body:
+          type: Endpoints
+          example: !include ../examples/netctrl-endpoints-get-200.json
+      501:
+        description: The query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
+  /{endpointId}:
+    uriParameters:
+      endpointId:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        description: The globally unique identifier for the Endpoint.
+        example: 3607f868-c762-4220-8caf-e5a546395b29
+    options:
+      description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
+      responses:
+        200:
+        403:
+    get:
+      description: Get a single Endpoint
+      responses:
+        200:
+          body:
+            type: Endpoint
+            example: !include ../examples/netctrl-endpoint-id-get-200.json
+        404:
+          description: Returned when the requested Endpoint ID does not exist.
+          body:
+            type: ErrorSchema
+    put:
+      description: >
+        Register a new Endpoint.
+        The PUT is invoked to inform the network controller about the presence of an Endpoint.
+        The Endpoint _should_ include details of the Network Device the Endpoint is attached to.
+        The attached network device details can be fetched by the endpoint through LLDP (if the endpoint is LLDP capable)
+        or manual entry in the caller of this API (e.g., a broadcast controller).
+        The network controller _may_ verify these details. If the details are invalid, the network controller _may_ reject the request.
+        When the attached network device details are not included in the request, the network controller _may_ attempt to determine them and include them in the registered Endpoint.
+        However, if the network controller cannot determine them, it may reject the the request.
+        Subsequent PUT requests should receive an error response. Updates should be done using PATCH.
+      body:
+        type: Endpoint
+        example: !include ../examples/netctrl-endpoint-put-request.json
+      responses:
+        201:
+          description: >
+            Returned when the Endpoint is registered with the network controller successfully. The Location header should indicate the location of the created resource.
+          body:
+            type: Endpoint
+            example: !include ../examples/netctrl-endpoint-id-get-200.json
+          headers:
+            Location:
+              example: /x-nmos/netctrl/{version}/endpoints/d0729fa2-83ba-4e6b-8817-d48a4bf28f74
+        400:
+          description: >
+            Returned when the PUT request is incorrectly formatted or has missing mandatory attributes or an attribute is invalid given the API's configuration, such as when the Endpoint ID already exists, or the network controller can identify that the details for other parameters do not agree with the information held by the network device. Error responses should contain a relevant message.
+          body:
+            type: ErrorSchema
+        409:
+          description: >
+            Returned when the PUT request is invalid because an Endpoint with the same unique details (Chassis ID, Port ID and IP Address) already exists. The existing Endpoint is indicated via the Location header.
+          body:
+            type: ErrorSchema
+          headers:
+            Location:
+              example: /x-nmos/netctrl/{version}/endpoints/b2ff7bc0-de0c-478a-bd93-4be0b13a2ffe
+    patch:
+      description: Update an existing Endpoint's attributes.
+      body:
+        type: !include schemas/endpoint-patch.json
+        example: !include ../examples/netctrl-endpoint-patch-request.json
+      responses:
+        200:
+          description: >
+            Returned when the Endpoint is updated successfully. The updated Endpoint is returned in the response.
+          body:
+            type: Endpoint
+            example: !include ../examples/netctrl-endpoint-id-get-200.json
+        400:
+          description: >
+            Returned when the PATCH request is incorrectly formatted or cannot be applied.
+          body:
+            type: ErrorSchema
+        404:
+          description: Returned when the requested Endpoint ID does not exist.
+          body:
+            type: ErrorSchema
+    delete:
+      description: Delete an existing Endpoint.
+      responses:
+        204:
+          description: >
+            Returned when the Endpoint is successfully deleted. No response body.
+        404:
+          description: Returned when the requested Endpoint ID does not exist.
+          body:
+            type: ErrorSchema
+        409:
+          description: Returned when the operation cannot be performed because one or more Network Flows refer to this Endpoint. The Network Flows must be deleted first.
+          body:
+            type: ErrorSchema
+/network-links:
+  displayName: Network Links
+  get:
+    is: [paged]
+    description: |
+      List Network Links.
+      NB: Query parameters should be implemented for all permitted resource attributes.
+    queryParameters:
+      id:
+      peers.device_id:
+      peers.port_id:
+      speed:
+    responses:
+      200:
+        body:
+          type: NetworkLinks
+          example: !include ../examples/netctrl-network-links-get-200.json
+      501:
+        description: The query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
+  /{networkLinkId}:
+    uriParameters:
+      networkLinkId:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        description: The globally unique identifier for the Network Link.
+        example: 9468239c-afae-43eb-b711-bb7b8e817a83
+    get:
+      description: Get a single Network Link
+      responses:
+        200:
+          body:
+            type: NetworkLink
+            example: !include ../examples/netctrl-network-link-id-get-200.json
+        404:
+          description: Returned when the Network Link ID does not exist.
+          body:
+            type: ErrorSchema
+/network-flows:
+  displayName: Network Flows
+  get:
+    is: [paged]
+    description: |
+      List Network Flows.
+      NB: Query parameters should be implemented for all permitted resource attributes.
+    queryParameters:
+      id:
+      multicast_address:
+      sender_endpoint_id:
+      receiver_endpoint_ids:
+      bandwidth:
+      profile:
+      forward_flow:
+      dscp:
+      label:
+    responses:
+      200:
+        body:
+          type: NetworkFlows
+          example: !include ../examples/netctrl-network-flows-get-200.json
+      501:
+        description: The query parameters specified are not currently supported by this implementation.
+        body:
+          type: ErrorSchema
+  /{networkFlowId}:
+    uriParameters:
+      networkFlowId:
+        type: string
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        description: The globally unique identifier for the Network Flow.
+        example: cfd02532-1c83-45a5-ae38-1cb7614346db
+    options:
+      description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
+      responses:
+        200:
+        403:
+    get:
+      description: Get a single Network Flow
+      responses:
+        200:
+          body: 
+            type: NetworkFlow
+            example: !include ../examples/netctrl-network-flow-id-get-200.json
+        404:
+          description: Returned when the Network Flow ID does not exist.
+          body: 
+            type: ErrorSchema
+    put:
+      description: >
+        Create a Network Flow with the specified ID. Subsequent PUT requests should receive an error response. Updates should be done using PATCH.
+      body:
+        type: NetworkFlow
+        example: !include ../examples/netctrl-network-flow-put.json
+      responses:
+        201:
+          description: >
+            Returned when the Network Flow is created successfully. The Location header should indicate the location of the created resource.
+          headers:
+            Location:
+              example: /x-nmos/netctrl/{version}/network-flows/6fb3c057-a363-40cc-8f3d-cbaee5e35248
+          body: 
+            type: NetworkFlow
+            example: !include ../examples/netctrl-network-flow-id-get-200.json
+        400:
+          description: >
+            Returned when the PUT request is incorrectly formatted or has missing mandatory attributes or an attribute is invalid given the API's configuration, such as when the Network Flow ID already exists. Error responses should contain a relevant message.
+          body:
+            type: ErrorSchema
+    patch:
+      description: >
+        Update an existing Network Flow with the specified ID. A Network Flow is equivalent to and also uniquely identified by the Sender Endpoint ID and the multicast address, or the <S,G> pair. So, neither the Sender Endpoint ID nor the multicast address can be updated of an existing Network Flow. A new Network Flow should be created for a different pair of <S,G>. Moreover, for simplicity, receiver Endpoint IDs can only be updated using a /receivers POST or DELETE request.
+      body:
+        type: !include schemas/network-flow-patch.json
+        example: !include ../examples/netctrl-network-flow-patch.json
+      responses:
+        200:
+          description: >
+            Returned when the Network Flow is updated successfully. The updated Network Flow is returned in the response.
+          body:
+            type: NetworkFlow
+            example: !include ../examples/netctrl-network-flow-id-get-200.json
+        400:
+          description: >
+            Returned when the PATCH request is incorrectly formatted or cannot be applied.
+          body:
+            type: ErrorSchema
+        404:
+          description: Returned when the Network Flow ID does not exist.
+          body: 
+            type: ErrorSchema
+    delete:
+      description: Delete the Network Flow with the specified ID.
+      responses:
+        204:
+          description: >
+            Returned when the Network Flow is successfully deleted. No response body.
+        404:
+          description: Returned when the Network Flow ID does not exist.
+          body:
+            type: ErrorSchema
+    /receivers:
+      options:
+        description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
+        responses:
+          200:
+          403:
+      post:
+        description: >
+          Add one or more receivers to this Network Flow. Receivers included in the body should be appended to the existing receivers, if any. If the forward flow flag is set for this Network Flow, both bandwidth reservation and flow switching must occur for all new receivers. If the forward flow flag is not set, only resource reservation should take place. Failure to satisfy for any one receiver should fail for all and fail the complete request. Proper error message should be provided in this scenario. No task should be completed partially, that is, server should employ all-or-nothing strategy.
+        body:
+          type: !include schemas/network-flow-receivers.json
+          example: !include ../examples/netctrl-network-flow-receiver-post.json
+        responses:
+          204:
+            description: >
+              Returned when the receivers are successfully added. No response body.
+          400:
+            description: >
+              Returned when the POST request is incorrectly formatted, missing values, or an error occurred while adding the receivers. If the request failed due to a partial error, an appropriate message should be added in the error response.
+            body:
+              type: ErrorSchema
+          404:
+            description: >
+              Returned when the Network Flow ID does not exist.
+            body:
+              type: ErrorSchema
+      /{receiverEndpointId}:
+        uriParameters:
+          receiverEndpointId:
+            type: string
+            pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            description: The globally unique identifier for the receiver Endpoint.
+            example: 77b52221-c789-45fd-90b3-d9d8211de9d3
+        options:
+          description: A pre-flight check generally used for Cross-Origin Resource Sharing (CORS) purposes
+          responses:
+            200:
+            403:
+        delete:
+          description: >
+            Delete the receiver with the specified ID from this Network Flow.
+          responses:
+            204:
+              description: >
+                Returned when the receiver is successfully deleted. No response body.
+            404:
+              description: >
+                Returned when no receiver with the specified ID exists for this Network Flow.
+              body:
+                type: ErrorSchema

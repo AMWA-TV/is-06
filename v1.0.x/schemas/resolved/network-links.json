@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "description": "A list of network links.",
+  "title": "List of network links.",
+  "items": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "description": "Describes a network link. A network link consists of two peers. Each peer in the link must be a network device, links between network devices and endpoints are not represented. Links are always bidirectional. That is, the order of the peers in this entity carries no special meaning.",
+    "required": [
+      "id",
+      "peers",
+      "speed"
+    ],
+    "properties": {
+      "id": {
+        "description": "Globally unique identifier for the network link",
+        "type": "string",
+        "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "peers": {
+        "description": "List of peers in a link. Each peer is a network device (switch). There must be exactly two peers in the list.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "device_id",
+            "port_id"
+          ],
+          "properties": {
+            "device_id": {
+              "description": "Globally unique identifier of a network device.",
+              "type": "string",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "port_id": {
+              "description": "Matches the port_id of the interface of the network device to which the link is connected.",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^([0-9a-f]{2}-){5}([0-9a-f]{2})$",
+                  "description": "When the Port ID is a MAC address, use this format."
+                },
+                {
+                  "type": "string",
+                  "pattern": "^.+$",
+                  "description": "When the Port ID is anything other than a MAC address, a freeform string may be used."
+                }
+              ]
+            }
+          }
+        },
+        "minItems": 2,
+        "maxItems": 2,
+        "uniqueItems": true
+      },
+      "speed": {
+        "type": "string",
+        "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?[kMG]bit\\/s$",
+        "description": "Speed of the link, formatted as a number followed by kbit/s, Mbit/s, Gbit/s. NB: Values should be formatted with no fraction component if possible, using the largest unit that allows that."
+      }
+    }
+  },
+  "uniqueItems": true
+}
