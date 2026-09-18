@@ -1,7 +1,8 @@
 # AMWA IS-06 NMOS Network Control Specification (Deprecated)
 
 [![Lint Status](https://github.com/AMWA-TV/is-06/workflows/Lint/badge.svg)](https://github.com/AMWA-TV/is-06/actions?query=workflow%3ALint)
-[![Render Status](https://github.com/AMWA-TV/is-06/workflows/Render/badge.svg)](https://github.com/AMWA-TV/is-06/actions?query=workflow%3ARender)
+[![Zensical Render Status](https://github.com/AMWA-TV/is-06/actions/workflows/docs.yml/badge.svg)](https://github.com/AMWA-TV/is-06/actions/workflows/docs.yml)
+[![Legacy Render Status](https://github.com/AMWA-TV/is-06/workflows/Render/badge.svg)](https://github.com/AMWA-TV/is-06/actions?query=workflow%3ARender)
 
 <!-- INTRO-START -->
 
