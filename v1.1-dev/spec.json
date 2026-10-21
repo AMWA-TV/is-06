@@ -10,5 +10,14 @@
     "v1.0.1"
   ],
   "default_branch": "v1.0.x",
-  "show_in_index": true
+  "show_in_index": true,
+  "intro": {
+    "what_does_it_do": [
+      "IS-06 lets broadcast control applications manage what happens on the network itself"
+    ],
+    "how_does_it_work": [
+      "Provides a “Northbound” API from network fabric’s controller",
+      "Includes topology discovery, flow authorization and assurances of flow bandwidth"
+    ]
+  }
 }
